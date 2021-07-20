@@ -14,4 +14,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="button_dashboard_text">Back</string>
     <string name="edit_name">Enter name</string>
+    <string name="add_car">Add New Vehicle</string>
+    <string name="add_vehicle_text">This is the \'Add New Vehicle\' page!</string>
 </resources>

@@ -14,16 +14,9 @@
         <action
             android:id="@+id/action_FirstFragment_to_dashboardFragment"
             app:destination="@id/dashboardFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.example.carmaintenancetracker.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
-
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_FirstFragment_to_add_Vehicle_Fragment"
+            app:destination="@id/add_Vehicle_Fragment2" />
     </fragment>
     <fragment
         android:id="@+id/dashboardFragment"
@@ -34,4 +27,9 @@
             android:id="@+id/action_dashboardFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/add_Vehicle_Fragment2"
+        android:name="com.example.carmaintenancetracker.Add_Vehicle_Fragment"
+        android:label="Add_Vehicle_Fragment"
+        tools:layout="@layout/fragment_add_vehicle"/>
 </navigation>

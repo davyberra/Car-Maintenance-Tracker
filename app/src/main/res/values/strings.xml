@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Car Maintenance Tracker</string>
-    <string name="dashboard_name">Dashboard</string>
+    <string name="dashboard_name">Car Maintenance Tracker</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -16,4 +16,10 @@
     <string name="edit_name">Enter name</string>
     <string name="add_car">Add New Vehicle</string>
     <string name="add_vehicle_text">This is the \'Add New Vehicle\' page!</string>
+    <string name="enter_your_name">Enter your name</string>
+    <string name="carMakeTextView">Make</string>
+    <string name="carModelTextView">Model</string>
+    <string name="carYearTextView">Year</string>
+    <string name="addNewVehicleTextView">Add a New Vehicle</string>
+    <string name="cancel_button">Cancel</string>
 </resources>

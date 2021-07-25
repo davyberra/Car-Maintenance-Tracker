@@ -1,5 +1,6 @@
 package com.example.carmaintenancetracker;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -7,6 +8,10 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.View;
@@ -52,11 +57,19 @@ public class MainActivity extends AppCompatActivity {
                 return true;
 
             case R.id.action_add_car:
+                NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
+                                .findFragmentById(R.id.nav_host_fragment);
+                NavController navController = navHostFragment.getNavController();
+                navController.navigate(R.id.action_global_add_Vehicle_Fragment2);
                 return true;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void addVehicle() {
+
     }
 
 }

@@ -12,5 +12,5 @@
     <item
         android:id="@+id/action_add_car"
         android:title="@string/add_car"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 </menu>

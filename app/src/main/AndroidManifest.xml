@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CarMaintenanceTracker">
         <activity
-            android:name=".MainActivity"
+            android:name="ui.MainActivity"
             android:label="@string/dashboard_name"
             android:theme="@style/Theme.CarMaintenanceTracker.NoActionBar">
             <intent-filter>

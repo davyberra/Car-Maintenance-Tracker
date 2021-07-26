@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:title="@string/dashboard_name"
-    tools:context="com.example.carmaintenancetracker.MainActivity">
+    tools:context="com.example.carmaintenancetracker.ui.MainActivity">
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
@@ -11,6 +11,7 @@
 
     <item
         android:id="@+id/action_add_car"
+        android:icon="@android:drawable/ic_menu_add"
         android:title="@string/add_car"
         app:showAsAction="ifRoom" />
 </menu>

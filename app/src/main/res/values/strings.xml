@@ -22,4 +22,5 @@
     <string name="carYearTextView">Year</string>
     <string name="addNewVehicleTextView">Add a New Vehicle</string>
     <string name="cancel_button">Cancel</string>
+    <string name="my_car">My Car</string>
 </resources>

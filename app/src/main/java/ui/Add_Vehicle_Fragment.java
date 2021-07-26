@@ -1,4 +1,4 @@
-package com.example.carmaintenancetracker;
+package ui;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,13 +8,17 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
+
+import com.example.carmaintenancetracker.R;
 
 public class Add_Vehicle_Fragment extends Fragment {
 
     private Button cancelButton;
+    private String pageTitle = "Add Car";
+
     public Add_Vehicle_Fragment() {
         super(R.layout.fragment_add_vehicle);
     }
@@ -29,13 +33,14 @@ public class Add_Vehicle_Fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ((AppCompatActivity) requireActivity()).getSupportActionBar().setTitle(pageTitle);
 
         cancelButton = view.findViewById(R.id.addVehicleCancelButton);
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 NavHostFragment.findNavController(Add_Vehicle_Fragment.this)
-                        .navigate(R.id.action_add_Vehicle_Fragment2_to_FirstFragment);
+                        .navigate(R.id.action_add_Vehicle_Fragment_to_carSelectFragment);
             }
         });
     }

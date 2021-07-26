@@ -3,35 +3,45 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/carSelectFragment">
 
-    <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.example.carmaintenancetracker.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
-
-        <action
-            android:id="@+id/action_FirstFragment_to_dashboardFragment"
-            app:destination="@id/dashboardFragment" />
-    </fragment>
     <fragment
         android:id="@+id/dashboardFragment"
-        android:name="com.example.carmaintenancetracker.DashboardFragment"
+        android:name="ui.DashboardFragment"
         android:label="fragment_dashboard"
         tools:layout="@layout/fragment_dashboard" >
         <action
-            android:id="@+id/action_dashboardFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_dashboardFragment_to_carSelectFragment"
+            app:destination="@id/carSelectFragment" />
     </fragment>
     <fragment
-        android:id="@+id/add_Vehicle_Fragment2"
-        android:name="com.example.carmaintenancetracker.Add_Vehicle_Fragment"
+        android:id="@+id/add_Vehicle_Fragment"
+        android:name="ui.Add_Vehicle_Fragment"
         android:label="Add_Vehicle_Fragment"
-        tools:layout="@layout/fragment_add_vehicle">
+        tools:layout="@layout/fragment_add_vehicle"
+        app:startDestination="@id/action_add_Vehicle_Fragment_to_carSelectFragment">
         <action
-            android:id="@+id/action_add_Vehicle_Fragment2_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_add_Vehicle_Fragment_to_carSelectFragment"
+            app:destination="@id/carSelectFragment" />
     </fragment>
-    <action android:id="@+id/action_global_add_Vehicle_Fragment2" app:destination="@id/add_Vehicle_Fragment2" />
+    <action android:id="@+id/action_global_add_Vehicle_Fragment" app:destination="@id/add_Vehicle_Fragment" />
+    <fragment
+        android:id="@+id/carSelectFragment"
+        android:name="ui.CarSelectFragment"
+        android:label="fragment_car_select"
+        tools:layout="@layout/fragment_car_select" >
+        <action
+            android:id="@+id/action_carSelectFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addGasFragment"
+        android:name="ui.AddGasFragment"
+        android:label="fragment_add_gas"
+        tools:layout="@layout/fragment_add_gas" >
+        <action
+            android:id="@+id/action_addGasFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment" />
+    </fragment>
+    <action android:id="@+id/action_global_addGasFragment" app:destination="@id/addGasFragment" />
 </navigation>

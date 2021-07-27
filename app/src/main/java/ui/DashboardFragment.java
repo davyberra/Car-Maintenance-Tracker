@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -17,8 +18,10 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.carmaintenancetracker.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class DashboardFragment extends Fragment {
+    private String pageTitle = "Dashboard";
 
     public DashboardFragment() {
         // Required empty public constructor
@@ -28,28 +31,34 @@ public class DashboardFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-    }
 
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.dashboard_menu, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        switch (item.getItemId()) {
-            case R.id.addGas:
+        FloatingActionButton fab = requireActivity().findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 NavHostFragment.findNavController(DashboardFragment.this)
                         .navigate(R.id.action_global_addGasFragment);
-                return true;
+                fab.hide();
+            }
+        });
 
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+        fab.show();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((AppCompatActivity) requireActivity()).getSupportActionBar().setTitle(pageTitle);
+        FloatingActionButton fab = requireActivity().findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavHostFragment.findNavController(DashboardFragment.this)
+                        .navigate(R.id.action_global_addGasFragment);
+                fab.hide();
+            }
+        });
+        fab.show();
     }
 
     @Override

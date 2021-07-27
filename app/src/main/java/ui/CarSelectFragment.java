@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.carmaintenancetracker.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class CarSelectFragment extends Fragment {
     private String pageTitle = "Select Car";
@@ -32,10 +33,25 @@ public class CarSelectFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        ((AppCompatActivity) requireActivity()).getSupportActionBar().setTitle(pageTitle);
+        FloatingActionButton fab = requireActivity().findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavHostFragment.findNavController(CarSelectFragment.this)
+                        .navigate(R.id.action_global_add_Vehicle_Fragment);
+                fab.hide();
+            }
+        });
+        fab.show();
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ((AppCompatActivity) requireActivity()).getSupportActionBar().setTitle(pageTitle);
         carImage = view.findViewById(R.id.carImageView);
         carImage.setOnClickListener(new View.OnClickListener() {
             @Override

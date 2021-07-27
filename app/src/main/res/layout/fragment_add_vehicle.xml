@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
+    style="@style/style_background"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,6 +8,7 @@
     android:layout_height="match_parent">
 
     <EditText
+        style="@style/style_text_view"
         android:id="@+id/carMakeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,6 +22,7 @@
         app:layout_constraintTop_toBottomOf="@+id/addNewVehicleTextView" />
 
     <EditText
+        style="@style/style_text_view"
         android:id="@+id/carModelText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -44,12 +47,12 @@
         app:layout_constraintTop_toBottomOf="@+id/carModelText" />
 
     <TextView
+        style="@style/style_text_view"
         android:id="@+id/addNewVehicleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="108dp"
         android:text="@string/addNewVehicleTextView"
-        android:textColor="@color/black"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -8,10 +8,4 @@
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
-
-    <item
-        android:id="@+id/action_add_car"
-        android:icon="@android:drawable/ic_menu_add"
-        android:title="@string/add_car"
-        app:showAsAction="ifRoom" />
 </menu>

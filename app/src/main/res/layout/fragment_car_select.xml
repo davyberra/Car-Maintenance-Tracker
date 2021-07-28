@@ -44,14 +44,14 @@
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginBottom="8dp"
                     android:text="@string/my_car"
                     android:textColor="@color/white"
                     android:textSize="24sp"
-                    app:layout_constraintStart_toStartOf="@id/carImageView"
-                    app:layout_constraintTop_toTopOf="@+id/carImageView" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/carImageView" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>

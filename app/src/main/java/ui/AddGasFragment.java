@@ -1,6 +1,8 @@
 package ui;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -43,9 +45,17 @@ public class AddGasFragment extends Fragment {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                addGas();
                 NavHostFragment.findNavController(AddGasFragment.this)
                         .navigate(R.id.action_addGasFragment_to_dashboardFragment);
             }
         });
+    }
+
+    private void addGas() {
+        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(getString(R.string.add_gas_test_key), "Added some gas!");
+        editor.apply();
     }
 }

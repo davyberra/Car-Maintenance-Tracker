@@ -14,13 +14,26 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="button_dashboard_text">Back</string>
     <string name="edit_name">Enter name</string>
-    <string name="add_car">Add New Vehicle</string>
+    <string name="nav_drawer_add_vehicle">Add New Vehicle</string>
     <string name="enter_your_name">Enter your name</string>
     <string name="carMakeTextView">Make</string>
     <string name="carModelTextView">Model</string>
     <string name="carYearTextView">Year</string>
     <string name="addNewVehicleTextView">Add a New Vehicle</string>
     <string name="cancel_button">Cancel</string>
-    <string name="my_car">My Car</string>
+    <string name="my_car">2003 Honda Accord</string>
     <string name="fab_add_vehicle_desc">fab_add_vehicle</string>
+    <string name="add_gas_test_key">add_gas_test</string>
+    <string name="title_activity_nav_drawer">NavDrawer</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="nav_drawer_select_vehicle">Select Vehicle</string>
+    <string name="header_text_content">Welcome, Davy!</string>
 </resources>

@@ -1,5 +1,7 @@
 package ui;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,6 +15,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -22,6 +25,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class DashboardFragment extends Fragment {
     private String pageTitle = "Dashboard";
+    private TextView dashboardText;
 
     public DashboardFragment() {
         // Required empty public constructor
@@ -78,5 +82,11 @@ public class DashboardFragment extends Fragment {
                         .navigate(R.id.action_dashboardFragment_to_carSelectFragment);
             }
         });
+
+        dashboardText = view.findViewById(R.id.dashboardTextView);
+        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        String defaultString = "No gas added yet";
+        String newText = sharedPref.getString(getString(R.string.add_gas_test_key), defaultString);
+        dashboardText.setText(newText);
     }
 }

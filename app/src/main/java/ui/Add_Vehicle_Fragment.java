@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.carmaintenancetracker.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class Add_Vehicle_Fragment extends Fragment {
 
@@ -28,6 +29,13 @@ public class Add_Vehicle_Fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_add_vehicle, container, false);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        FloatingActionButton fab = requireActivity().findViewById(R.id.fab);
+        fab.hide();
     }
 
     @Override

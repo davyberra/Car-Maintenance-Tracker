@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/carSelectFragment">
+    app:startDestination="@id/dashboardFragment">
 
     <fragment
         android:id="@+id/dashboardFragment"
@@ -44,4 +44,5 @@
             app:destination="@id/dashboardFragment" />
     </fragment>
     <action android:id="@+id/action_global_addGasFragment" app:destination="@id/addGasFragment" />
+    <action android:id="@+id/action_global_carSelectFragment" app:destination="@id/carSelectFragment" /><action android:id="@+id/action_global_dashboardFragment" app:destination="@id/dashboardFragment"/>
 </navigation>

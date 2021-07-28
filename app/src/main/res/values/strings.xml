@@ -36,4 +36,6 @@
     <string name="menu_slideshow">Slideshow</string>
     <string name="nav_drawer_select_vehicle">Select Vehicle</string>
     <string name="header_text_content">Welcome, Davy!</string>
+    <string name="nav_drawer_dashboard">Dashboard</string>
+    <string name="example_car_name">2003 Honda Accord</string>
 </resources>

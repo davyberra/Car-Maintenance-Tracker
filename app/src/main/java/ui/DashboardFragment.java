@@ -36,17 +36,6 @@ public class DashboardFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        FloatingActionButton fab = requireActivity().findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavHostFragment.findNavController(DashboardFragment.this)
-                        .navigate(R.id.action_global_addGasFragment);
-                fab.hide();
-            }
-        });
-
-        fab.show();
     }
 
     @Override
@@ -54,15 +43,7 @@ public class DashboardFragment extends Fragment {
         super.onResume();
         ((AppCompatActivity) requireActivity()).getSupportActionBar().setTitle(pageTitle);
         FloatingActionButton fab = requireActivity().findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavHostFragment.findNavController(DashboardFragment.this)
-                        .navigate(R.id.action_global_addGasFragment);
-                fab.hide();
-            }
-        });
-        fab.show();
+        fab.hide();
     }
 
     @Override
@@ -75,18 +56,10 @@ public class DashboardFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        view.findViewById(R.id.button_dashboard).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(DashboardFragment.this)
-                        .navigate(R.id.action_dashboardFragment_to_carSelectFragment);
-            }
-        });
-
-        dashboardText = view.findViewById(R.id.dashboardTextView);
-        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-        String defaultString = "No gas added yet";
-        String newText = sharedPref.getString(getString(R.string.add_gas_test_key), defaultString);
-        dashboardText.setText(newText);
+//        dashboardText = view.findViewById(R.id.dashboardTextView);
+//        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+//        String defaultString = "No gas added yet";
+//        String newText = sharedPref.getString(getString(R.string.add_gas_test_key), defaultString);
+//        dashboardText.setText(newText);
     }
 }

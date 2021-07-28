@@ -4,7 +4,11 @@
         android:id="@+id/main_group"
         android:checkableBehavior="single">
         <item
-            android:id="@+id/add_Vehicle_Fragment"
+            android:id="@+id/nav_drawer_dashboard"
+            android:icon="@drawable/outline_home_24"
+            android:title="@string/nav_drawer_dashboard" />
+        <item
+            android:id="@+id/nav_drawer_add_vehicle"
             android:icon="@drawable/baseline_add_20"
             android:title="@string/nav_drawer_add_vehicle" />
         <item

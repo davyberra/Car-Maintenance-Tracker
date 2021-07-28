@@ -8,11 +8,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,15 +21,11 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/example_card_view"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
             app:cardCornerRadius="4dp"
-            app:cardElevation="4dp">
+            app:cardElevation="10dp">
 
             <ImageView
                 android:id="@+id/carImageView"
@@ -37,14 +33,6 @@
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 app:srcCompat="@drawable/stock_car_image" />
-
-            <RadioButton
-                android:id="@+id/carRadioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="38dp"
-                android:layout_gravity="bottom|end"
-                android:checked="false"
-                app:buttonTint="@color/white" />
 
             <TextView
                 android:id="@+id/carTextView"

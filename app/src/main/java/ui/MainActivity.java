@@ -20,12 +20,15 @@ import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.room.Room;
 
 import android.util.AttributeSet;
 import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
+
+import database.MainDatabase;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     AppBarConfiguration appBarConfiguration;
@@ -51,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         .setOpenableLayout(drawerLayout)
                         .build();
         NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration);
+
 
 
 

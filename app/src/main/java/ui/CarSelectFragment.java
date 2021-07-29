@@ -17,9 +17,18 @@ import android.widget.ImageView;
 import com.example.carmaintenancetracker.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import dao.VehicleDao;
+import database.MainDatabase;
+import entity.Vehicle;
+import io.reactivex.rxjava3.core.Single;
+
 public class CarSelectFragment extends Fragment {
     private String pageTitle = "Select Car";
     private ImageView carImage;
+    private Single<List<Vehicle>> vehicles;
 
     public CarSelectFragment() {
         // Required empty public constructor
@@ -52,6 +61,10 @@ public class CarSelectFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        MainDatabase db = MainDatabase.getInstance(getContext());
+        VehicleDao vehicleDao = db.vehicleDao();
+        vehicles = vehicleDao.getAll();
+
         carImage = view.findViewById(R.id.carImageView);
         carImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,5 +73,9 @@ public class CarSelectFragment extends Fragment {
                         .navigate(R.id.action_carSelectFragment_to_dashboardFragment);
             }
         });
+
+        for (int i = 0; i < vehicles.le; i++) {
+
+        }
     }
 }

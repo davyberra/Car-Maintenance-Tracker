@@ -18,6 +18,7 @@ import com.example.carmaintenancetracker.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import dao.VehicleDao;
@@ -74,8 +75,6 @@ public class CarSelectFragment extends Fragment {
             }
         });
 
-        for (int i = 0; i < vehicles.le; i++) {
-
-        }
+//        Iterator iterator = vehicles.iterator();
     }
 }

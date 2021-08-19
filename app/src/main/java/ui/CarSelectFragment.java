@@ -7,7 +7,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import adapter.CarSelectAdapter;
 import dao.VehicleDao;
 import database.MainDatabase;
 import entity.Vehicle;
@@ -29,7 +32,7 @@ import io.reactivex.rxjava3.core.Single;
 public class CarSelectFragment extends Fragment {
     private String pageTitle = "Select Car";
     private ImageView carImage;
-    private Single<List<Vehicle>> vehicles;
+    private LiveData<List<Vehicle>> vehicles;
 
     public CarSelectFragment() {
         // Required empty public constructor
@@ -66,14 +69,8 @@ public class CarSelectFragment extends Fragment {
         VehicleDao vehicleDao = db.vehicleDao();
         vehicles = vehicleDao.getAll();
 
-        carImage = view.findViewById(R.id.carImageView);
-        carImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavHostFragment.findNavController(CarSelectFragment.this)
-                        .navigate(R.id.action_carSelectFragment_to_dashboardFragment);
-            }
-        });
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rvCarSelect);
+        CarSelectAdapter adapter = new CarSelectAdapter(vehicles);
 
 //        Iterator iterator = vehicles.iterator();
     }

@@ -1,5 +1,6 @@
 package dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -15,7 +16,7 @@ import io.reactivex.rxjava3.core.Single;
 @Dao
 public interface VehicleDao {
     @Query("SELECT * FROM vehicle")
-    public Single<List<Vehicle>> getAll();
+    public LiveData<List<Vehicle>> getAll();
 
     @Query("SELECT * FROM vehicle WHERE carId = (:id)")
     public Single<Vehicle> getVehicleById(int id);

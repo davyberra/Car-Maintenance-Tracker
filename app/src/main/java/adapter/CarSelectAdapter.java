@@ -1,6 +1,7 @@
 package adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +27,11 @@ import entity.Vehicle;
 import ui.CarSelectFragment;
 
 public class CarSelectAdapter extends RecyclerView.Adapter<CarSelectAdapter.ViewHolder> {
-    private LiveData<List<Vehicle>> vehicles;
+    private static final String PREFS_FILE = "com.davyberra.carmaintenancetracker.preferences";
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
+    private String KEY_RADIO_SELECTED_TOGGLE = "key_radio_selected_toggle_";
+    private List<Vehicle> vehicles;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public CardView carCardView;
@@ -44,7 +49,7 @@ public class CarSelectAdapter extends RecyclerView.Adapter<CarSelectAdapter.View
         }
     }
 
-    public CarSelectAdapter(LiveData<List<Vehicle>> vehicles) {
+    public CarSelectAdapter(List<Vehicle> vehicles) {
         this.vehicles = vehicles;
     }
 
@@ -52,6 +57,8 @@ public class CarSelectAdapter extends RecyclerView.Adapter<CarSelectAdapter.View
     @Override
     public CarSelectAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
+        sharedPreferences = context.getSharedPreferences(PREFS_FILE, Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
         LayoutInflater inflater = LayoutInflater.from(context);
 
         View carView = inflater.inflate(R.layout.car_item_view, parent, false);
@@ -62,8 +69,9 @@ public class CarSelectAdapter extends RecyclerView.Adapter<CarSelectAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Vehicle vehicle = vehicles[position];
-
+        Vehicle vehicle = vehicles.get(position);
+        String pref_key = KEY_RADIO_SELECTED_TOGGLE + Integer.toString(position);
+        holder.carRadioButton.setChecked(sharedPreferences.getBoolean(pref_key, false));
         TextView textView = holder.carTextView;
         String text = String.format("%s %s %s",
                 vehicle.year,
@@ -74,6 +82,8 @@ public class CarSelectAdapter extends RecyclerView.Adapter<CarSelectAdapter.View
         holder.carImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                editor.putBoolean(pref_key, true);
+                holder.carRadioButton.setChecked(true);
                 Navigation.findNavController(v)
                         .navigate(R.id.action_carSelectFragment_to_dashboardFragment);
             }
@@ -82,6 +92,6 @@ public class CarSelectAdapter extends RecyclerView.Adapter<CarSelectAdapter.View
 
     @Override
     public int getItemCount() {
-        return vehicles.length;
+        return vehicles.size();
     }
 }

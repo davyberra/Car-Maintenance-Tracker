@@ -1,6 +1,7 @@
 package dao;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -22,7 +23,7 @@ public interface VehicleDao {
     public Single<Vehicle> getVehicleById(int id);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public Completable insertVehicle(Vehicle vehicle);
+    public void insertVehicle(Vehicle vehicle);
 
     @Delete
     public Completable delete(Vehicle vehicle);

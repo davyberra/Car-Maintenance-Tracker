@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavHost;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -20,6 +21,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import dao.VehicleDao;
 import database.MainDatabase;
 import entity.Vehicle;
+import viewmodel.CarSelectViewModel;
 
 public class Add_Vehicle_Fragment extends Fragment {
 
@@ -29,6 +31,9 @@ public class Add_Vehicle_Fragment extends Fragment {
     private EditText makeText;
     private EditText modelText;
     private EditText yearText;
+
+    private CarSelectViewModel viewModel;
+    private Add_Vehicle_Fragment context;
 
     public Add_Vehicle_Fragment() {
         super(R.layout.fragment_add_vehicle);
@@ -52,6 +57,7 @@ public class Add_Vehicle_Fragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ((AppCompatActivity) requireActivity()).getSupportActionBar().setTitle(pageTitle);
+        context = this;
 
         makeText = view.findViewById(R.id.carMakeText);
         modelText = view.findViewById(R.id.carModelText);
@@ -68,9 +74,8 @@ public class Add_Vehicle_Fragment extends Fragment {
                         modelText.getText().toString()
                 );
 
-                MainDatabase db = MainDatabase.getInstance(getContext());
-                VehicleDao vehicleDao = db.vehicleDao();
-                vehicleDao.insertVehicle(vehicle);
+                viewModel = ViewModelProviders.of(context).get(CarSelectViewModel.class);
+                viewModel.insert(vehicle);
 
                 NavHostFragment.findNavController(Add_Vehicle_Fragment.this)
                         .navigate(R.id.action_global_carSelectFragment);

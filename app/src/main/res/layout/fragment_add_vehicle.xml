@@ -8,29 +8,29 @@
     android:layout_height="match_parent">
 
     <EditText
-        style="@style/style_text_view"
         android:id="@+id/carMakeText"
+        style="@style/style_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:ems="10"
         android:hint="@string/carMakeTextView"
-        android:inputType="textPersonName"
+        android:inputType="textCapWords"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addNewVehicleTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/carYearText" />
 
     <EditText
-        style="@style/style_text_view"
         android:id="@+id/carModelText"
+        style="@style/style_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:ems="10"
         android:hint="@string/carModelTextView"
-        android:inputType="textPersonName"
+        android:inputType="text|textCapWords"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/carMakeText" />
 
@@ -38,13 +38,14 @@
         android:id="@+id/carYearText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:ems="10"
         android:hint="@string/carYearTextView"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/carModelText" />
+        app:layout_constraintTop_toBottomOf="@+id/addNewVehicleTextView" />
 
     <TextView
         style="@style/style_text_view"
@@ -74,11 +75,11 @@
         android:id="@+id/buttonSaveAddVehicle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="100dp"
         android:text="@string/buttonSaveAddVehicle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/carYearText" />
+        app:layout_constraintTop_toBottomOf="@+id/carModelText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

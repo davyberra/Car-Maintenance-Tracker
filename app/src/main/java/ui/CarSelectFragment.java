@@ -8,7 +8,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -28,11 +31,13 @@ import dao.VehicleDao;
 import database.MainDatabase;
 import entity.Vehicle;
 import io.reactivex.rxjava3.core.Single;
+import viewmodel.CarSelectViewModel;
 
 public class CarSelectFragment extends Fragment {
     private String pageTitle = "Select Car";
     private ImageView carImage;
-    private LiveData<List<Vehicle>> vehicles;
+    private CarSelectViewModel viewModel;
+    private CarSelectFragment context;
 
     public CarSelectFragment() {
         // Required empty public constructor
@@ -64,13 +69,21 @@ public class CarSelectFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        MainDatabase db = MainDatabase.getInstance(getContext());
-        VehicleDao vehicleDao = db.vehicleDao();
-        vehicles = vehicleDao.getAll();
-
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rvCarSelect);
-        CarSelectAdapter adapter = new CarSelectAdapter(vehicles);
+        context = this;
+        viewModel = ViewModelProviders.of(context).get(CarSelectViewModel.class);
+        viewModel.getVehicleLiveData().observe(getViewLifecycleOwner(), new Observer<List<Vehicle>>() {
+            @Override
+            public void onChanged(List<Vehicle> vehicles) {
+                CarSelectAdapter adapter = new CarSelectAdapter(vehicles);
+                recyclerView.setAdapter(adapter);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            }
+        });
+
+
+
+
 
 //        Iterator iterator = vehicles.iterator();
     }

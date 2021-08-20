@@ -45,4 +45,8 @@
     </fragment>
     <action android:id="@+id/action_global_addGasFragment" app:destination="@id/addGasFragment" />
     <action android:id="@+id/action_global_carSelectFragment" app:destination="@id/carSelectFragment" /><action android:id="@+id/action_global_dashboardFragment" app:destination="@id/dashboardFragment"/>
+    <fragment
+        android:id="@+id/gasEntryOverviewFragment"
+        android:name="ui.GasEntryOverviewFragment"
+        android:label="GasEntryOverviewFragment" /><action android:id="@+id/action_global_gasEntryOverviewFragment" app:destination="@id/gasEntryOverviewFragment"/>
 </navigation>

@@ -79,10 +79,5 @@ public class CarSelectFragment extends Fragment {
             }
         });
 
-
-
-
-
-//        Iterator iterator = vehicles.iterator();
     }
 }

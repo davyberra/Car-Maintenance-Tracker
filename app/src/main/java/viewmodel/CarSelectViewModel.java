@@ -31,6 +31,7 @@ public class CarSelectViewModel extends AndroidViewModel {
     private LiveData<Vehicle> selectedVehicle = new MutableLiveData<Vehicle>();
     private MainDatabase db;
     private Executor executor = Executors.newSingleThreadExecutor();
+    private int selectedVehicleId;
 
 
     public CarSelectViewModel(Application application) {
@@ -75,9 +76,12 @@ public class CarSelectViewModel extends AndroidViewModel {
     }
 
     public LiveData<Vehicle> getSelectedVehicle() {
-        int selectedVehicleId = sharedPreferences.getInt(KEY_SELECTED_VEHICLE, 2);
+        selectedVehicleId = sharedPreferences.getInt(KEY_SELECTED_VEHICLE, 2);
         selectedVehicle = vehicleDao.getVehicleById(selectedVehicleId);
         return selectedVehicle;
     }
 
+    public int getSelectedVehicleId() {
+        return selectedVehicleId;
+    }
 }

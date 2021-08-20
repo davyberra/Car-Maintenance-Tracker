@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/brand_light_teal"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/gas_entry_overview_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="Fill-Up Overview"
+        android:textColor="@color/brand_dark_grey"
+        android:textSize="32sp" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="2dp"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="2dp">
+
+        <TextView
+            android:id="@+id/gasEntryOverviewDateLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/style_gas_entry_text"
+            android:text="@string/gas_entry_overview_date_label" />
+
+        <TextView
+            android:id="@+id/gasEntryOverviewDateText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            style="@style/style_gas_entry_text"
+            android:text="TextView" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="2dp"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="2dp">
+
+        <TextView
+            android:id="@+id/gasEntryOverviewMileageLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/style_gas_entry_text"
+            android:text="@string/gas_entry_overview_mileage_label" />
+
+        <TextView
+            android:id="@+id/gasEntryOverviewMileageText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            style="@style/style_gas_entry_text"
+            android:text="TextView" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="2dp"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="2dp">
+
+        <TextView
+            android:id="@+id/gasEntryOverviewGallonsLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/style_gas_entry_text"
+            android:text="@string/gas_entry_overview_gallons_label" />
+
+        <TextView
+            android:id="@+id/gasEntryOverviewGallonsText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            style="@style/style_gas_entry_text"
+            android:text="TextView" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="2dp"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="2dp">
+
+        <TextView
+            android:id="@+id/gasEntryOverviewCostLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/style_gas_entry_text"
+            android:text="@string/gas_entry_overview_cost_label" />
+
+        <TextView
+            android:id="@+id/gasEntryOverviewCostText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            style="@style/style_gas_entry_text"
+            android:text="TextView" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="2dp"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="2dp">
+
+        <TextView
+            android:id="@+id/gasEntryOverviewPpgLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/style_gas_entry_text"
+            android:text="@string/gas_entry_overview_ppg_label" />
+
+        <TextView
+            android:id="@+id/gasEntryOverviewPpgText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            style="@style/style_gas_entry_text"
+            android:text="TextView" />
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

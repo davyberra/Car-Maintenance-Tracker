@@ -39,4 +39,9 @@
     <string name="nav_drawer_dashboard">Dashboard</string>
     <string name="example_car_name">2003 Honda Accord</string>
     <string name="buttonSaveAddVehicle">Save</string>
+    <string name="gas_entry_overview_ppg_label">Price/Gallon:</string>
+    <string name="gas_entry_overview_cost_label">Total Cost:</string>
+    <string name="gas_entry_overview_gallons_label">Gallons:</string>
+    <string name="gas_entry_overview_mileage_label">Odometer:</string>
+    <string name="gas_entry_overview_date_label">Date:</string>
 </resources>

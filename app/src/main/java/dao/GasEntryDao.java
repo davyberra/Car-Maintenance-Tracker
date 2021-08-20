@@ -19,7 +19,7 @@ public interface GasEntryDao {
     @Query("SELECT * FROM gasentry WHERE gasEntryId = (:id)")
     public LiveData<GasEntry> getGasEntryById(int id);
 
-    @Query("SELECT * FROM gasentry WHERE carId = (:id)")
+    @Query("SELECT * FROM gasentry WHERE carId = (:id) ORDER BY gasEntryId DESC")
     public LiveData<List<GasEntry>> getAllByCarId(int id);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

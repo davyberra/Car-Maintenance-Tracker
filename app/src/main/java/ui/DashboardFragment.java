@@ -20,15 +20,24 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.carmaintenancetracker.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.List;
+
+import adapter.ContextProvider;
+import adapter.GasEntryAdapter;
+import entity.GasEntry;
 import entity.Vehicle;
 import viewmodel.CarSelectViewModel;
+import viewmodel.GasEntryViewModel;
 
 public class DashboardFragment extends Fragment {
     private static final String TAG = DashboardFragment.class.getSimpleName();
@@ -69,8 +78,8 @@ public class DashboardFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        CarSelectViewModel viewModel = new ViewModelProvider(requireActivity()).get(CarSelectViewModel.class);
-        selectedVehicle = viewModel.getSelectedVehicle();
+        CarSelectViewModel carSelectViewModel = new ViewModelProvider(requireActivity()).get(CarSelectViewModel.class);
+        selectedVehicle = carSelectViewModel.getSelectedVehicle();
 
         selectedVehicle.observe(getViewLifecycleOwner(), vehicle -> {
             Log.d(TAG, String.valueOf(vehicle == null));
@@ -93,11 +102,21 @@ public class DashboardFragment extends Fragment {
             }
         });
 
-
-//        dashboardText = view.findViewById(R.id.dashboardTextView);
-//        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-//        String defaultString = "No gas added yet";
-//        String newText = sharedPref.getString(getString(R.string.add_gas_test_key), defaultString);
-//        dashboardText.setText(newText);
+        RecyclerView recyclerView = view.findViewById(R.id.rvDashboard);
+        GasEntryViewModel gasEntryViewModel = new ViewModelProvider(requireActivity()).get(GasEntryViewModel.class);
+        int carId = carSelectViewModel.getSelectedVehicleId();
+        gasEntryViewModel.getAllByCarId(carId).observe(getViewLifecycleOwner(), new Observer<List<GasEntry>>() {
+            @Override
+            public void onChanged(List<GasEntry> gasEntries) {
+                GasEntryAdapter adapter = new GasEntryAdapter(gasEntries, new ContextProvider() {
+                    @Override
+                    public Context getContext() {
+                        return requireActivity();
+                    }
+                });
+                recyclerView.setAdapter(adapter);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            }
+        });
     }
 }

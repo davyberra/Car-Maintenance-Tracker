@@ -25,6 +25,7 @@ import java.util.Date;
 
 import entity.GasEntry;
 import viewmodel.CarSelectViewModel;
+import viewmodel.GasEntryViewModel;
 
 public class AddGasFragment extends Fragment {
     private static final String PREFS_FILE = "com.davyberra.carmaintenancetracker.preferences";
@@ -34,7 +35,7 @@ public class AddGasFragment extends Fragment {
 
     private String pageTitle = "Add Gas";
     private Button saveButton;
-    private CarSelectViewModel viewModel;
+    private GasEntryViewModel viewModel;
 
     private EditText gallonsText;
     private EditText pricePerGallonText;
@@ -77,7 +78,7 @@ public class AddGasFragment extends Fragment {
     }
 
     private void addGas() {
-        viewModel = ViewModelProviders.of(requireActivity()).get(CarSelectViewModel.class);
+        viewModel = ViewModelProviders.of(requireActivity()).get(GasEntryViewModel.class);
         int vehicleId = sharedPreferences.getInt(KEY_SELECTED_VEHICLE, 0);
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date(System.currentTimeMillis());

@@ -12,14 +12,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.navigation.NavHost;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.carmaintenancetracker.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import dao.VehicleDao;
-import database.MainDatabase;
 import entity.Vehicle;
 import viewmodel.CarSelectViewModel;
 
@@ -75,7 +72,7 @@ public class Add_Vehicle_Fragment extends Fragment {
                 );
 
                 viewModel = ViewModelProviders.of(context).get(CarSelectViewModel.class);
-                viewModel.insert(vehicle);
+                viewModel.insertVehicle(vehicle);
 
                 NavHostFragment.findNavController(Add_Vehicle_Fragment.this)
                         .navigate(R.id.action_global_carSelectFragment);

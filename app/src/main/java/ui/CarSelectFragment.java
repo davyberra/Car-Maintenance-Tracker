@@ -1,13 +1,12 @@
 package ui;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.fragment.NavHostFragment;
@@ -22,22 +21,17 @@ import android.widget.ImageView;
 import com.example.carmaintenancetracker.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import adapter.CarSelectAdapter;
-import dao.VehicleDao;
-import database.MainDatabase;
+import adapter.ContextProvider;
 import entity.Vehicle;
-import io.reactivex.rxjava3.core.Single;
 import viewmodel.CarSelectViewModel;
 
 public class CarSelectFragment extends Fragment {
     private String pageTitle = "Select Car";
     private ImageView carImage;
     private CarSelectViewModel viewModel;
-    private CarSelectFragment context;
 
     public CarSelectFragment() {
         // Required empty public constructor
@@ -70,12 +64,16 @@ public class CarSelectFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rvCarSelect);
-        context = this;
-        viewModel = ViewModelProviders.of(context).get(CarSelectViewModel.class);
-        viewModel.getVehicleLiveData().observe(getViewLifecycleOwner(), new Observer<List<Vehicle>>() {
+        viewModel = ViewModelProviders.of(requireActivity()).get(CarSelectViewModel.class);
+        viewModel.getVehiclesLiveData().observe(getViewLifecycleOwner(), new Observer<List<Vehicle>>() {
             @Override
             public void onChanged(List<Vehicle> vehicles) {
-                CarSelectAdapter adapter = new CarSelectAdapter(vehicles);
+                CarSelectAdapter adapter = new CarSelectAdapter(vehicles, new ContextProvider() {
+                    @Override
+                    public FragmentActivity getContext() {
+                        return requireActivity();
+                    }
+                });
                 recyclerView.setAdapter(adapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
             }

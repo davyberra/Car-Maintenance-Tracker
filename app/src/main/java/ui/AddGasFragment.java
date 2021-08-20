@@ -1,6 +1,5 @@
 package ui;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,20 +9,38 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.example.carmaintenancetracker.R;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import entity.GasEntry;
+import viewmodel.CarSelectViewModel;
+
 public class AddGasFragment extends Fragment {
+    private static final String PREFS_FILE = "com.davyberra.carmaintenancetracker.preferences";
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
+    private String KEY_SELECTED_VEHICLE = "key_selected_vehicle";
 
     private String pageTitle = "Add Gas";
     private Button saveButton;
+    private CarSelectViewModel viewModel;
+
+    private EditText gallonsText;
+    private EditText pricePerGallonText;
+    private EditText totalPriceText;
+    private EditText totalMileageText;
+
     public AddGasFragment() {
         // Required empty public constructor
     }
@@ -41,7 +58,14 @@ public class AddGasFragment extends Fragment {
         ActionBar actionBar = ((AppCompatActivity) requireActivity()).getSupportActionBar();
         actionBar.setTitle(pageTitle);
 
+        sharedPreferences = requireActivity().getSharedPreferences(PREFS_FILE, Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+
         saveButton = view.findViewById(R.id.buttonAddGasSave);
+        gallonsText = view.findViewById(R.id.gallonsTextView);
+        totalPriceText = view.findViewById(R.id.costTextView);
+        pricePerGallonText = view.findViewById(R.id.ppgTextView);
+        totalMileageText = view.findViewById(R.id.milesTextView);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,9 +77,23 @@ public class AddGasFragment extends Fragment {
     }
 
     private void addGas() {
-        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString(getString(R.string.add_gas_test_key), "Added some gas!");
-        editor.apply();
+        viewModel = ViewModelProviders.of(requireActivity()).get(CarSelectViewModel.class);
+        int vehicleId = sharedPreferences.getInt(KEY_SELECTED_VEHICLE, 0);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date(System.currentTimeMillis());
+        GasEntry gasEntry = new GasEntry(
+                formatter.format(date),
+                vehicleId,
+                Float.parseFloat(gallonsText.getText().toString()),
+                Float.parseFloat(totalPriceText.getText().toString()),
+                Float.parseFloat(pricePerGallonText.getText().toString()),
+                Integer.parseInt(totalMileageText.getText().toString())
+        );
+
+
+        viewModel.insertGasEntry(gasEntry);
+
+//        NavHostFragment.findNavController(AddGasFragment.this)
+//                .navigate(R.id.action_global_carSelectFragment);
     }
 }

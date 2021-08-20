@@ -9,23 +9,36 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.carmaintenancetracker.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import entity.Vehicle;
+import viewmodel.CarSelectViewModel;
+
 public class DashboardFragment extends Fragment {
+    private static final String TAG = DashboardFragment.class.getSimpleName();
     private String pageTitle = "Dashboard";
     private TextView dashboardText;
+    private Button addGasButton;
+    private LiveData<Vehicle> selectedVehicle;
+
+
+    private CarSelectViewModel viewModel;
 
     public DashboardFragment() {
         // Required empty public constructor
@@ -55,6 +68,31 @@ public class DashboardFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        CarSelectViewModel viewModel = new ViewModelProvider(requireActivity()).get(CarSelectViewModel.class);
+        selectedVehicle = viewModel.getSelectedVehicle();
+
+        selectedVehicle.observe(getViewLifecycleOwner(), vehicle -> {
+            Log.d(TAG, String.valueOf(vehicle == null));
+            if (vehicle != null) {
+                TextView vehicleTitle = view.findViewById(R.id.dashboardVehicleTitle);
+                vehicleTitle.setText(String.format("%s %s %s",
+                        vehicle.year,
+                        vehicle.make,
+                        vehicle.model
+                ));
+            }
+        });
+
+        addGasButton = view.findViewById(R.id.dashboardAddGasButton);
+        addGasButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavHostFragment.findNavController(DashboardFragment.this)
+                        .navigate(R.id.action_global_addGasFragment);
+            }
+        });
+
 
 //        dashboardText = view.findViewById(R.id.dashboardTextView);
 //        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);

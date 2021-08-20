@@ -20,7 +20,10 @@ public interface VehicleDao {
     public LiveData<List<Vehicle>> getAll();
 
     @Query("SELECT * FROM vehicle WHERE carId = (:id)")
-    public Single<Vehicle> getVehicleById(int id);
+    public LiveData<Vehicle> getVehicleById(int id);
+
+    @Query("SELECT MIN(carId) AS carId FROM vehicle")
+    public LiveData<Vehicle> getVehicleWithLowestId();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public void insertVehicle(Vehicle vehicle);

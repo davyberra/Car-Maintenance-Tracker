@@ -11,27 +11,26 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.carmaintenancetracker.R;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 import entity.Vehicle;
-import ui.CarSelectFragment;
+import viewmodel.CarSelectViewModel;
 
 public class CarSelectAdapter extends RecyclerView.Adapter<CarSelectAdapter.ViewHolder> {
     private static final String PREFS_FILE = "com.davyberra.carmaintenancetracker.preferences";
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
+    private final ContextProvider contextProvider;
     private String KEY_RADIO_SELECTED_TOGGLE = "key_radio_selected_toggle_";
     private List<Vehicle> vehicles;
+    private CarSelectViewModel viewModel;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public CardView carCardView;
@@ -49,8 +48,9 @@ public class CarSelectAdapter extends RecyclerView.Adapter<CarSelectAdapter.View
         }
     }
 
-    public CarSelectAdapter(List<Vehicle> vehicles) {
+    public CarSelectAdapter(List<Vehicle> vehicles, ContextProvider contextProvider) {
         this.vehicles = vehicles;
+        this.contextProvider = contextProvider;
     }
 
 
@@ -78,10 +78,12 @@ public class CarSelectAdapter extends RecyclerView.Adapter<CarSelectAdapter.View
                 vehicle.make,
                 vehicle.model);
         textView.setText(text);
+        viewModel = new ViewModelProvider((ViewModelStoreOwner) contextProvider.getContext()).get(CarSelectViewModel.class);
 
         holder.carImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                viewModel.selectVehicle(vehicle);
                 editor.putBoolean(pref_key, true);
                 holder.carRadioButton.setChecked(true);
                 Navigation.findNavController(v)

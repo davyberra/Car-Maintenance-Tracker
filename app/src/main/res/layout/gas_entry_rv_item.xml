@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -10,25 +11,61 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginStart="2dp"
-        android:layout_marginEnd="2dp"
         android:layout_marginTop="2dp"
+        android:layout_marginEnd="2dp"
         android:layout_marginBottom="2dp"
         app:cardCornerRadius="4dp"
         app:cardElevation="2dp">
 
-        <TextView
-            android:id="@+id/gasEntryDateText"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            android:textSize="24sp" />
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/gasEntryCostText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="end"
-            android:text="TextView"
-            android:textSize="24sp" />
+            <TextView
+                android:id="@+id/gasEntryCostText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="3dp"
+                android:layout_marginRight="3dp"
+                android:text="TextView"
+                android:textSize="16sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/gasEntryDateText"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/gasEntryDateText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginLeft="3dp"
+                android:text="TextView"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/gasEntryDateLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginLeft="3dp"
+                android:text="Date:"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toTopOf="@+id/gasEntryCostText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/gasEntryCostLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="3dp"
+                android:layout_marginRight="3dp"
+                android:text="Total Cost:"
+                android:textSize="24sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/gasEntryDateLabel"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.cardview.widget.CardView>
 </FrameLayout>

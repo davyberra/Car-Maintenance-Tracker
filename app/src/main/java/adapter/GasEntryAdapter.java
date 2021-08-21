@@ -59,7 +59,8 @@ public class GasEntryAdapter extends RecyclerView.Adapter<GasEntryAdapter.ViewHo
         TextView textViewDate = holder.gasEntryDateText;
         textViewDate.setText(gasEntry.date);
         TextView textViewCost = holder.gasEntryCostText;
-        textViewCost.setText(String.valueOf(gasEntry.totalPrice));
+        String totalPrice = String.format("%.2f", gasEntry.totalPrice);
+        textViewCost.setText("$" + totalPrice);
 
         viewModel = new ViewModelProvider((ViewModelStoreOwner) contextProvider.getContext()).get(GasEntryViewModel.class);
 

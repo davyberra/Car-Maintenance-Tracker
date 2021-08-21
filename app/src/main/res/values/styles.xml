@@ -14,4 +14,10 @@
         <item name="android:paddingEnd">2dp</item>
         <item name="android:paddingRight">2dp</item>
     </style>
+
+    <style name="style_add_gas_constraint">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingBottom">10dp</item>
+    </style>
 </resources>

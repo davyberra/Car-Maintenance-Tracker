@@ -80,14 +80,14 @@ public class AddGasFragment extends Fragment {
     private void addGas() {
         viewModel = ViewModelProviders.of(requireActivity()).get(GasEntryViewModel.class);
         int vehicleId = sharedPreferences.getInt(KEY_SELECTED_VEHICLE, 0);
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
         Date date = new Date(System.currentTimeMillis());
         GasEntry gasEntry = new GasEntry(
                 formatter.format(date),
                 vehicleId,
-                Float.parseFloat(gallonsText.getText().toString()),
-                Float.parseFloat(totalPriceText.getText().toString()),
-                Float.parseFloat(pricePerGallonText.getText().toString()),
+                Double.parseDouble(gallonsText.getText().toString()),
+                Double.parseDouble(totalPriceText.getText().toString()),
+                Double.parseDouble(pricePerGallonText.getText().toString()),
                 Integer.parseInt(totalMileageText.getText().toString())
         );
 

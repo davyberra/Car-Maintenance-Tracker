@@ -60,9 +60,9 @@ public class GasEntryOverviewFragment extends Fragment {
             public void onChanged(GasEntry gasEntry) {
                 gasEntryOverviewDateText.setText(gasEntry.date);
                 gasEntryOverviewMileageText.setText(String.valueOf(gasEntry.totalMileage));
-                gasEntryOverviewGallonsText.setText(String.valueOf(gasEntry.gallons));
-                gasEntryOverviewCostText.setText(String.valueOf(gasEntry.totalPrice));
-                gasEntryOverviewPpgText.setText(String.valueOf(gasEntry.pricePerGallon));
+                gasEntryOverviewGallonsText.setText(String.format("%.2f", gasEntry.gallons));
+                gasEntryOverviewCostText.setText("$" + String.format("%.2f", gasEntry.totalPrice));
+                gasEntryOverviewPpgText.setText("$" + String.format("%.2f", gasEntry.pricePerGallon));
             }
         });
     }

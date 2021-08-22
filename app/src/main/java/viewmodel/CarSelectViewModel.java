@@ -3,12 +3,10 @@ package viewmodel;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -16,9 +14,7 @@ import java.util.concurrent.Executors;
 
 import dao.VehicleDao;
 import database.MainDatabase;
-import entity.GasEntry;
 import entity.Vehicle;
-import io.reactivex.rxjava3.core.Single;
 
 public class CarSelectViewModel extends AndroidViewModel {
     private static final String TAG = CarSelectViewModel.class.getSimpleName();
@@ -28,10 +24,11 @@ public class CarSelectViewModel extends AndroidViewModel {
     private String KEY_SELECTED_VEHICLE = "key_selected_vehicle";
     private LiveData<List<Vehicle>> vehicleLiveData;
     private VehicleDao vehicleDao;
-    private LiveData<Vehicle> selectedVehicle = new MutableLiveData<Vehicle>();
+    private LiveData<Vehicle> selectedVehicleLiveData = new MutableLiveData<Vehicle>();
     private MainDatabase db;
     private Executor executor = Executors.newSingleThreadExecutor();
     private int selectedVehicleId;
+    private Vehicle selectedVehicle;
 
 
     public CarSelectViewModel(Application application) {
@@ -71,14 +68,19 @@ public class CarSelectViewModel extends AndroidViewModel {
 
 
     public void selectVehicle(Vehicle vehicle) {
+        selectedVehicle = vehicle;
         editor.putInt(KEY_SELECTED_VEHICLE, vehicle.carId);
         editor.commit();
     }
 
-    public LiveData<Vehicle> getSelectedVehicle() {
-        selectedVehicleId = sharedPreferences.getInt(KEY_SELECTED_VEHICLE, 2);
-        selectedVehicle = vehicleDao.getVehicleById(selectedVehicleId);
+    public Vehicle getSelectedVehicle() {
         return selectedVehicle;
+    }
+
+    public LiveData<Vehicle> getSelectedVehicleLiveData() {
+        selectedVehicleId = sharedPreferences.getInt(KEY_SELECTED_VEHICLE, 2);
+        selectedVehicleLiveData = vehicleDao.getVehicleById(selectedVehicleId);
+        return selectedVehicleLiveData;
     }
 
     public int getSelectedVehicleId() {

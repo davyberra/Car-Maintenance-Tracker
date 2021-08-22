@@ -24,6 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import entity.GasEntry;
+import entity.Vehicle;
 import viewmodel.CarSelectViewModel;
 import viewmodel.GasEntryViewModel;
 
@@ -35,7 +36,8 @@ public class AddGasFragment extends Fragment {
 
     private String pageTitle = "Add Gas";
     private Button saveButton;
-    private GasEntryViewModel viewModel;
+    private GasEntryViewModel gasEntryViewModel;
+    private CarSelectViewModel carSelectViewModel;
 
     private EditText gallonsText;
     private EditText pricePerGallonText;
@@ -78,7 +80,7 @@ public class AddGasFragment extends Fragment {
     }
 
     private void addGas() {
-        viewModel = ViewModelProviders.of(requireActivity()).get(GasEntryViewModel.class);
+        gasEntryViewModel = ViewModelProviders.of(requireActivity()).get(GasEntryViewModel.class);
         int vehicleId = sharedPreferences.getInt(KEY_SELECTED_VEHICLE, 0);
         SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
         Date date = new Date(System.currentTimeMillis());
@@ -91,8 +93,16 @@ public class AddGasFragment extends Fragment {
                 Integer.parseInt(totalMileageText.getText().toString())
         );
 
+        carSelectViewModel = ViewModelProviders.of(requireActivity()).get(CarSelectViewModel.class);
+        Vehicle vehicle = carSelectViewModel.getSelectedVehicle();
+        Vehicle updatedVehicle = new Vehicle(
+                vehicle.year,
+                vehicle.make,
+                vehicle.model
+        );
 
-        viewModel.insertGasEntry(gasEntry);
+        carSelectViewModel.insertVehicle(updatedVehicle);
+        gasEntryViewModel.insertGasEntry(gasEntry);
 
 //        NavHostFragment.findNavController(AddGasFragment.this)
 //                .navigate(R.id.action_global_carSelectFragment);

@@ -1,11 +1,13 @@
 package ui;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -65,6 +67,11 @@ public class Add_Vehicle_Fragment extends Fragment {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (TextUtils.isEmpty(yearText.getText()) || TextUtils.isEmpty(makeText.getText())
+                || TextUtils.isEmpty(modelText.getText())) {
+                    Toast.makeText(getContext(), "Please fill out each field.", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 Vehicle vehicle = new Vehicle(
                         yearText.getText().toString(),
                         makeText.getText().toString(),

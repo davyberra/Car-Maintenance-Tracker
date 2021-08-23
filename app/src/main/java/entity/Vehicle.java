@@ -11,6 +11,9 @@ public class Vehicle {
     public int carId;
 
     @ColumnInfo
+    public int mileage;
+
+    @ColumnInfo
     public String year;
 
     @ColumnInfo

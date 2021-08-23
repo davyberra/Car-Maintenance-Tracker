@@ -79,12 +79,15 @@ public class DashboardFragment extends Fragment {
         selectedVehicle.observe(getViewLifecycleOwner(), vehicle -> {
             Log.d(TAG, String.valueOf(vehicle == null));
             if (vehicle != null) {
+                carSelectViewModel.selectVehicle(vehicle);
                 TextView vehicleTitle = view.findViewById(R.id.dashboardVehicleTitle);
+                TextView vehicleMileage = view.findViewById(R.id.dashboardMileageText);
                 vehicleTitle.setText(String.format("%s %s %s",
                         vehicle.year,
                         vehicle.make,
                         vehicle.model
                 ));
+                vehicleMileage.setText(String.valueOf(vehicle.mileage));
             }
         });
 

@@ -44,4 +44,5 @@
     <string name="gas_entry_overview_gallons_label">Gallons:</string>
     <string name="gas_entry_overview_mileage_label">Odometer:</string>
     <string name="gas_entry_overview_date_label">Date:</string>
+    <string name="dashboard_mileage_label">Mileage:</string>
 </resources>

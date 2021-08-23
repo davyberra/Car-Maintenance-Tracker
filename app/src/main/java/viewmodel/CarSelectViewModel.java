@@ -73,6 +73,15 @@ public class CarSelectViewModel extends AndroidViewModel {
         editor.commit();
     }
 
+    public void updateVehicle(Vehicle vehicle) {
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                db.vehicleDao().updateVehicle(vehicle);
+            }
+        });
+    }
+
     public Vehicle getSelectedVehicle() {
         return selectedVehicle;
     }

@@ -13,7 +13,7 @@ import entity.GasEntry;
 import entity.User;
 import entity.Vehicle;
 
-@Database(entities = {User.class, Vehicle.class, GasEntry.class}, version = 4)
+@Database(entities = {User.class, Vehicle.class, GasEntry.class}, version = 5)
 public abstract class MainDatabase extends RoomDatabase {
     private static MainDatabase instance;
 

@@ -12,11 +12,15 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.carmaintenancetracker.R;
 
@@ -25,8 +29,11 @@ import java.util.Date;
 
 import entity.GasEntry;
 import entity.Vehicle;
+import listener.EditTextListener;
 import viewmodel.CarSelectViewModel;
 import viewmodel.GasEntryViewModel;
+
+
 
 public class AddGasFragment extends Fragment {
     private static final String PREFS_FILE = "com.davyberra.carmaintenancetracker.preferences";
@@ -69,12 +76,52 @@ public class AddGasFragment extends Fragment {
         totalPriceText = view.findViewById(R.id.costTextView);
         pricePerGallonText = view.findViewById(R.id.ppgTextView);
         totalMileageText = view.findViewById(R.id.milesTextView);
+
+        gallonsText.addTextChangedListener(new EditTextListener<EditText>(gallonsText) {
+            @Override
+            public void onTextChanged(EditText target, CharSequence s) {
+                if (!TextUtils.isEmpty(totalPriceText.getText()) && !TextUtils.isEmpty(s)) {
+                    double gallons = Double.parseDouble(s.toString());
+                    double totalPrice = Double.parseDouble(String.valueOf(totalPriceText.getText()));
+                    double ppg = totalPrice / gallons;
+                    pricePerGallonText.setText(String.valueOf(ppg));
+                }
+            }
+        });
+
+        totalPriceText.addTextChangedListener(new EditTextListener<EditText>(totalPriceText) {
+            @Override
+            public void onTextChanged(EditText target, CharSequence s) {
+                if (!TextUtils.isEmpty(gallonsText.getText()) && !TextUtils.isEmpty(s)) {
+                    double totalPrice = Double.parseDouble(s.toString());
+                    double gallons = Double.parseDouble(String.valueOf(gallonsText.getText()));
+                    double ppg = totalPrice / gallons;
+                    pricePerGallonText.setText(String.valueOf(ppg));
+                }
+            }
+        });
+
+//        pricePerGallonText.addTextChangedListener(new EditTextListener<EditText>(pricePerGallonText) {
+//            @Override
+//            public void onTextChanged(EditText target, CharSequence s) {
+//                if (!TextUtils.isEmpty(s) && !TextUtils.isEmpty(gallonsText.getText())) {
+//                    double ppg = Double.parseDouble(s.toString());
+//                    double gallons = Double.parseDouble(String.valueOf(gallonsText.getText()));
+//                    double totalPrice = gallons * ppg;
+//                    totalPriceText.setText(String.valueOf(totalPrice));
+//                }
+//            }
+//        });
+
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (TextUtils.isEmpty(gallonsText.getText()) || TextUtils.isEmpty(totalPriceText.getText()) ||
+                        TextUtils.isEmpty(pricePerGallonText.getText()) || TextUtils.isEmpty(totalMileageText.getText())) {
+                    Toast.makeText(getContext(), "Please fill out each field.", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 addGas();
-                NavHostFragment.findNavController(AddGasFragment.this)
-                        .navigate(R.id.action_addGasFragment_to_dashboardFragment);
             }
         });
     }
@@ -95,16 +142,24 @@ public class AddGasFragment extends Fragment {
 
         carSelectViewModel = ViewModelProviders.of(requireActivity()).get(CarSelectViewModel.class);
         Vehicle vehicle = carSelectViewModel.getSelectedVehicle();
-        Vehicle updatedVehicle = new Vehicle(
-                vehicle.year,
-                vehicle.make,
-                vehicle.model
-        );
 
-        carSelectViewModel.insertVehicle(updatedVehicle);
-        gasEntryViewModel.insertGasEntry(gasEntry);
+        if (vehicle.mileage > gasEntry.totalMileage) {
+            Toast.makeText(getContext(), "Inputted mileage is lower than total mileage for vehicle", Toast.LENGTH_LONG).show();
+        } else {
+            Vehicle updatedVehicle = new Vehicle(
+                    vehicle.year,
+                    vehicle.make,
+                    vehicle.model
+            );
+            updatedVehicle.mileage = gasEntry.totalMileage;
+            updatedVehicle.carId = carSelectViewModel.getSelectedVehicleId();
 
-//        NavHostFragment.findNavController(AddGasFragment.this)
-//                .navigate(R.id.action_global_carSelectFragment);
+            carSelectViewModel.updateVehicle(updatedVehicle);
+            gasEntryViewModel.insertGasEntry(gasEntry);
+
+            NavHostFragment.findNavController(AddGasFragment.this)
+                    .navigate(R.id.action_addGasFragment_to_dashboardFragment);
+        }
+
     }
 }

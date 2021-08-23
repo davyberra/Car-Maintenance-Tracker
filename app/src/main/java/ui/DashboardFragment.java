@@ -39,6 +39,7 @@ public class DashboardFragment extends Fragment {
     private String pageTitle = "Dashboard";
     private TextView dashboardText;
     private Button addGasButton;
+    private Button addServiceButton;
     private LiveData<Vehicle> selectedVehicle;
 
 
@@ -97,6 +98,14 @@ public class DashboardFragment extends Fragment {
             public void onClick(View v) {
                 NavHostFragment.findNavController(DashboardFragment.this)
                         .navigate(R.id.action_global_addGasFragment);
+            }
+        });
+        addServiceButton = view.findViewById(R.id.dashboardAddService);
+        addServiceButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavHostFragment.findNavController(DashboardFragment.this)
+                        .navigate(R.id.action_dashboardFragment_to_addServiceFragment);
             }
         });
 

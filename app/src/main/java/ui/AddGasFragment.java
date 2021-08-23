@@ -12,9 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.fragment.NavHostFragment;
 
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,10 +69,10 @@ public class AddGasFragment extends Fragment {
         sharedPreferences = requireActivity().getSharedPreferences(PREFS_FILE, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
-        saveButton = view.findViewById(R.id.buttonAddGasSave);
+        saveButton = view.findViewById(R.id.serviceSaveButton);
         gallonsText = view.findViewById(R.id.gallonsTextView);
-        totalPriceText = view.findViewById(R.id.costTextView);
-        pricePerGallonText = view.findViewById(R.id.ppgTextView);
+        totalPriceText = view.findViewById(R.id.serviceServiceText);
+        pricePerGallonText = view.findViewById(R.id.serviceCostText);
         totalMileageText = view.findViewById(R.id.milesTextView);
 
         gallonsText.addTextChangedListener(new EditTextListener<EditText>(gallonsText) {

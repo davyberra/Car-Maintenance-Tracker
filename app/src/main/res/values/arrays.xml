@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="services_array">
+        <item>Brakes</item>
+        <item>Engine</item>
+        <item>Tires</item>
+        <item>Interior</item>
+        <item>Exterior</item>
+        <item>Electronics</item>
+        <item>Inspection/Check-Up</item>
+        <item>Transmission</item>
+        <item>Suspension</item>
+        <item>Fluids</item>
+        <item>A/C</item>
+        <item>Battery/Alternator</item>
+        <item>Other</item>
+    </string-array>
+</resources>

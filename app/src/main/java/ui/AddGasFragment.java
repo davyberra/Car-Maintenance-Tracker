@@ -52,6 +52,13 @@ public class AddGasFragment extends Fragment {
     public AddGasFragment() {
         // Required empty public constructor
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((MainActivity) getActivity()).hideFabButtons();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

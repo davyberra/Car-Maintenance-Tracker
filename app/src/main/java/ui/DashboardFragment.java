@@ -38,9 +38,12 @@ public class DashboardFragment extends Fragment {
     private static final String TAG = DashboardFragment.class.getSimpleName();
     private String pageTitle = "Dashboard";
     private TextView dashboardText;
-    private Button addGasButton;
-    private Button addServiceButton;
     private LiveData<Vehicle> selectedVehicle;
+
+    private FloatingActionButton fabAddMain;
+    private FloatingActionButton fabAddGas;
+    private FloatingActionButton fabAddService;
+    private boolean isFabOpen;
 
 
     private CarSelectViewModel viewModel;
@@ -60,8 +63,55 @@ public class DashboardFragment extends Fragment {
     public void onResume() {
         super.onResume();
         ((AppCompatActivity) requireActivity()).getSupportActionBar().setTitle(pageTitle);
-        FloatingActionButton fab = requireActivity().findViewById(R.id.fab);
-        fab.hide();
+
+
+        fabAddMain = requireActivity().findViewById(R.id.fabPlusIcon);
+        fabAddGas = requireActivity().findViewById(R.id.fabAddGas);
+        fabAddService = requireActivity().findViewById(R.id.fabAddService);
+
+        closeFabMenu();
+
+        fabAddGas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                closeFabMenu();
+                NavHostFragment.findNavController(DashboardFragment.this)
+                        .navigate(R.id.action_global_addGasFragment);
+            }
+        });
+        fabAddService.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                closeFabMenu();
+                NavHostFragment.findNavController(DashboardFragment.this)
+                        .navigate(R.id.action_dashboardFragment_to_addServiceFragment);
+            }
+        });
+        fabAddMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!isFabOpen) {
+                    showFabMenu();
+                }else{
+                    closeFabMenu();
+                }
+            }
+        });
+        fabAddGas.show();
+        fabAddService.show();
+        fabAddMain.show();
+    }
+
+    private void showFabMenu() {
+        isFabOpen = true;
+        fabAddService.animate().translationY(-getResources().getDimension(R.dimen.standard_55));
+        fabAddGas.animate().translationY(-getResources().getDimension(R.dimen.standard_105));
+    }
+
+    private void closeFabMenu() {
+        isFabOpen = false;
+        fabAddService.animate().translationY(0);
+        fabAddGas.animate().translationY(0);
     }
 
     @Override
@@ -92,23 +142,7 @@ public class DashboardFragment extends Fragment {
             }
         });
 
-        addGasButton = view.findViewById(R.id.dashboardAddGasButton);
-        addGasButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavHostFragment.findNavController(DashboardFragment.this)
-                        .navigate(R.id.action_global_addGasFragment);
-            }
-        });
-        addServiceButton = view.findViewById(R.id.dashboardAddService);
-        addServiceButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavHostFragment.findNavController(DashboardFragment.this)
-                        .navigate(R.id.action_dashboardFragment_to_addServiceFragment);
-            }
-        });
-
+        
         RecyclerView recyclerView = view.findViewById(R.id.rvDashboard);
         GasEntryViewModel gasEntryViewModel = new ViewModelProvider(requireActivity()).get(GasEntryViewModel.class);
         int carId = carSelectViewModel.getSelectedVehicleId();

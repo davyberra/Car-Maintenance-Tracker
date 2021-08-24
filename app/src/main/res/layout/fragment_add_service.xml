@@ -140,13 +140,19 @@
 
             <EditText
                 android:id="@+id/serviceDateText"
-                android:layout_width="wrap_content"
+                android:layout_width="135dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
                 android:ems="10"
                 android:inputType="date"
                 app:layout_constraintBaseline_toBaselineOf="@+id/serviceDateLabel"
+                app:layout_constraintEnd_toStartOf="@+id/serviceDateChooseButton" />
+
+            <ImageButton
+                android:id="@+id/serviceDateChooseButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/outline_edit_calendar_20"
+                app:layout_constraintBottom_toBottomOf="@+id/serviceDateText"
                 app:layout_constraintEnd_toEndOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

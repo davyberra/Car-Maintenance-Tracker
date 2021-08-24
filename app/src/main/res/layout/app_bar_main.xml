@@ -23,11 +23,30 @@
     <include layout="@layout/content_main" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/fabAddGas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:contentDescription="@string/fab_add_vehicle_desc"
+        app:srcCompat="@drawable/outline_local_gas_station_24" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAddService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:contentDescription="@string/fab_add_vehicle_desc"
+        app:srcCompat="@drawable/outline_build_24" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabPlusIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:contentDescription="@string/fab_add_vehicle_desc"
         app:srcCompat="@drawable/baseline_add_20" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

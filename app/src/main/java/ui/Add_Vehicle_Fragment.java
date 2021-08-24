@@ -48,8 +48,7 @@ public class Add_Vehicle_Fragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        FloatingActionButton fab = requireActivity().findViewById(R.id.fab);
-        fab.hide();
+        ((MainActivity) getActivity()).hideFabButtons();
     }
 
     @Override

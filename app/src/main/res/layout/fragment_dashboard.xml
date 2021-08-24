@@ -121,18 +121,5 @@
             android:layout_width="match_parent"
             android:layout_height="345dp" />
 
-        <Button
-            android:id="@+id/dashboardAddGasButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:text="Add Gas" />
-
-        <Button
-            android:id="@+id/dashboardAddService"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Add Service" />
-
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,7 @@
 package ui;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,13 +12,16 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.fragment.NavHostFragment;
@@ -24,6 +29,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.example.carmaintenancetracker.R;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import entity.ServiceEntry;
@@ -44,10 +50,16 @@ public class AddServiceFragment extends Fragment {
     private EditText locationText;
     private EditText dateText;
     private Button saveButton;
+    private ImageButton chooseButton;
 
     private CarSelectViewModel carSelectViewModel;
     private ServiceEntryViewModel serviceEntryViewModel;
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((MainActivity) getActivity()).hideFabButtons();
+    }
 
     @Nullable
     @Override
@@ -90,6 +102,24 @@ public class AddServiceFragment extends Fragment {
             }
         });
 
+        chooseButton = view.findViewById(R.id.serviceDateChooseButton);
+        chooseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePickerDialog(view);
+            }
+        });
+
+        dateText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePickerDialog(dateText);
+            }
+        });
+
+
+
+
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,6 +146,37 @@ public class AddServiceFragment extends Fragment {
             }
         });
 
+    }
+
+    public void showDatePickerDialog(View v) {
+        DialogFragment newFragment = new DatePickerFragment(dateText);
+        newFragment.show(getParentFragmentManager(), "datePicker");
+    }
+
+    public static class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+
+        private EditText dateText;
+
+        public DatePickerFragment(EditText dateText) {
+            this.dateText = dateText;
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the current date as the default date in the picker
+            final Calendar c = Calendar.getInstance();
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH);
+            int day = c.get(Calendar.DAY_OF_MONTH);
+
+            // Create a new instance of DatePickerDialog and return it
+            return new DatePickerDialog(getActivity(), this, year, month, day);
+        }
+
+        public void onDateSet(DatePicker view, int year, int month, int day) {
+            // Do something with the date chosen by the user
+            dateText.setText((month + 1) + "/" + day + "/" + year);
+        }
     }
 }
 

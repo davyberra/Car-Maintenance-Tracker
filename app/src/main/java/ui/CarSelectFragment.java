@@ -48,7 +48,8 @@ public class CarSelectFragment extends Fragment {
     public void onResume() {
         super.onResume();
         ((AppCompatActivity) requireActivity()).getSupportActionBar().setTitle(pageTitle);
-        FloatingActionButton fab = requireActivity().findViewById(R.id.fab);
+        ((MainActivity) getActivity()).hideFabButtons();
+        FloatingActionButton fab = requireActivity().findViewById(R.id.fabPlusIcon);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

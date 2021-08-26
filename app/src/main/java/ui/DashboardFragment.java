@@ -29,6 +29,7 @@ import java.util.List;
 
 import adapter.ContextProvider;
 import adapter.GasEntryAdapter;
+import dialog.AddMileageDialogFragment;
 import entity.GasEntry;
 import entity.Vehicle;
 import viewmodel.CarSelectViewModel;
@@ -43,6 +44,7 @@ public class DashboardFragment extends Fragment {
     private FloatingActionButton fabAddMain;
     private FloatingActionButton fabAddGas;
     private FloatingActionButton fabAddService;
+    private FloatingActionButton fabAddMileage;
     private boolean isFabOpen;
 
 
@@ -68,6 +70,7 @@ public class DashboardFragment extends Fragment {
         fabAddMain = requireActivity().findViewById(R.id.fabPlusIcon);
         fabAddGas = requireActivity().findViewById(R.id.fabAddGas);
         fabAddService = requireActivity().findViewById(R.id.fabAddService);
+        fabAddMileage = requireActivity().findViewById(R.id.fabAddMileage);
 
         closeFabMenu();
 
@@ -97,19 +100,29 @@ public class DashboardFragment extends Fragment {
                 }
             }
         });
+        fabAddMileage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddMileageDialogFragment dialogFragment = new AddMileageDialogFragment();
+                dialogFragment.show(getParentFragmentManager(), "addMileageDialogFragment");
+            }
+        });
         fabAddGas.show();
         fabAddService.show();
+        fabAddMileage.show();
         fabAddMain.show();
     }
 
     private void showFabMenu() {
         isFabOpen = true;
-        fabAddService.animate().translationY(-getResources().getDimension(R.dimen.standard_55));
-        fabAddGas.animate().translationY(-getResources().getDimension(R.dimen.standard_105));
+        fabAddMileage.animate().translationY(-getResources().getDimension(R.dimen.standard_55));
+        fabAddService.animate().translationY(-getResources().getDimension(R.dimen.standard_105));
+        fabAddGas.animate().translationY(-getResources().getDimension(R.dimen.standard_155));
     }
 
     private void closeFabMenu() {
         isFabOpen = false;
+        fabAddMileage.animate().translationY(0);
         fabAddService.animate().translationY(0);
         fabAddGas.animate().translationY(0);
     }

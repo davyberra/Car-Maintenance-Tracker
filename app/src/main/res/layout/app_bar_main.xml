@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:contentDescription="@string/fab_add_vehicle_desc"
+        android:contentDescription="@string/fab_add_gas_desc"
         app:srcCompat="@drawable/outline_local_gas_station_24" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -37,8 +37,17 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:contentDescription="@string/fab_add_vehicle_desc"
+        android:contentDescription="@string/fab_add_service_desc"
         app:srcCompat="@drawable/outline_build_24" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAddMileage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:contentDescription="@string/fab_add_mileage_desc"
+        app:srcCompat="@drawable/outline_speed_24" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabPlusIcon"
@@ -46,7 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:contentDescription="@string/fab_add_vehicle_desc"
+        android:contentDescription="@string/fab_add_main_desc"
         app:srcCompat="@drawable/baseline_add_20" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

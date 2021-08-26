@@ -1,4 +1,4 @@
-package ui;
+package dialog;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;

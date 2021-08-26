@@ -45,4 +45,8 @@
     <string name="gas_entry_overview_mileage_label">Odometer:</string>
     <string name="gas_entry_overview_date_label">Date:</string>
     <string name="dashboard_mileage_label">Mileage:</string>
+    <string name="fab_add_gas_desc">fab_add_gas</string>
+    <string name="fab_add_service_desc">fab_add_service</string>
+    <string name="fab_add_mileage_desc">fab_add_mileage</string>
+    <string name="fab_add_main_desc">fab_add_main</string>
 </resources>

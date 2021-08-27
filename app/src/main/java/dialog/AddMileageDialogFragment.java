@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -22,11 +23,9 @@ import ui.AddGasFragment;
 import viewmodel.CarSelectViewModel;
 
 public class AddMileageDialogFragment extends DialogFragment {
-    EditText newMileage;
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        newMileage = requireActivity().findViewById(R.id.dialogAddMileageText);
     }
 
     @NonNull
@@ -35,7 +34,10 @@ public class AddMileageDialogFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         LayoutInflater inflater = requireActivity().getLayoutInflater();
 
-        builder.setView(inflater.inflate(R.layout.dialog_add_mileage, null))
+        final EditText input = new EditText(requireContext());
+        input.setInputType(InputType.TYPE_CLASS_NUMBER);
+
+        builder.setView(input)
                 .setTitle("Add Mileage")
                 .setPositiveButton("Set", new DialogInterface.OnClickListener() {
                     @Override
@@ -43,7 +45,7 @@ public class AddMileageDialogFragment extends DialogFragment {
                         CarSelectViewModel carSelectViewModel = ViewModelProviders.of(requireActivity()).get(CarSelectViewModel.class);
                         Vehicle vehicle = carSelectViewModel.getSelectedVehicle();
 
-                        if (vehicle.mileage > Integer.parseInt(newMileage.getText().toString())) {
+                        if (vehicle.mileage > Integer.parseInt(input.getText().toString())) {
                             Toast.makeText(getContext(), "Inputted mileage is lower than total mileage for vehicle", Toast.LENGTH_LONG).show();
                         } else {
                             Vehicle updatedVehicle = new Vehicle(
@@ -51,7 +53,7 @@ public class AddMileageDialogFragment extends DialogFragment {
                                     vehicle.make,
                                     vehicle.model
                             );
-                            updatedVehicle.mileage = Integer.parseInt(newMileage.getText().toString());
+                            updatedVehicle.mileage = Integer.parseInt(input.getText().toString());
                             updatedVehicle.carId = carSelectViewModel.getSelectedVehicleId();
 
                             carSelectViewModel.updateVehicle(updatedVehicle);

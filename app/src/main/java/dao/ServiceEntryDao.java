@@ -16,6 +16,9 @@ public interface ServiceEntryDao {
     @Query("SELECT * FROM serviceentry WHERE carId = (:id)")
     public LiveData<List<ServiceEntry>> getAllByCarId(int id);
 
+    @Query("SELECT * FROM serviceentry WHERE carID = (:id) AND category = (:type)")
+    public LiveData<List<ServiceEntry>> getAllByType(int id, String type);
+
     @Query("SELECT * FROM serviceentry WHERE serviceId = (:id)")
     public LiveData<ServiceEntry> getServiceEntryById(int id);
 

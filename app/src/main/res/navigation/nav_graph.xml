@@ -57,4 +57,8 @@
         android:name="ui.AddServiceFragment"
         android:label="fragment_add_service"
         tools:layout="@layout/fragment_add_service" />
+    <fragment
+        android:id="@+id/servicesOverviewFragment"
+        android:name="ui.ServicesOverviewFragment"
+        android:label="ServicesOverviewFragment" /><action android:id="@+id/action_global_servicesOverviewFragment" app:destination="@id/servicesOverviewFragment"/>
 </navigation>

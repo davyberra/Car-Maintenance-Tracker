@@ -104,6 +104,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_drawer_dashboard:
                 navController.navigate(R.id.action_global_dashboardFragment);
                 break;
+
+            case R.id.nav_drawer_services_overview:
+                navController.navigate(R.id.action_global_servicesOverviewFragment);
+                break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return false;

@@ -30,6 +30,10 @@ public class ServiceEntryViewModel extends AndroidViewModel {
         return serviceEntryDao.getAllByCarId(carId);
     }
 
+    public LiveData<List<ServiceEntry>> getAllByType(int carId, String type) {
+        return serviceEntryDao.getAllByType(carId, type);
+    }
+
     public LiveData<ServiceEntry> getServiceEntryById(int id) {
         return serviceEntryDao.getServiceEntryById(id);
     }

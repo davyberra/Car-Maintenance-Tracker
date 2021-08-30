@@ -2,6 +2,7 @@ package ui;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.carmaintenancetracker.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import adapter.ContextProvider;
@@ -31,12 +33,12 @@ import viewmodel.CarSelectViewModel;
 import viewmodel.ServiceEntryViewModel;
 
 public class ServicesOverviewFragment extends Fragment {
+    private static final String TAG = ServicesOverviewFragment.class.getSimpleName();
     private String pageTitle = "Services Overview";
     private ServiceEntryViewModel serviceEntryViewModel;
     private CarSelectViewModel carSelectViewModel;
     private Spinner serviceOverviewSpinner;
     private String type = "Engine";
-    private MutableLiveData<String> liveDataType = new MutableLiveData<String>();
 
     @Override
     public void onResume() {
@@ -56,14 +58,61 @@ public class ServicesOverviewFragment extends Fragment {
 
         ActionBar actionBar = ((AppCompatActivity) requireActivity()).getSupportActionBar();
         actionBar.setTitle(pageTitle);
-        
-        liveDataType.setValue("Engine");
-        liveDataType.observe(getViewLifecycleOwner(), new Observer<String>() {
+
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rvServiceOverview);
+        serviceEntryViewModel = ViewModelProviders.of(requireActivity()).get(ServiceEntryViewModel.class);
+        carSelectViewModel = ViewModelProviders.of(requireActivity()).get(CarSelectViewModel.class);
+
+        serviceEntryViewModel.getAllByCarId(carSelectViewModel.getSelectedVehicleId())
+        .observe(getViewLifecycleOwner(), new Observer<List<ServiceEntry>>() {
             @Override
-            public void onChanged(String s) {
-                type = liveDataType.getValue();
+            public void onChanged(List<ServiceEntry> newServiceEntries) {
+                serviceEntryViewModel.setCurServiceEntries(newServiceEntries);
             }
         });
+
+        serviceEntryViewModel.getTypeLiveData().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                List<ServiceEntry> filteredServiceEntries = new ArrayList<ServiceEntry>();
+                if (s.equals("All Services")) {
+                    filteredServiceEntries = serviceEntryViewModel.getCurServiceEntries();
+                } else {
+                    for (ServiceEntry serviceEntry : serviceEntryViewModel.getCurServiceEntries()) {
+                        if (serviceEntry.category.equals(s)) {
+                            filteredServiceEntries.add(serviceEntry);
+                        }
+                    }
+                }
+                ServiceOverviewAdapter adapter = new ServiceOverviewAdapter(filteredServiceEntries, new ContextProvider() {
+                    @Override
+                    public Context getContext() {
+                        return requireActivity();
+                    }
+                });
+                recyclerView.setAdapter(adapter);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                Log.d(TAG, "called onChanged");
+            }
+        });
+
+//        serviceEntryViewModel.getAllByType(carSelectViewModel.getSelectedVehicleId(), serviceEntryViewModel.getTypeLiveData().getValue())
+//                .observe(getViewLifecycleOwner(), new Observer<List<ServiceEntry>>() {
+//                    @Override
+//                    public void onChanged(List<ServiceEntry> serviceEntries) {
+//                        if (ServicesOverviewFragment.this.serviceEntries == null) {
+//                            ServicesOverviewFragment.this.serviceEntries = serviceEntries;
+//                        }
+//                        ServiceOverviewAdapter adapter = new ServiceOverviewAdapter(serviceEntries, new ContextProvider() {
+//                            @Override
+//                            public Context getContext() {
+//                                return requireActivity();
+//                            }
+//                        });
+//                        recyclerView.setAdapter(adapter);
+//                        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+//                    }
+//                });
 
         serviceOverviewSpinner = view.findViewById(R.id.spinnerServiceOverview);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
@@ -73,7 +122,9 @@ public class ServicesOverviewFragment extends Fragment {
         serviceOverviewSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                liveDataType.setValue(view.toString());
+                String selection = parent.getItemAtPosition(position).toString();
+                serviceEntryViewModel.getTypeLiveData().setValue(selection);
+                Log.d(TAG, parent.getItemAtPosition(position).toString());
             }
 
             @Override
@@ -81,23 +132,5 @@ public class ServicesOverviewFragment extends Fragment {
 
             }
         });
-
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rvServiceOverview);
-        serviceEntryViewModel = ViewModelProviders.of(requireActivity()).get(ServiceEntryViewModel.class);
-        carSelectViewModel = ViewModelProviders.of(requireActivity()).get(CarSelectViewModel.class);
-        serviceEntryViewModel.getAllByType(carSelectViewModel.getSelectedVehicleId(), liveDataType.getValue())
-                .observe(getViewLifecycleOwner(), new Observer<List<ServiceEntry>>() {
-                    @Override
-                    public void onChanged(List<ServiceEntry> serviceEntries) {
-                        ServiceOverviewAdapter adapter = new ServiceOverviewAdapter(serviceEntries, new ContextProvider() {
-                            @Override
-                            public Context getContext() {
-                                return requireActivity();
-                            }
-                        });
-                        recyclerView.setAdapter(adapter);
-                        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                    }
-                });
     }
 }

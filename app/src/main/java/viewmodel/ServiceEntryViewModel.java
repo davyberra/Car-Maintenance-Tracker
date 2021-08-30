@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -19,11 +20,28 @@ public class ServiceEntryViewModel extends AndroidViewModel {
     private MainDatabase db;
     private ServiceEntryDao serviceEntryDao;
     private Executor executor = Executors.newSingleThreadExecutor();
+    private MutableLiveData<String> type;
+    private List<ServiceEntry> curServiceEntries;
 
     public ServiceEntryViewModel(@NonNull Application application) {
         super(application);
         db = MainDatabase.getInstance(getApplication().getApplicationContext());
         serviceEntryDao = db.serviceEntryDao();
+    }
+
+    public List<ServiceEntry> getCurServiceEntries() {
+        return curServiceEntries;
+    }
+
+    public void setCurServiceEntries(List<ServiceEntry> curServiceEntries) {
+        this.curServiceEntries = curServiceEntries;
+    }
+
+    public MutableLiveData<String> getTypeLiveData() {
+        if (type == null) {
+            type = new MutableLiveData<>();
+        }
+        return type;
     }
 
     public LiveData<List<ServiceEntry>> getAllByCarId(int carId) {

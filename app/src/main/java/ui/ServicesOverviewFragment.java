@@ -95,25 +95,7 @@ public class ServicesOverviewFragment extends Fragment {
                 Log.d(TAG, "called onChanged");
             }
         });
-
-//        serviceEntryViewModel.getAllByType(carSelectViewModel.getSelectedVehicleId(), serviceEntryViewModel.getTypeLiveData().getValue())
-//                .observe(getViewLifecycleOwner(), new Observer<List<ServiceEntry>>() {
-//                    @Override
-//                    public void onChanged(List<ServiceEntry> serviceEntries) {
-//                        if (ServicesOverviewFragment.this.serviceEntries == null) {
-//                            ServicesOverviewFragment.this.serviceEntries = serviceEntries;
-//                        }
-//                        ServiceOverviewAdapter adapter = new ServiceOverviewAdapter(serviceEntries, new ContextProvider() {
-//                            @Override
-//                            public Context getContext() {
-//                                return requireActivity();
-//                            }
-//                        });
-//                        recyclerView.setAdapter(adapter);
-//                        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-//                    }
-//                });
-
+        
         serviceOverviewSpinner = view.findViewById(R.id.spinnerServiceOverview);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
                 R.array.services_overview_array, android.R.layout.simple_spinner_item);

@@ -32,6 +32,12 @@ public class GasEntryOverviewFragment extends Fragment {
     private TextView gasEntryOverviewPpgText;
     private LiveData<GasEntry> gasEntryLiveData;
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((MainActivity) requireActivity()).hideFabButtons();
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

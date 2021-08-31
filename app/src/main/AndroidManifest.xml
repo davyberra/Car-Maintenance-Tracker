@@ -11,13 +11,11 @@
         android:theme="@style/Theme.CarMaintenanceTracker" >
         <activity
             android:name=".NavDrawer"
-            android:label="@string/title_activity_nav_drawer"
-            android:theme="@style/Theme.CarMaintenanceTracker.NoActionBar" >
+            android:label="@string/title_activity_nav_drawer">
         </activity>
         <activity
             android:name="ui.MainActivity"
-            android:label="@string/dashboard_name"
-            android:theme="@style/Theme.CarMaintenanceTracker.NoActionBar" >
+            android:label="@string/dashboard_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

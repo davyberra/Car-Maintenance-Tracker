@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="brand_teal_800">#00695c</color>
     <color name="brand_slate_blue">#3C6085</color>
     <color name="brand_light_teal">#D8EDED</color>
     <color name="brand_dark_grey">#2E3637</color>
@@ -8,5 +9,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="brand_light_gray">#828282</color>
+    <color name="brand_light_gray">#f5f5f5</color>
+    <color name="brand_teal_400">#439889</color>
+    <color name="yellow_500">#ffeb3b</color>
+    <color name="yellow_600">#c8b900</color>
+    <color name="brand_teal_900">#003d33</color>
+    <color name="yellow_300">#ffff72</color>
 </resources>

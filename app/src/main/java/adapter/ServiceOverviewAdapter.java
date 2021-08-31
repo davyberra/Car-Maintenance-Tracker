@@ -45,7 +45,7 @@ public class ServiceOverviewAdapter extends RecyclerView.Adapter<ServiceOverview
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
-        View serviceEntryView = inflater.inflate(R.layout.service_entry_rv, parent, false);
+        View serviceEntryView = inflater.inflate(R.layout.service_entry_rv_item, parent, false);
         return new ViewHolder(serviceEntryView);
     }
 

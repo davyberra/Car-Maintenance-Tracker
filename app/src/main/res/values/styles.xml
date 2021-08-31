@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="style_background">
-        <item name="android:background">@color/brand_light_teal</item>
+        <item name="android:background">@color/brand_light_gray</item>
+    </style>
+    <style name="style_secondary_light">
+        <item name="android:background">@color/yellow_300</item>
     </style>
     <style name="style_text_view">
         <item name="android:textColor">@color/white</item>
     </style>
     <style name="style_gas_entry_text">
         <item name="android:textSize">24sp</item>
-        <item name="android:textColor">@color/brand_light_gray</item>
+        <item name="android:textColor">?attr/colorOnSecondary</item>
         <item name="android:paddingStart">2dp</item>
         <item name="android:paddingLeft">2dp</item>
         <item name="android:paddingEnd">2dp</item>
@@ -19,5 +22,17 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:paddingBottom">10dp</item>
+    </style>
+
+    <style name="gas_entry_overview_card_view">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginStart">2dp</item>
+        <item name="android:layout_marginLeft">2dp</item>
+        <item name="android:layout_marginEnd">2dp</item>
+        <item name="android:layout_marginRight">2dp</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:layout_marginBottom">4dp</item>
+        <item name="cardCornerRadius">4dp</item>
+        <item name="cardElevation">2dp</item>
     </style>
 </resources>

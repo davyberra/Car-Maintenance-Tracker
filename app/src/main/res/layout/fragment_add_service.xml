@@ -152,6 +152,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/outline_edit_calendar_20"
+                android:tint="@color/yellow_500"
                 app:layout_constraintBottom_toBottomOf="@+id/serviceDateText"
                 app:layout_constraintEnd_toEndOf="parent" />
 

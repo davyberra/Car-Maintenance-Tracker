@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
@@ -178,6 +179,11 @@ public class DashboardFragment extends Fragment {
                         vehicle.model
                 ));
                 vehicleMileage.setText(String.valueOf(vehicle.mileage));;
+            } else {
+                NavHostFragment.findNavController(DashboardFragment.this)
+                        .navigate(R.id.action_global_carSelectFragment);
+                Toast.makeText(getContext(), "No vehicles created. Please create a new vehicle to get started.",
+                        Toast.LENGTH_LONG).show();
             }
         });
 

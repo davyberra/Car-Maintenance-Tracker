@@ -87,7 +87,7 @@ public class CarSelectViewModel extends AndroidViewModel {
     }
 
     public LiveData<Vehicle> getSelectedVehicleLiveData() {
-        selectedVehicleId = sharedPreferences.getInt(KEY_SELECTED_VEHICLE, 2);
+        selectedVehicleId = sharedPreferences.getInt(KEY_SELECTED_VEHICLE, -1);
         selectedVehicleLiveData = vehicleDao.getVehicleById(selectedVehicleId);
         return selectedVehicleLiveData;
     }

@@ -1,5 +1,7 @@
 package entity;
 
+import android.net.Uri;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
@@ -21,6 +23,9 @@ public class Vehicle {
 
     @ColumnInfo
     public String model;
+
+    @ColumnInfo
+    public String imageUri;
 
     public Vehicle(String year, String make, String model) {
         this.year = year;

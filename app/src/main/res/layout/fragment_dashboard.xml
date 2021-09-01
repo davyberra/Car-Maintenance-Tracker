@@ -47,9 +47,8 @@
                 android:layout_marginTop="44dp"
                 android:text="Last Fill Up Date:"
                 android:textColor="@color/white"
-                android:textSize="10sp"
-                app:layout_constraintEnd_toStartOf="@+id/textView4"
-                app:layout_constraintHorizontal_bias="0.504"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_center"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -57,24 +56,14 @@
                 android:id="@+id/dashboardLastFillUpContent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                android:text="N/A"
                 android:textColor="@color/white"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/textView4"
-                app:layout_constraintHorizontal_bias="0.495"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_center"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/dashboardLastFillUpLabel"
                 app:layout_constraintVertical_bias="0.109" />
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/guideline_center"
-                app:layout_constraintStart_toStartOf="@+id/guideline_center"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/dashboardMileageLabel"
@@ -82,11 +71,10 @@
                 android:layout_height="wrap_content"
                 android:text="@string/dashboard_mileage_label"
                 android:textColor="@color/white"
-                android:textSize="10sp"
+                android:textSize="14sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/dashboardLastFillUpLabel"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.436"
-                app:layout_constraintStart_toEndOf="@+id/textView4" />
+                app:layout_constraintStart_toStartOf="@+id/guideline_center" />
 
             <TextView
                 android:id="@+id/dashboardMileageText"
@@ -94,9 +82,9 @@
                 android:layout_height="wrap_content"
                 android:text="TextView"
                 android:textColor="@color/white"
+                android:textSize="18sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/dashboardLastFillUpContent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.553"
                 app:layout_constraintStart_toStartOf="@+id/guideline_center" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

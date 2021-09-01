@@ -9,7 +9,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -49,6 +52,9 @@ public class DashboardFragment extends Fragment {
 
 
     private CarSelectViewModel viewModel;
+    private RecyclerView recyclerView;
+    private GasEntryAdapter adapter;
+    private GasEntryViewModel gasEntryViewModel;
 
     public DashboardFragment() {
         // Required empty public constructor
@@ -134,6 +140,26 @@ public class DashboardFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_dashboard, container, false);
     }
 
+    @Override
+    public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, @Nullable ContextMenu.ContextMenuInfo menuInfo) {
+        MenuInflater inflater = getActivity().getMenuInflater();
+        inflater.inflate(R.menu.menu_context_delete, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        GasEntry selectedGasEntry = adapter.getSelectedGasEntry();
+        switch (item.getItemId()) {
+            case R.id.action_delete:
+                deleteSelectedGasEntry(selectedGasEntry);
+        }
+        return super.onContextItemSelected(item);
+    }
+
+    private void deleteSelectedGasEntry(GasEntry selectedGasEntry) {
+        gasEntryViewModel.deleteGasEntry(selectedGasEntry);
+    }
+
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
@@ -151,18 +177,20 @@ public class DashboardFragment extends Fragment {
                         vehicle.make,
                         vehicle.model
                 ));
-                vehicleMileage.setText(String.valueOf(vehicle.mileage));
+                vehicleMileage.setText(String.valueOf(vehicle.mileage));;
             }
         });
 
         
-        RecyclerView recyclerView = view.findViewById(R.id.rvDashboard);
-        GasEntryViewModel gasEntryViewModel = new ViewModelProvider(requireActivity()).get(GasEntryViewModel.class);
+        recyclerView = view.findViewById(R.id.rvDashboard);
+        registerForContextMenu(recyclerView);
+
+        gasEntryViewModel = new ViewModelProvider(requireActivity()).get(GasEntryViewModel.class);
         int carId = carSelectViewModel.getSelectedVehicleId();
         gasEntryViewModel.getAllByCarId(carId).observe(getViewLifecycleOwner(), new Observer<List<GasEntry>>() {
             @Override
             public void onChanged(List<GasEntry> gasEntries) {
-                GasEntryAdapter adapter = new GasEntryAdapter(gasEntries, new ContextProvider() {
+                adapter = new GasEntryAdapter(gasEntries, new ContextProvider() {
                     @Override
                     public Context getContext() {
                         return requireActivity();
@@ -170,6 +198,15 @@ public class DashboardFragment extends Fragment {
                 });
                 recyclerView.setAdapter(adapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            }
+        });
+        gasEntryViewModel.getLatestGasEntry(carId).observe(getViewLifecycleOwner(), new Observer<GasEntry>() {
+            @Override
+            public void onChanged(GasEntry gasEntry) {
+                if (gasEntry != null) {
+                    TextView lastFillUpDate = view.findViewById(R.id.dashboardLastFillUpContent);
+                    lastFillUpDate.setText(String.valueOf(gasEntry.date));
+                }
             }
         });
     }

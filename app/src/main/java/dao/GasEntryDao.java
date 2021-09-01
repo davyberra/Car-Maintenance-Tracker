@@ -16,6 +16,9 @@ public interface GasEntryDao {
     @Query("SELECT * FROM gasentry")
     public LiveData<List<GasEntry>> getAll();
 
+    @Query("SELECT * FROM gasentry WHERE carId = (:carId) ORDER BY gasEntryId DESC LIMIT 1")
+    public LiveData<GasEntry> getLatestGasEntry(int carId);
+
     @Query("SELECT * FROM gasentry WHERE gasEntryId = (:id)")
     public LiveData<GasEntry> getGasEntryById(int id);
 

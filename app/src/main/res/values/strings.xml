@@ -50,4 +50,5 @@
     <string name="fab_add_mileage_desc">fab_add_mileage</string>
     <string name="fab_add_main_desc">fab_add_main</string>
     <string name="nav_drawer_services_overview">Services Overview</string>
+    <string name="action_delete">Delete</string>
 </resources>

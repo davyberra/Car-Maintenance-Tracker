@@ -1,9 +1,13 @@
 package adapter;
 
 import android.content.Context;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -24,8 +28,9 @@ public class GasEntryAdapter extends RecyclerView.Adapter<GasEntryAdapter.ViewHo
     private final ContextProvider contextProvider;
     private final List<GasEntry> gasEntries;
     private GasEntryViewModel viewModel;
+    private int currentPos;
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
         public TextView gasEntryDateText;
         public TextView gasEntryCostText;
         public CardView gasEntryCardView;
@@ -36,7 +41,22 @@ public class GasEntryAdapter extends RecyclerView.Adapter<GasEntryAdapter.ViewHo
             gasEntryDateText = itemView.findViewById(R.id.gasEntryDateText);
             gasEntryCostText = itemView.findViewById(R.id.gasEntryCostText);
             gasEntryCardView = itemView.findViewById(R.id.gasEntryCardView);
+
+            itemView.setOnLongClickListener(this);
         }
+
+        @Override
+        public boolean onLongClick(View v) {
+            currentPos = getAdapterPosition();
+            return false;
+        }
+    }
+
+    public GasEntry getSelectedGasEntry() {
+        if (currentPos >= 0 && gasEntries != null && currentPos < gasEntries.size()) {
+            return gasEntries.get(currentPos);
+        }
+        return null;
     }
 
     public GasEntryAdapter(List<GasEntry> gasEntries, ContextProvider contextProvider) {
@@ -71,6 +91,13 @@ public class GasEntryAdapter extends RecyclerView.Adapter<GasEntryAdapter.ViewHo
                 Navigation.findNavController(v)
                         .navigate(R.id.action_global_gasEntryOverviewFragment);
 
+            }
+        });
+        holder.gasEntryCardView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                currentPos = holder.getAdapterPosition();
+                return false;
             }
         });
     }

@@ -9,12 +9,13 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/carCardView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="205dp"
         android:layout_gravity="center"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
+        app:cardBackgroundColor="@color/yellow_300"
         app:cardCornerRadius="4dp"
         app:cardElevation="4dp">
 
@@ -22,6 +23,7 @@
             android:id="@+id/carImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
             android:adjustViewBounds="true"
             app:srcCompat="@drawable/stock_car_image" />
 
@@ -29,7 +31,7 @@
             android:id="@+id/carRadioButton"
             android:layout_width="wrap_content"
             android:layout_height="38dp"
-            android:layout_gravity="bottom|end"
+            android:layout_gravity="top|end"
             android:checked="false"
             app:buttonTint="@color/white" />
 
@@ -37,12 +39,12 @@
             android:id="@+id/carTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
+            android:layout_gravity="start|top|left"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:paddingBottom="5dp"
             android:text="@string/example_car_name"
-            android:textColor="@color/white"
+            android:textColor="?attr/colorOnSecondary"
             android:textSize="24sp" />
     </androidx.cardview.widget.CardView>
 </FrameLayout>

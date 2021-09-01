@@ -50,6 +50,10 @@ public class GasEntryViewModel extends AndroidViewModel {
         return gasEntryDao.getGasEntryById(id);
     }
 
+    public LiveData<GasEntry> getLatestGasEntry(int carId) {
+        return gasEntryDao.getLatestGasEntry(carId);
+    }
+
     public void insertGasEntry(GasEntry gasEntry) {
         executor.execute(new Runnable() {
             @Override
@@ -75,4 +79,12 @@ public class GasEntryViewModel extends AndroidViewModel {
     }
 
 
+    public void deleteGasEntry(GasEntry gasEntry) {
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                db.gasEntryDao().delete(gasEntry);
+            }
+        });
+    }
 }

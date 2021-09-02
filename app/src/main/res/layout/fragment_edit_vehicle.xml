@@ -8,7 +8,7 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/carMakeText"
+        android:id="@+id/editCarMakeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -17,10 +17,10 @@
         android:inputType="textCapWords"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/carYearText" />
+        app:layout_constraintTop_toBottomOf="@+id/editCarYearText" />
 
     <EditText
-        android:id="@+id/carModelText"
+        android:id="@+id/editCarModelText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -30,10 +30,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/carMakeText" />
+        app:layout_constraintTop_toBottomOf="@+id/editCarMakeText" />
 
     <EditText
-        android:id="@+id/carYearText"
+        android:id="@+id/editCarYearText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
@@ -41,12 +41,12 @@
         android:hint="@string/carYearTextView"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/addVehicleCancelButton"
+        android:id="@+id/editVehicleCancelButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="64dp"
@@ -57,11 +57,11 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/buttonSaveAddVehicle"
+        android:id="@+id/buttonSaveEditVehicle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/buttonSaveAddVehicle"
-        app:layout_constraintBottom_toTopOf="@+id/addVehicleCancelButton"
+        app:layout_constraintBottom_toTopOf="@+id/editVehicleCancelButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
@@ -69,26 +69,26 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="184dp"
-        app:layout_constraintBottom_toTopOf="@id/buttonSaveAddVehicle"
+        app:layout_constraintBottom_toTopOf="@id/buttonSaveEditVehicle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/carModelText">
+        app:layout_constraintTop_toBottomOf="@id/editCarModelText">
 
         <ImageButton
-            android:id="@+id/buttonAddPhotoAddVehicle"
+            android:id="@+id/buttonEditPhotoAddVehicle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:translationZ="45dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/addVehicleImageView"
+            app:layout_constraintStart_toStartOf="@+id/editVehicleImageView"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.504"
             app:srcCompat="@drawable/baseline_add_a_photo_24"
             app:tint="@color/yellow_500" />
 
         <ImageView
-            android:id="@+id/addVehicleImageView"
+            android:id="@+id/editVehicleImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"

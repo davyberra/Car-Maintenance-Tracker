@@ -13,7 +13,11 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -29,9 +33,12 @@ import entity.Vehicle;
 import viewmodel.CarSelectViewModel;
 
 public class CarSelectFragment extends Fragment {
+    private static final String TAG = CarSelectFragment.class.getSimpleName();
     private String pageTitle = "Select Car";
     private ImageView carImage;
     private CarSelectViewModel viewModel;
+    private CarSelectAdapter adapter;
+    private RecyclerView recyclerView;
 
     public CarSelectFragment() {
         // Required empty public constructor
@@ -62,14 +69,47 @@ public class CarSelectFragment extends Fragment {
     }
 
     @Override
+    public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, @Nullable ContextMenu.ContextMenuInfo menuInfo) {
+        MenuInflater inflater = getActivity().getMenuInflater();
+        inflater.inflate(R.menu.context_edit_delete, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        Vehicle selectedVehicle = adapter.getSelectedVehicle();
+        switch (item.getItemId()) {
+            case R.id.action_edit:
+                editSelectedVehicle(selectedVehicle);
+                break;
+            case R.id.action_delete:
+                deleteSelectedVehicle(selectedVehicle);
+                break;
+        }
+        return super.onContextItemSelected(item);
+    }
+
+    private void editSelectedVehicle(Vehicle selectedVehicle) {
+        viewModel.setSelectedEditVehicle(selectedVehicle);
+        Log.d(TAG, String.valueOf(viewModel.getSelectedEditVehicle() == null));
+        NavHostFragment.findNavController(CarSelectFragment.this)
+                .navigate(R.id.action_carSelectFragment_to_editVehicleFragment);
+    }
+
+    private void deleteSelectedVehicle(Vehicle selectedVehicle) {
+        viewModel.deleteVehicle(selectedVehicle);
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rvCarSelect);
+        recyclerView = (RecyclerView) view.findViewById(R.id.rvCarSelect);
+        registerForContextMenu(recyclerView);
+
         viewModel = ViewModelProviders.of(requireActivity()).get(CarSelectViewModel.class);
         viewModel.getVehiclesLiveData().observe(getViewLifecycleOwner(), new Observer<List<Vehicle>>() {
             @Override
             public void onChanged(List<Vehicle> vehicles) {
-                CarSelectAdapter adapter = new CarSelectAdapter(vehicles, new ContextProvider() {
+                adapter = new CarSelectAdapter(vehicles, new ContextProvider() {
                     @Override
                     public FragmentActivity getContext() {
                         return requireActivity();

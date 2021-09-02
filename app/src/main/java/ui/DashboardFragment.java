@@ -182,7 +182,7 @@ public class DashboardFragment extends Fragment {
             } else {
                 NavHostFragment.findNavController(DashboardFragment.this)
                         .navigate(R.id.action_global_carSelectFragment);
-                Toast.makeText(getContext(), "No vehicles created. Please create a new vehicle to get started.",
+                Toast.makeText(getContext(), "Please select or create a vehicle to get started.",
                         Toast.LENGTH_LONG).show();
             }
         });

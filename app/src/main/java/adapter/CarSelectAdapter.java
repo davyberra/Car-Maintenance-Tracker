@@ -1,7 +1,10 @@
 package adapter;
 
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +21,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.carmaintenancetracker.R;
 
+import java.io.File;
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import entity.Vehicle;
 import viewmodel.CarSelectViewModel;
@@ -31,8 +37,9 @@ public class CarSelectAdapter extends RecyclerView.Adapter<CarSelectAdapter.View
     private String KEY_RADIO_SELECTED_TOGGLE = "key_radio_selected_toggle_";
     private List<Vehicle> vehicles;
     private CarSelectViewModel viewModel;
+    private int currentPos;
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
         public CardView carCardView;
         public ImageView carImageView;
         public RadioButton carRadioButton;
@@ -45,7 +52,22 @@ public class CarSelectAdapter extends RecyclerView.Adapter<CarSelectAdapter.View
             carImageView = (ImageView) itemView.findViewById(R.id.carImageView);
             carRadioButton = (RadioButton) itemView.findViewById(R.id.carRadioButton);
             carTextView = (TextView) itemView.findViewById(R.id.carTextView);
+
+            itemView.setOnLongClickListener(this);
         }
+
+        @Override
+        public boolean onLongClick(View v) {
+            currentPos = getAdapterPosition();
+            return false;
+        }
+    }
+
+    public Vehicle getSelectedVehicle() {
+        if (currentPos >= 0 && vehicles != null && currentPos < vehicles.size()) {
+            return vehicles.get(currentPos);
+        }
+        return null;
     }
 
     public CarSelectAdapter(List<Vehicle> vehicles, ContextProvider contextProvider) {
@@ -78,6 +100,15 @@ public class CarSelectAdapter extends RecyclerView.Adapter<CarSelectAdapter.View
                 vehicle.make,
                 vehicle.model);
         textView.setText(text);
+
+        if (vehicle.imagePath != null) {
+            ContextWrapper contextWrapper = new ContextWrapper(contextProvider.getContext());
+            File directory = contextWrapper.getDir("vehicleImageDir", Context.MODE_PRIVATE);
+            File file = new File(directory, vehicle.imagePath);
+            Log.d("path", file.toString());
+            holder.carImageView.setImageDrawable(Drawable.createFromPath(file.toString()));
+            holder.carImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        }
         viewModel = new ViewModelProvider((ViewModelStoreOwner) contextProvider.getContext()).get(CarSelectViewModel.class);
 
         holder.carImageView.setOnClickListener(new View.OnClickListener() {
@@ -88,6 +119,14 @@ public class CarSelectAdapter extends RecyclerView.Adapter<CarSelectAdapter.View
                 holder.carRadioButton.setChecked(true);
                 Navigation.findNavController(v)
                         .navigate(R.id.action_carSelectFragment_to_dashboardFragment);
+            }
+        });
+
+        holder.carImageView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                currentPos = holder.getAdapterPosition();
+                return false;
             }
         });
     }

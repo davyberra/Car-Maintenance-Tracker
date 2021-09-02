@@ -25,7 +25,7 @@ public class Vehicle {
     public String model;
 
     @ColumnInfo
-    public String imageUri;
+    public String imagePath;
 
     public Vehicle(String year, String make, String model) {
         this.year = year;

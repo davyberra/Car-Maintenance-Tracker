@@ -33,5 +33,5 @@ public interface VehicleDao {
     public int updateVehicle(Vehicle vehicle);
 
     @Delete
-    public Completable delete(Vehicle vehicle);
+    public int delete(Vehicle vehicle);
 }

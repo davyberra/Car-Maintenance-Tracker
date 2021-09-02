@@ -29,7 +29,7 @@ public class CarSelectViewModel extends AndroidViewModel {
     private Executor executor = Executors.newSingleThreadExecutor();
     private int selectedVehicleId;
     private Vehicle selectedVehicle;
-
+    private Vehicle selectedEditVehicle;
 
     public CarSelectViewModel(Application application) {
         super(application);
@@ -94,5 +94,22 @@ public class CarSelectViewModel extends AndroidViewModel {
 
     public int getSelectedVehicleId() {
         return selectedVehicleId;
+    }
+
+    public void deleteVehicle(Vehicle selectedVehicle) {
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                db.vehicleDao().delete(selectedVehicle);
+            }
+        });
+    }
+
+    public Vehicle getSelectedEditVehicle() {
+        return selectedEditVehicle;
+    }
+
+    public void setSelectedEditVehicle(Vehicle selectedEditVehicle) {
+        this.selectedEditVehicle = selectedEditVehicle;
     }
 }

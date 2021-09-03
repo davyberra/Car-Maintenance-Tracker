@@ -7,6 +7,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.carmaintenancetracker.R;
@@ -24,6 +29,7 @@ public class ServiceOverviewAdapter extends RecyclerView.Adapter<ServiceOverview
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView serviceRvNameText;
         public TextView serviceRvCostText;
+        public CardView serviceEntryCardView;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -31,6 +37,7 @@ public class ServiceOverviewAdapter extends RecyclerView.Adapter<ServiceOverview
 
             serviceRvNameText = itemView.findViewById(R.id.serviceRvNameText);
             serviceRvCostText = itemView.findViewById(R.id.serviceRvCostText);
+            serviceEntryCardView = itemView.findViewById(R.id.service_entry_card_view);
         }
     }
 
@@ -55,8 +62,18 @@ public class ServiceOverviewAdapter extends RecyclerView.Adapter<ServiceOverview
         TextView textViewName = holder.serviceRvNameText;
         textViewName.setText(serviceEntry.serviceDescription);
         TextView textViewCost = holder.serviceRvCostText;
-        String cost = String.valueOf(serviceEntry.cost);
+        String cost = String.format("%.2f", serviceEntry.cost);
         textViewCost.setText("$" + cost);
+
+        viewModel = ViewModelProviders.of((FragmentActivity) contextProvider.getContext()).get(ServiceEntryViewModel.class);
+        holder.serviceEntryCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewModel.selectServiceEntry(serviceEntry);
+                Navigation.findNavController(v)
+                        .navigate(R.id.action_servicesOverviewFragment_to_serviceEntryOverviewFragment);
+            }
+        });
     }
 
     @Override

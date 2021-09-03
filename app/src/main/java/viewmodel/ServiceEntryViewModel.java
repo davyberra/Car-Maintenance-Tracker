@@ -1,6 +1,7 @@
 package viewmodel;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
@@ -22,11 +23,21 @@ public class ServiceEntryViewModel extends AndroidViewModel {
     private Executor executor = Executors.newSingleThreadExecutor();
     private MutableLiveData<String> type;
     private List<ServiceEntry> curServiceEntries;
+    private LiveData<ServiceEntry> selectedServiceEntry;
+
+    private static final String PREFS_FILE = "com.davyberra.carmaintenancetracker.preferences";
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
+    private String KEY_SELECTED_SERVICE_ENTRY = "key_selected_service_entry";
 
     public ServiceEntryViewModel(@NonNull Application application) {
         super(application);
         db = MainDatabase.getInstance(getApplication().getApplicationContext());
         serviceEntryDao = db.serviceEntryDao();
+        sharedPreferences = getApplication().getApplicationContext().getSharedPreferences(
+                PREFS_FILE, Context.MODE_PRIVATE
+        );
+        editor = sharedPreferences.edit();
     }
 
     public List<ServiceEntry> getCurServiceEntries() {
@@ -58,6 +69,21 @@ public class ServiceEntryViewModel extends AndroidViewModel {
 
     public void insertServiceEntry(ServiceEntry serviceEntry) {
         executor.execute(() -> db.serviceEntryDao().insertServiceEntry(serviceEntry));
+    }
+
+    public void selectServiceEntry(ServiceEntry serviceEntry) {
+        editor.putInt(KEY_SELECTED_SERVICE_ENTRY, serviceEntry.serviceId);
+        editor.commit();
+    }
+
+    public LiveData<ServiceEntry> getSelectedServiceEntry() {
+        int id = getSelectedServiceEntryId();
+        selectedServiceEntry = db.serviceEntryDao().getServiceEntryById(id);
+        return selectedServiceEntry;
+    }
+
+    private int getSelectedServiceEntryId() {
+        return sharedPreferences.getInt(KEY_SELECTED_SERVICE_ENTRY, -1);
     }
 
 }

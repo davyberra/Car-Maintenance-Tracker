@@ -7,7 +7,7 @@
     tools:context="ui.AddGasFragment" >
 
     <LinearLayout
-        android:id="@+id/addServiceLinearLayout"
+        android:id="@+id/addGasLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -18,118 +18,83 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout style="@style/style_add_gas_constraint">
 
-            <TextView
-                android:id="@+id/serviceCategoryLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:text="Gallons:"
-                android:textSize="24sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <EditText
                 android:id="@+id/gallonsTextView"
-                android:layout_width="@dimen/num_input_sm"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:ems="10"
-                android:inputType="numberDecimal"
-                app:layout_constraintBaseline_toBaselineOf="@+id/serviceCategoryLabel"
-                app:layout_constraintEnd_toEndOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout style="@style/style_add_gas_constraint">
-
-            <TextView
-                android:id="@+id/serviceServiceLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
-                android:text="Cost ($):"
+                android:ems="10"
+                android:hint="Gallons"
+                android:inputType="numberDecimal"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/style_add_gas_constraint">
 
             <EditText
-                android:id="@+id/serviceServiceText"
-                android:layout_width="@dimen/num_input_lg"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:inputType="numberDecimal"
-                app:layout_constraintBaseline_toBaselineOf="@+id/serviceServiceLabel"
-                app:layout_constraintEnd_toEndOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout style="@style/style_add_gas_constraint">
-
-            <TextView
-                android:id="@+id/serviceCostLabel"
+                android:id="@+id/addGasCostText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
-                android:text="Price/Gal:"
+                android:ems="10"
+                android:hint="Cost ($)"
+                android:inputType="numberDecimal"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/style_add_gas_constraint">
 
             <EditText
-                android:id="@+id/serviceCostText"
-                android:layout_width="@dimen/num_input_sm"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:ems="10"
-                android:inputType="numberDecimal"
-                app:layout_constraintBaseline_toBaselineOf="@+id/serviceCostLabel"
-                app:layout_constraintEnd_toEndOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout style="@style/style_add_gas_constraint">
-
-            <TextView
-                android:id="@+id/serviceDateLabel"
+                android:id="@+id/addGasPpgText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
-                android:text="Odometer:"
+                android:ems="10"
+                android:hint="Price/Gal ($/gal)"
+                android:inputType="numberDecimal"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/style_add_gas_constraint">
 
             <EditText
                 android:id="@+id/milesTextView"
-                android:layout_width="@dimen/num_input_lg"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
                 android:ems="10"
+                android:hint="Odometer"
                 android:inputType="number"
-                app:layout_constraintBaseline_toBaselineOf="@+id/serviceDateLabel"
-                app:layout_constraintEnd_toEndOf="parent" />
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 
     <Button
-        android:id="@+id/serviceSaveButton"
+        android:id="@+id/addGasSaveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addServiceLinearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/addGasLinearLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

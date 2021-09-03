@@ -63,9 +63,17 @@
     <fragment
         android:id="@+id/servicesOverviewFragment"
         android:name="ui.ServicesOverviewFragment"
-        android:label="ServicesOverviewFragment" /><action android:id="@+id/action_global_servicesOverviewFragment" app:destination="@id/servicesOverviewFragment"/>
+        android:label="ServicesOverviewFragment" >
+        <action
+            android:id="@+id/action_servicesOverviewFragment_to_serviceEntryOverviewFragment"
+            app:destination="@id/serviceEntryOverviewFragment" />
+    </fragment><action android:id="@+id/action_global_servicesOverviewFragment" app:destination="@id/servicesOverviewFragment"/>
     <fragment
         android:id="@+id/editVehicleFragment"
         android:name="ui.EditVehicleFragment"
         android:label="EditVehicleFragment" />
+    <fragment
+        android:id="@+id/serviceEntryOverviewFragment"
+        android:name="ui.ServiceEntryOverviewFragment"
+        android:label="ServiceEntryOverviewFragment" />
 </navigation>

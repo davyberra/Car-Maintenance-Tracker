@@ -54,6 +54,7 @@ public class AddMileageDialogFragment extends DialogFragment {
                                     vehicle.model
                             );
                             updatedVehicle.mileage = Integer.parseInt(input.getText().toString());
+                            updatedVehicle.imagePath = vehicle.imagePath;
                             updatedVehicle.carId = carSelectViewModel.getSelectedVehicleId();
 
                             carSelectViewModel.updateVehicle(updatedVehicle);

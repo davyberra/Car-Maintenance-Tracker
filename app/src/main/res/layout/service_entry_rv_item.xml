@@ -5,7 +5,8 @@
     style="@style/gas_entry_overview_card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="@color/yellow_500">
+    app:cardBackgroundColor="@color/yellow_500"
+    android:id="@+id/service_entry_card_view">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

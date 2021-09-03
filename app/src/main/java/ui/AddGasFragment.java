@@ -76,10 +76,10 @@ public class AddGasFragment extends Fragment {
         sharedPreferences = requireActivity().getSharedPreferences(PREFS_FILE, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
-        saveButton = view.findViewById(R.id.serviceSaveButton);
+        saveButton = view.findViewById(R.id.addGasSaveButton);
         gallonsText = view.findViewById(R.id.gallonsTextView);
-        totalPriceText = view.findViewById(R.id.serviceServiceText);
-        pricePerGallonText = view.findViewById(R.id.serviceCostText);
+        totalPriceText = view.findViewById(R.id.addGasCostText);
+        pricePerGallonText = view.findViewById(R.id.addGasPpgText);
         totalMileageText = view.findViewById(R.id.milesTextView);
 
         gallonsText.addTextChangedListener(new EditTextListener<EditText>(gallonsText) {
@@ -89,7 +89,7 @@ public class AddGasFragment extends Fragment {
                     double gallons = Double.parseDouble(s.toString());
                     double totalPrice = Double.parseDouble(String.valueOf(totalPriceText.getText()));
                     double ppg = totalPrice / gallons;
-                    pricePerGallonText.setText(String.valueOf(ppg));
+                    pricePerGallonText.setText(String.format("%.2f", ppg));
                 }
             }
         });
@@ -157,6 +157,7 @@ public class AddGasFragment extends Fragment {
                     vehicle.model
             );
             updatedVehicle.mileage = gasEntry.totalMileage;
+            updatedVehicle.imagePath = vehicle.imagePath;
             updatedVehicle.carId = carSelectViewModel.getSelectedVehicleId();
 
             carSelectViewModel.updateVehicle(updatedVehicle);

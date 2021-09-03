@@ -52,4 +52,6 @@
     <string name="nav_drawer_services_overview">Services Overview</string>
     <string name="action_delete">Delete</string>
     <string name="action_edit">Edit</string>
+    <string name="service_entry_overview_date_label">Date:</string>
+    <string name="service_entry_overview_cost_label">Total Cost:</string>
 </resources>

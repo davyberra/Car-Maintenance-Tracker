@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/style_background"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/gas_entry_overview_card_view">
+
+        <TextView
+            android:id="@+id/serviceEntryOverviewDateLabel"
+            style="@style/style_gas_entry_text"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:background="@color/yellow_500"
+            android:text="@string/service_entry_overview_date_label" />
+
+        <TextView
+            android:id="@+id/serviceEntryOverviewDateText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            style="@style/style_gas_entry_text"
+            android:text="TextView" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/gas_entry_overview_card_view">
+
+        <TextView
+            android:id="@+id/serviceEntryOverviewCategoryLabel"
+            style="@style/style_gas_entry_text"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:background="@color/yellow_500"
+            android:text="Category:" />
+
+        <TextView
+            android:id="@+id/serviceEntryOverviewCategoryText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            style="@style/style_gas_entry_text"
+            android:text="TextView" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/gas_entry_overview_card_view">
+
+        <TextView
+            android:id="@+id/serviceEntryOverviewServiceLabel"
+            style="@style/style_gas_entry_text"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:background="@color/yellow_500"
+            android:text="Service:" />
+
+        <TextView
+            android:id="@+id/serviceEntryOverviewServiceText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            style="@style/style_gas_entry_text"
+            android:text="TextView" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/gas_entry_overview_card_view">
+
+        <TextView
+            android:id="@+id/serviceEntryOverviewLocationLabel"
+            style="@style/style_gas_entry_text"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:background="@color/yellow_500"
+            android:text="Location" />
+
+        <TextView
+            android:id="@+id/serviceEntryOverviewLocationText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            style="@style/style_gas_entry_text"
+            android:text="TextView" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        style="@style/gas_entry_overview_card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/serviceEntryOverviewCostLabel"
+            style="@style/style_gas_entry_text"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:background="@color/yellow_500"
+            android:text="@string/service_entry_overview_cost_label" />
+
+        <TextView
+            android:id="@+id/serviceEntryOverviewCostText"
+            style="@style/style_gas_entry_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:text="TextView" />
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

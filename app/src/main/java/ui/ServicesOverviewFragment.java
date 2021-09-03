@@ -34,7 +34,7 @@ import viewmodel.ServiceEntryViewModel;
 
 public class ServicesOverviewFragment extends Fragment {
     private static final String TAG = ServicesOverviewFragment.class.getSimpleName();
-    private String pageTitle = "Services Overview";
+    private String pageTitle = "Services";
     private ServiceEntryViewModel serviceEntryViewModel;
     private CarSelectViewModel carSelectViewModel;
     private Spinner serviceOverviewSpinner;

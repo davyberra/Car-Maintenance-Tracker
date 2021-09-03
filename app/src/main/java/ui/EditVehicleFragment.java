@@ -151,6 +151,7 @@ public class EditVehicleFragment extends Fragment {
                     e.printStackTrace();
                 }
                 vehicle.imagePath = filename;
+                vehicle.mileage = selectedVehicle.mileage;
                 vehicle.carId = selectedVehicle.carId;
 
                 viewModel = ViewModelProviders.of(EditVehicleFragment.this).get(CarSelectViewModel.class);
@@ -164,7 +165,7 @@ public class EditVehicleFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 NavHostFragment.findNavController(EditVehicleFragment.this)
-                        .navigate(R.id.action_add_Vehicle_Fragment_to_carSelectFragment);
+                        .navigate(R.id.action_global_carSelectFragment);
             }
         });
     }

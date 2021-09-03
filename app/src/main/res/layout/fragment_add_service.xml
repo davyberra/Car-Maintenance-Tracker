@@ -11,7 +11,7 @@
         android:id="@+id/addServiceLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="10dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,55 +43,40 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout style="@style/style_add_gas_constraint">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            style="@style/style_add_gas_constraint"
+            android:layout_marginTop="50dp">
 
-            <TextView
-                android:id="@+id/serviceServiceLabel"
+            <EditText
+                android:id="@+id/serviceServiceText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
-                android:text="Service:"
+                android:ems="10"
+                android:hint="Service"
+                android:inputType="textCapWords"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <EditText
-                android:id="@+id/serviceServiceText"
-                android:layout_width="210dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:inputType="textCapWords"
-                app:layout_constraintBaseline_toBaselineOf="@+id/serviceServiceLabel"
-                app:layout_constraintEnd_toEndOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout style="@style/style_add_gas_constraint">
 
-            <TextView
-                android:id="@+id/serviceCostLabel"
+            <EditText
+                android:id="@+id/serviceCostText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
-                android:text="Cost($):"
+                android:ems="10"
+                android:hint="Cost ($)"
+                android:inputType="numberDecimal"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <EditText
-                android:id="@+id/serviceCostText"
-                android:layout_width="130dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:inputType="numberDecimal"
-                android:ems="10"
-                app:layout_constraintBaseline_toBaselineOf="@+id/serviceCostLabel"
-                app:layout_constraintEnd_toEndOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -99,53 +84,37 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/serviceLocationLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:text="Location:"
-                android:textSize="24sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <EditText
                 android:id="@+id/serviceLocationText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
                 android:ems="10"
+                android:hint="Location"
                 android:inputType="textCapWords"
-                app:layout_constraintBaseline_toBaselineOf="@+id/serviceLocationLabel"
-                app:layout_constraintEnd_toEndOf="parent" />
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout style="@style/style_add_gas_constraint">
 
-            <TextView
-                android:id="@+id/serviceDateLabel"
+            <EditText
+                android:id="@+id/serviceDateText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
-                android:text="Date:"
+                android:ems="10"
+                android:hint="Date"
+                android:inputType="date"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <EditText
-                android:id="@+id/serviceDateText"
-                android:layout_width="135dp"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="date"
-                app:layout_constraintBaseline_toBaselineOf="@+id/serviceDateLabel"
-                app:layout_constraintEnd_toStartOf="@+id/serviceDateChooseButton" />
 
             <ImageButton
                 android:id="@+id/serviceDateChooseButton"
@@ -153,8 +122,9 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/outline_edit_calendar_20"
                 android:tint="@color/yellow_500"
-                app:layout_constraintBottom_toBottomOf="@+id/serviceDateText"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/serviceDateText"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -2,6 +2,9 @@ package ui;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -13,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.carmaintenancetracker.R;
 
@@ -28,10 +32,41 @@ public class ServiceEntryOverviewFragment extends Fragment {
     private TextView totalCostText;
     private LiveData<ServiceEntry> serviceEntryLiveData;
     private ServiceEntryViewModel viewModel;
+    private ServiceEntry selectedServiceEntry;
 
 
     public ServiceEntryOverviewFragment() {
         super(R.layout.fragment_service_entry_overview);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((MainActivity) requireActivity()).hideFabButtons();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_gas_entry_overview, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_app_bar_delete:
+                viewModel.deleteServiceEntry(selectedServiceEntry);
+                NavHostFragment.findNavController(ServiceEntryOverviewFragment.this)
+                        .navigate(R.id.action_global_servicesOverviewFragment);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Nullable
@@ -56,6 +91,7 @@ public class ServiceEntryOverviewFragment extends Fragment {
         serviceEntryLiveData.observe(getViewLifecycleOwner(), new Observer<ServiceEntry>() {
             @Override
             public void onChanged(ServiceEntry serviceEntry) {
+                selectedServiceEntry = serviceEntry;
                 dateText.setText(serviceEntry.date);
                 categoryText.setText(serviceEntry.category);
                 serviceText.setText(serviceEntry.serviceDescription);

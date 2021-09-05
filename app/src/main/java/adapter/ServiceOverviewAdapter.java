@@ -25,8 +25,9 @@ public class ServiceOverviewAdapter extends RecyclerView.Adapter<ServiceOverview
     private final ContextProvider contextProvider;
     private final List<ServiceEntry> serviceEntries;
     private ServiceEntryViewModel viewModel;
+    private int currentPos;
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
         public TextView serviceRvNameText;
         public TextView serviceRvCostText;
         public CardView serviceEntryCardView;
@@ -38,7 +39,22 @@ public class ServiceOverviewAdapter extends RecyclerView.Adapter<ServiceOverview
             serviceRvNameText = itemView.findViewById(R.id.serviceRvNameText);
             serviceRvCostText = itemView.findViewById(R.id.serviceRvCostText);
             serviceEntryCardView = itemView.findViewById(R.id.service_entry_card_view);
+
+            itemView.setOnLongClickListener(this);
         }
+
+        @Override
+        public boolean onLongClick(View v) {
+            currentPos = getAdapterPosition();
+            return false;
+        }
+    }
+
+    public ServiceEntry getSelectedServiceEntry() {
+        if (currentPos >= 0 && serviceEntries != null && currentPos < serviceEntries.size()) {
+            return serviceEntries.get(currentPos);
+        }
+        return null;
     }
 
     public ServiceOverviewAdapter(List<ServiceEntry> serviceEntries, ContextProvider contextProvider) {
@@ -72,6 +88,14 @@ public class ServiceOverviewAdapter extends RecyclerView.Adapter<ServiceOverview
                 viewModel.selectServiceEntry(serviceEntry);
                 Navigation.findNavController(v)
                         .navigate(R.id.action_servicesOverviewFragment_to_serviceEntryOverviewFragment);
+            }
+        });
+
+        holder.serviceEntryCardView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                currentPos = holder.getAdapterPosition();
+                return false;
             }
         });
     }

@@ -27,6 +27,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 import entity.Vehicle;
+import ui.MainActivity;
 import viewmodel.CarSelectViewModel;
 
 public class CarSelectAdapter extends RecyclerView.Adapter<CarSelectAdapter.ViewHolder> {
@@ -38,6 +39,7 @@ public class CarSelectAdapter extends RecyclerView.Adapter<CarSelectAdapter.View
     private List<Vehicle> vehicles;
     private CarSelectViewModel viewModel;
     private int currentPos;
+    private Executor executor = Executors.newSingleThreadExecutor();
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
         public CardView carCardView;
@@ -101,14 +103,27 @@ public class CarSelectAdapter extends RecyclerView.Adapter<CarSelectAdapter.View
                 vehicle.model);
         textView.setText(text);
 
-        if (vehicle.imagePath != null) {
-            ContextWrapper contextWrapper = new ContextWrapper(contextProvider.getContext());
-            File directory = contextWrapper.getDir("vehicleImageDir", Context.MODE_PRIVATE);
-            File file = new File(directory, vehicle.imagePath);
-            Log.d("path", file.toString());
-            holder.carImageView.setImageDrawable(Drawable.createFromPath(file.toString()));
-            holder.carImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        }
+
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                if (vehicle.imagePath != null) {
+                    ContextWrapper contextWrapper = new ContextWrapper(contextProvider.getContext());
+                    File directory = contextWrapper.getDir("vehicleImageDir", Context.MODE_PRIVATE);
+                    File file = new File(directory, vehicle.imagePath);
+                    Log.d("path", file.toString());
+                    ((MainActivity) contextProvider.getContext()).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            holder.carImageView.setImageDrawable(Drawable.createFromPath(file.toString()));
+                            holder.carImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                        }
+                    });
+                }
+            }
+        });
+
+
         viewModel = new ViewModelProvider((ViewModelStoreOwner) contextProvider.getContext()).get(CarSelectViewModel.class);
 
         holder.carImageView.setOnClickListener(new View.OnClickListener() {

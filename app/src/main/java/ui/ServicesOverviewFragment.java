@@ -3,7 +3,10 @@ package ui;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -18,10 +21,12 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.carmaintenancetracker.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,11 +44,23 @@ public class ServicesOverviewFragment extends Fragment {
     private CarSelectViewModel carSelectViewModel;
     private Spinner serviceOverviewSpinner;
     private String type = "Engine";
+    private RecyclerView recyclerView;
+    private ServiceOverviewAdapter adapter;
 
     @Override
     public void onResume() {
         super.onResume();
         ((MainActivity) getActivity()).hideFabButtons();
+        FloatingActionButton fab = requireActivity().findViewById(R.id.fabPlusIcon);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavHostFragment.findNavController(ServicesOverviewFragment.this)
+                        .navigate(R.id.action_servicesOverviewFragment_to_addServiceFragment);
+                fab.hide();
+            }
+        });
+        fab.show();
     }
 
     @Nullable
@@ -53,21 +70,65 @@ public class ServicesOverviewFragment extends Fragment {
     }
 
     @Override
+    public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, @Nullable ContextMenu.ContextMenuInfo menuInfo) {
+        MenuInflater inflater = getActivity().getMenuInflater();
+        inflater.inflate(R.menu.menu_context_delete, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        ServiceEntry selectedServiceEntry = adapter.getSelectedServiceEntry();
+        switch (item.getItemId()) {
+            case R.id.action_delete:
+                deleteSelectedServiceEntry(selectedServiceEntry);
+                break;
+        }
+        return super.onContextItemSelected(item);
+    }
+
+    private void deleteSelectedServiceEntry(ServiceEntry selectedServiceEntry) {
+        serviceEntryViewModel.deleteServiceEntry(selectedServiceEntry);
+        serviceEntryViewModel.getTypeLiveData().setValue(serviceEntryViewModel.getTypeLiveData().getValue());
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         ActionBar actionBar = ((AppCompatActivity) requireActivity()).getSupportActionBar();
         actionBar.setTitle(pageTitle);
 
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rvServiceOverview);
+        recyclerView = (RecyclerView) view.findViewById(R.id.rvServiceOverview);
+        registerForContextMenu(recyclerView);
+
         serviceEntryViewModel = ViewModelProviders.of(requireActivity()).get(ServiceEntryViewModel.class);
         carSelectViewModel = ViewModelProviders.of(requireActivity()).get(CarSelectViewModel.class);
 
         serviceEntryViewModel.getAllByCarId(carSelectViewModel.getSelectedVehicleId())
         .observe(getViewLifecycleOwner(), new Observer<List<ServiceEntry>>() {
             @Override
-            public void onChanged(List<ServiceEntry> newServiceEntries) {
-                serviceEntryViewModel.setCurServiceEntries(newServiceEntries);
+            public void onChanged(List<ServiceEntry> serviceEntries) {
+                serviceEntryViewModel.setCurServiceEntries(serviceEntries);
+                List<ServiceEntry> filteredServiceEntries = new ArrayList<>();
+                String type = serviceEntryViewModel.getTypeLiveData().getValue();
+                if (type == null || type.equals("All Services")) {
+                    filteredServiceEntries = serviceEntries;
+                } else {
+                    for (ServiceEntry serviceEntry : serviceEntries) {
+                        if (serviceEntry.category.equals(type)) {
+                            filteredServiceEntries.add(serviceEntry);
+                        }
+                    }
+                }
+                serviceEntryViewModel.setFilteredServiceEntries(filteredServiceEntries);
+                adapter = new ServiceOverviewAdapter(filteredServiceEntries, new ContextProvider() {
+                    @Override
+                    public Context getContext() {
+                        return requireActivity();
+                    }
+                });
+                recyclerView.setAdapter(adapter);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
             }
         });
 
@@ -84,7 +145,8 @@ public class ServicesOverviewFragment extends Fragment {
                         }
                     }
                 }
-                ServiceOverviewAdapter adapter = new ServiceOverviewAdapter(filteredServiceEntries, new ContextProvider() {
+                serviceEntryViewModel.setFilteredServiceEntries(filteredServiceEntries);
+                adapter = new ServiceOverviewAdapter(filteredServiceEntries, new ContextProvider() {
                     @Override
                     public Context getContext() {
                         return requireActivity();

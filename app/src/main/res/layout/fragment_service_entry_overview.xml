@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     style="@style/style_background"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="end"
     android:orientation="vertical"
     android:padding="10dp">
 
     <androidx.cardview.widget.CardView
+        style="@style/gas_entry_overview_card_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/gas_entry_overview_card_view">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/serviceEntryOverviewDateLabel"
@@ -22,18 +23,18 @@
 
         <TextView
             android:id="@+id/serviceEntryOverviewDateText"
+            style="@style/style_gas_entry_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="end"
-            style="@style/style_gas_entry_text"
             android:text="TextView" />
 
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        style="@style/gas_entry_overview_card_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/gas_entry_overview_card_view">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/serviceEntryOverviewCategoryLabel"
@@ -45,41 +46,43 @@
 
         <TextView
             android:id="@+id/serviceEntryOverviewCategoryText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="end"
             style="@style/style_gas_entry_text"
+            android:layout_width="181dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|end"
+            android:gravity="end"
             android:text="TextView" />
 
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        style="@style/gas_entry_overview_card_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/gas_entry_overview_card_view">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/serviceEntryOverviewServiceLabel"
             style="@style/style_gas_entry_text"
             android:layout_width="180dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@color/yellow_500"
             android:text="Service:" />
 
         <TextView
             android:id="@+id/serviceEntryOverviewServiceText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="end"
             style="@style/style_gas_entry_text"
+            android:layout_width="186dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:gravity="end"
             android:text="TextView" />
 
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        style="@style/gas_entry_overview_card_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/gas_entry_overview_card_view">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/serviceEntryOverviewLocationLabel"
@@ -91,10 +94,10 @@
 
         <TextView
             android:id="@+id/serviceEntryOverviewLocationText"
+            style="@style/style_gas_entry_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="end"
-            style="@style/style_gas_entry_text"
             android:text="TextView" />
 
     </androidx.cardview.widget.CardView>

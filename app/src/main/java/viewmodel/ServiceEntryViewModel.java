@@ -23,6 +23,7 @@ public class ServiceEntryViewModel extends AndroidViewModel {
     private Executor executor = Executors.newSingleThreadExecutor();
     private MutableLiveData<String> type;
     private List<ServiceEntry> curServiceEntries;
+    private List<ServiceEntry> filteredServiceEntries;
     private LiveData<ServiceEntry> selectedServiceEntry;
 
     private static final String PREFS_FILE = "com.davyberra.carmaintenancetracker.preferences";
@@ -46,6 +47,14 @@ public class ServiceEntryViewModel extends AndroidViewModel {
 
     public void setCurServiceEntries(List<ServiceEntry> curServiceEntries) {
         this.curServiceEntries = curServiceEntries;
+    }
+
+    public List<ServiceEntry> getFilteredServiceEntries() {
+        return filteredServiceEntries;
+    }
+
+    public void setFilteredServiceEntries(List<ServiceEntry> filteredServiceEntries) {
+        this.filteredServiceEntries = filteredServiceEntries;
     }
 
     public MutableLiveData<String> getTypeLiveData() {
@@ -86,4 +95,13 @@ public class ServiceEntryViewModel extends AndroidViewModel {
         return sharedPreferences.getInt(KEY_SELECTED_SERVICE_ENTRY, -1);
     }
 
+    public void deleteServiceEntry(ServiceEntry serviceEntry) {
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                db.serviceEntryDao().delete(serviceEntry);
+            }
+        });
+
+    }
 }

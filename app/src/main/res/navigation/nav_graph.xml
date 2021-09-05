@@ -67,6 +67,9 @@
         <action
             android:id="@+id/action_servicesOverviewFragment_to_serviceEntryOverviewFragment"
             app:destination="@id/serviceEntryOverviewFragment" />
+        <action
+            android:id="@+id/action_servicesOverviewFragment_to_addServiceFragment"
+            app:destination="@id/addServiceFragment" />
     </fragment><action android:id="@+id/action_global_servicesOverviewFragment" app:destination="@id/servicesOverviewFragment"/>
     <fragment
         android:id="@+id/editVehicleFragment"

@@ -142,7 +142,7 @@ public class AddServiceFragment extends Fragment {
 
                 serviceEntryViewModel.insertServiceEntry(serviceEntry);
                 NavHostFragment.findNavController(AddServiceFragment.this)
-                        .navigate(R.id.action_global_dashboardFragment);
+                        .navigate(R.id.action_global_servicesOverviewFragment);
             }
         });
 

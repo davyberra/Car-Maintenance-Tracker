@@ -94,8 +94,6 @@ public class CarSelectAdapter extends RecyclerView.Adapter<CarSelectAdapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Vehicle vehicle = vehicles.get(position);
-        String pref_key = KEY_RADIO_SELECTED_TOGGLE + Integer.toString(position);
-        holder.carRadioButton.setChecked(sharedPreferences.getBoolean(pref_key, false));
         TextView textView = holder.carTextView;
         String text = String.format("%s %s %s",
                 vehicle.year,
@@ -125,13 +123,13 @@ public class CarSelectAdapter extends RecyclerView.Adapter<CarSelectAdapter.View
 
 
         viewModel = new ViewModelProvider((ViewModelStoreOwner) contextProvider.getContext()).get(CarSelectViewModel.class);
-
+        if (vehicle.carId == viewModel.getSelectedVehicleId()) {
+            holder.carRadioButton.setChecked(true);
+        }
         holder.carImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 viewModel.selectVehicle(vehicle);
-                editor.putBoolean(pref_key, true);
-                holder.carRadioButton.setChecked(true);
                 Navigation.findNavController(v)
                         .navigate(R.id.action_carSelectFragment_to_dashboardFragment);
             }

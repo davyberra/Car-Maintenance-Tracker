@@ -13,10 +13,10 @@ import entity.ServiceEntry;
 
 @Dao
 public interface ServiceEntryDao {
-    @Query("SELECT * FROM serviceentry WHERE carId = (:id)")
+    @Query("SELECT * FROM serviceentry WHERE carId = (:id) ORDER BY date DESC")
     public LiveData<List<ServiceEntry>> getAllByCarId(int id);
 
-    @Query("SELECT * FROM serviceentry WHERE carID = (:id) AND category = (:type)")
+    @Query("SELECT * FROM serviceentry WHERE carID = (:id) AND category = (:type) ORDER BY date DESC")
     public LiveData<List<ServiceEntry>> getAllByType(int id, String type);
 
     @Query("SELECT * FROM serviceentry WHERE serviceId = (:id)")

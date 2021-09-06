@@ -82,6 +82,13 @@ public class AddServiceFragment extends Fragment {
         dateText = view.findViewById(R.id.serviceDateText);
         saveButton = view.findViewById(R.id.serviceSaveButton);
 
+        final Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+
+        dateText.setText((month + 1) + "/" + day + "/" + year);
+
         carSelectViewModel = ViewModelProviders.of(requireActivity()).get(CarSelectViewModel.class);
         serviceEntryViewModel = ViewModelProviders.of(requireActivity()).get(ServiceEntryViewModel.class);
 
@@ -110,12 +117,7 @@ public class AddServiceFragment extends Fragment {
             }
         });
 
-        dateText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDatePickerDialog(dateText);
-            }
-        });
+        dateText.setKeyListener(null);
 
 
 

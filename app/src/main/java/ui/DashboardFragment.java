@@ -211,7 +211,9 @@ public class DashboardFragment extends Fragment {
             public void onChanged(GasEntry gasEntry) {
                 if (gasEntry != null) {
                     TextView lastFillUpDate = view.findViewById(R.id.dashboardLastFillUpContent);
+                    TextView mileage = view.findViewById(R.id.dashboardMileageText);
                     lastFillUpDate.setText(String.valueOf(gasEntry.date));
+                    mileage.setText(String.valueOf(gasEntry.totalMileage));
                 }
             }
         });

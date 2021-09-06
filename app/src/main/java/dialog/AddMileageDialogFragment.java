@@ -45,20 +45,17 @@ public class AddMileageDialogFragment extends DialogFragment {
                         CarSelectViewModel carSelectViewModel = ViewModelProviders.of(requireActivity()).get(CarSelectViewModel.class);
                         Vehicle vehicle = carSelectViewModel.getSelectedVehicle();
 
-                        if (vehicle.mileage > Integer.parseInt(input.getText().toString())) {
-                            Toast.makeText(getContext(), "Inputted mileage is lower than total mileage for vehicle", Toast.LENGTH_LONG).show();
-                        } else {
-                            Vehicle updatedVehicle = new Vehicle(
-                                    vehicle.year,
-                                    vehicle.make,
-                                    vehicle.model
-                            );
-                            updatedVehicle.mileage = Integer.parseInt(input.getText().toString());
-                            updatedVehicle.imagePath = vehicle.imagePath;
-                            updatedVehicle.carId = carSelectViewModel.getSelectedVehicleId();
+                        Vehicle updatedVehicle = new Vehicle(
+                                vehicle.year,
+                                vehicle.make,
+                                vehicle.model
+                        );
+                        updatedVehicle.mileage = Integer.parseInt(input.getText().toString());
+                        updatedVehicle.imagePath = vehicle.imagePath;
+                        updatedVehicle.carId = carSelectViewModel.getSelectedVehicleId();
 
-                            carSelectViewModel.updateVehicle(updatedVehicle);
-                        }
+                        carSelectViewModel.updateVehicle(updatedVehicle);
+
                     }
                 })
                 .setNegativeButton("Cancel", (dialog, which) -> {});

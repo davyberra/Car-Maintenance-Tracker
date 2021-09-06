@@ -1,5 +1,7 @@
 package ui;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -8,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.fragment.NavHostFragment;
@@ -17,12 +20,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.carmaintenancetracker.R;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import entity.GasEntry;
@@ -48,6 +54,8 @@ public class AddGasFragment extends Fragment {
     private EditText pricePerGallonText;
     private EditText totalPriceText;
     private EditText totalMileageText;
+    private EditText dateText;
+    private ImageButton dateButton;
 
     public AddGasFragment() {
         // Required empty public constructor
@@ -81,6 +89,15 @@ public class AddGasFragment extends Fragment {
         totalPriceText = view.findViewById(R.id.addGasCostText);
         pricePerGallonText = view.findViewById(R.id.addGasPpgText);
         totalMileageText = view.findViewById(R.id.milesTextView);
+        dateText = view.findViewById(R.id.addGasDateText);
+        dateButton = view.findViewById(R.id.addGasCalendarButton);
+
+        final Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+
+        dateText.setText((month + 1) + "/" + day + "/" + year);
 
         gallonsText.addTextChangedListener(new EditTextListener<EditText>(gallonsText) {
             @Override
@@ -118,6 +135,15 @@ public class AddGasFragment extends Fragment {
 //            }
 //        });
 
+        dateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePickerDialog(v);
+            }
+        });
+
+        dateText.setKeyListener(null);
+
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,10 +160,8 @@ public class AddGasFragment extends Fragment {
     private void addGas() {
         gasEntryViewModel = ViewModelProviders.of(requireActivity()).get(GasEntryViewModel.class);
         int vehicleId = sharedPreferences.getInt(KEY_SELECTED_VEHICLE, 0);
-        SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
-        Date date = new Date(System.currentTimeMillis());
         GasEntry gasEntry = new GasEntry(
-                formatter.format(date),
+                dateText.getText().toString(),
                 vehicleId,
                 Double.parseDouble(gallonsText.getText().toString()),
                 Double.parseDouble(totalPriceText.getText().toString()),
@@ -167,5 +191,36 @@ public class AddGasFragment extends Fragment {
                     .navigate(R.id.action_addGasFragment_to_dashboardFragment);
         }
 
+    }
+
+    public void showDatePickerDialog(View v) {
+        DialogFragment newFragment = new AddGasFragment.DatePickerFragment(dateText);
+        newFragment.show(getParentFragmentManager(), "datePicker");
+    }
+
+    public static class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+
+        private EditText dateText;
+
+        public DatePickerFragment(EditText dateText) {
+            this.dateText = dateText;
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the current date as the default date in the picker
+            final Calendar c = Calendar.getInstance();
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH);
+            int day = c.get(Calendar.DAY_OF_MONTH);
+
+            // Create a new instance of DatePickerDialog and return it
+            return new DatePickerDialog(getActivity(), this, year, month, day);
+        }
+
+        public void onDateSet(DatePicker view, int year, int month, int day) {
+            // Do something with the date chosen by the user
+            dateText.setText((month + 1) + "/" + day + "/" + year);
+        }
     }
 }

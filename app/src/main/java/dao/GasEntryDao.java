@@ -16,13 +16,13 @@ public interface GasEntryDao {
     @Query("SELECT * FROM gasentry")
     public LiveData<List<GasEntry>> getAll();
 
-    @Query("SELECT * FROM gasentry WHERE carId = (:carId) ORDER BY gasEntryId DESC LIMIT 1")
+    @Query("SELECT * FROM gasentry WHERE carId = (:carId) ORDER BY date DESC LIMIT 1")
     public LiveData<GasEntry> getLatestGasEntry(int carId);
 
     @Query("SELECT * FROM gasentry WHERE gasEntryId = (:id)")
     public LiveData<GasEntry> getGasEntryById(int id);
 
-    @Query("SELECT * FROM gasentry WHERE carId = (:id) ORDER BY gasEntryId DESC")
+    @Query("SELECT * FROM gasentry WHERE carId = (:id) ORDER BY date DESC")
     public LiveData<List<GasEntry>> getAllByCarId(int id);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

@@ -54,7 +54,13 @@
     <fragment
         android:id="@+id/gasEntryOverviewFragment"
         android:name="ui.GasEntryOverviewFragment"
-        android:label="GasEntryOverviewFragment" /><action android:id="@+id/action_global_gasEntryOverviewFragment" app:destination="@id/gasEntryOverviewFragment"/>
+        android:label="GasEntryOverviewFragment" >
+        <action
+            android:id="@+id/action_delete_gasEntryOverviewFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment"
+            app:popUpTo="@id/dashboardFragment"
+            app:popUpToInclusive="true" />
+    </fragment><action android:id="@+id/action_global_gasEntryOverviewFragment" app:destination="@id/gasEntryOverviewFragment"/>
     <fragment
         android:id="@+id/addServiceFragment"
         android:name="ui.AddServiceFragment"
@@ -78,5 +84,11 @@
     <fragment
         android:id="@+id/serviceEntryOverviewFragment"
         android:name="ui.ServiceEntryOverviewFragment"
-        android:label="ServiceEntryOverviewFragment" />
+        android:label="ServiceEntryOverviewFragment" >
+        <action
+            android:id="@+id/action_delete_serviceEntryOverviewFragment_to_servicesOverviewFragment"
+            app:destination="@id/servicesOverviewFragment"
+            app:popUpTo="@id/servicesOverviewFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

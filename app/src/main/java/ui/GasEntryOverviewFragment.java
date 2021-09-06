@@ -63,7 +63,7 @@ public class GasEntryOverviewFragment extends Fragment {
             case R.id.action_app_bar_delete:
                 viewModel.deleteGasEntry(selectedGasEntry);
                 NavHostFragment.findNavController(GasEntryOverviewFragment.this)
-                        .navigate(R.id.action_global_dashboardFragment);
+                        .navigate(R.id.action_delete_gasEntryOverviewFragment_to_dashboardFragment);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

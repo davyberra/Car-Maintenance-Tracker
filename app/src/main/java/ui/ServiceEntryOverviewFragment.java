@@ -62,7 +62,7 @@ public class ServiceEntryOverviewFragment extends Fragment {
             case R.id.action_app_bar_delete:
                 viewModel.deleteServiceEntry(selectedServiceEntry);
                 NavHostFragment.findNavController(ServiceEntryOverviewFragment.this)
-                        .navigate(R.id.action_global_servicesOverviewFragment);
+                        .navigate(R.id.action_delete_serviceEntryOverviewFragment_to_servicesOverviewFragment);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

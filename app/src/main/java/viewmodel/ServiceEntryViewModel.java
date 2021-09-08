@@ -24,7 +24,6 @@ public class ServiceEntryViewModel extends AndroidViewModel {
     private MutableLiveData<String> type;
     private List<ServiceEntry> curServiceEntries;
     private List<ServiceEntry> filteredServiceEntries;
-    private LiveData<ServiceEntry> selectedServiceEntry;
 
     private static final String PREFS_FILE = "com.davyberra.carmaintenancetracker.preferences";
     private SharedPreferences sharedPreferences;
@@ -87,8 +86,8 @@ public class ServiceEntryViewModel extends AndroidViewModel {
 
     public LiveData<ServiceEntry> getSelectedServiceEntry() {
         int id = getSelectedServiceEntryId();
-        selectedServiceEntry = db.serviceEntryDao().getServiceEntryById(id);
-        return selectedServiceEntry;
+        return db.serviceEntryDao().getServiceEntryById(id);
+
     }
 
     private int getSelectedServiceEntryId() {

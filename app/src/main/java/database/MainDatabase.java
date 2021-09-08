@@ -7,13 +7,15 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import dao.GasEntryDao;
+import dao.ReminderDao;
 import dao.ServiceEntryDao;
 import dao.VehicleDao;
 import entity.GasEntry;
+import entity.Reminder;
 import entity.ServiceEntry;
 import entity.Vehicle;
 
-@Database(entities = {Vehicle.class, GasEntry.class, ServiceEntry.class}, version = 9)
+@Database(entities = {Vehicle.class, GasEntry.class, ServiceEntry.class, Reminder.class}, version = 10)
 public abstract class MainDatabase extends RoomDatabase {
     private static MainDatabase instance;
 
@@ -30,4 +32,5 @@ public abstract class MainDatabase extends RoomDatabase {
     public abstract VehicleDao vehicleDao();
     public abstract GasEntryDao gasEntryDao();
     public abstract ServiceEntryDao serviceEntryDao();
+    public abstract ReminderDao reminderDao();
 }

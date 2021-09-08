@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/reminderRvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/reminderRvProgressBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+        android:id="@+id/reminderRvProgressBar"
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/reminderRvNextService"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:rcBackgroundColor="@color/brand_light_gray"
+        app:rcBackgroundPadding="2dp"
+        app:rcIconBackgroundColor="@color/yellow_600"
+        app:rcIconPadding="5dp"
+        app:rcIconSize="24dp"
+        app:rcIconSrc="@drawable/outline_build_24"
+        app:rcMax="150"
+        app:rcProgress="90"
+        app:rcProgressColor="@color/yellow_300"
+        app:rcRadius="5dp" />
+
+    <TextView
+        android:id="@+id/reminderRvNextService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next Service: "
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

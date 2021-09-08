@@ -26,6 +26,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar;
 import com.example.carmaintenancetracker.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -51,6 +52,8 @@ public class DashboardFragment extends Fragment {
     private FloatingActionButton fabAddMileage;
     private boolean isFabOpen;
 
+    private IconRoundCornerProgressBar progressBar;
+
 
     private CarSelectViewModel viewModel;
     private RecyclerView recyclerView;
@@ -72,7 +75,6 @@ public class DashboardFragment extends Fragment {
     public void onResume() {
         super.onResume();
         ((AppCompatActivity) requireActivity()).getSupportActionBar().setTitle(pageTitle);
-
 
         fabAddMain = requireActivity().findViewById(R.id.fabPlusIcon);
         fabAddGas = requireActivity().findViewById(R.id.fabAddGas);
@@ -217,5 +219,9 @@ public class DashboardFragment extends Fragment {
                 }
             }
         });
+
+        progressBar = view.findViewById(R.id.dashboardProgressBar);
+        progressBar.setMax(1f);
+        progressBar.setProgress(.75f);
     }
 }

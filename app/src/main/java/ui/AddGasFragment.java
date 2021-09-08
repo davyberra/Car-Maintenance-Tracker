@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.carmaintenancetracker.R;
@@ -55,7 +56,9 @@ public class AddGasFragment extends Fragment {
     private EditText totalPriceText;
     private EditText totalMileageText;
     private EditText dateText;
+    private TextView currentOdometer;
     private ImageButton dateButton;
+    private Vehicle vehicle;
 
     public AddGasFragment() {
         // Required empty public constructor
@@ -84,11 +87,15 @@ public class AddGasFragment extends Fragment {
         sharedPreferences = requireActivity().getSharedPreferences(PREFS_FILE, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
+        carSelectViewModel = ViewModelProviders.of(requireActivity()).get(CarSelectViewModel.class);
+        vehicle = carSelectViewModel.getSelectedVehicle();
+
         saveButton = view.findViewById(R.id.addGasSaveButton);
         gallonsText = view.findViewById(R.id.gallonsTextView);
         totalPriceText = view.findViewById(R.id.addGasCostText);
         pricePerGallonText = view.findViewById(R.id.addGasPpgText);
         totalMileageText = view.findViewById(R.id.milesTextView);
+        currentOdometer = view.findViewById(R.id.addGasCurrentOdometer);
         dateText = view.findViewById(R.id.addGasDateText);
         dateButton = view.findViewById(R.id.addGasCalendarButton);
 
@@ -98,6 +105,8 @@ public class AddGasFragment extends Fragment {
         int day = c.get(Calendar.DAY_OF_MONTH);
 
         dateText.setText((month + 1) + "/" + day + "/" + year);
+
+        currentOdometer.setText("Current Odometer: " + vehicle.mileage);
 
         gallonsText.addTextChangedListener(new EditTextListener<EditText>(gallonsText) {
             @Override
@@ -168,9 +177,6 @@ public class AddGasFragment extends Fragment {
                 Double.parseDouble(pricePerGallonText.getText().toString()),
                 Integer.parseInt(totalMileageText.getText().toString())
         );
-
-        carSelectViewModel = ViewModelProviders.of(requireActivity()).get(CarSelectViewModel.class);
-        Vehicle vehicle = carSelectViewModel.getSelectedVehicle();
 
         if (vehicle.mileage > gasEntry.totalMileage) {
             Toast.makeText(getContext(), "Inputted mileage is lower than total mileage for vehicle", Toast.LENGTH_LONG).show();

@@ -15,13 +15,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,11 +34,14 @@ import java.util.List;
 
 import adapter.ContextProvider;
 import adapter.GasEntryAdapter;
+import adapter.ReminderAdapter;
 import dialog.AddMileageDialogFragment;
 import entity.GasEntry;
+import entity.Reminder;
 import entity.Vehicle;
 import viewmodel.CarSelectViewModel;
 import viewmodel.GasEntryViewModel;
+import viewmodel.ReminderViewModel;
 
 public class DashboardFragment extends Fragment {
     private static final String TAG = DashboardFragment.class.getSimpleName();
@@ -49,16 +52,19 @@ public class DashboardFragment extends Fragment {
     private FloatingActionButton fabAddMain;
     private FloatingActionButton fabAddGas;
     private FloatingActionButton fabAddService;
+    private FloatingActionButton fabAddReminder;
     private FloatingActionButton fabAddMileage;
     private boolean isFabOpen;
 
     private IconRoundCornerProgressBar progressBar;
 
-
-    private CarSelectViewModel viewModel;
-    private RecyclerView recyclerView;
-    private GasEntryAdapter adapter;
+    private CarSelectViewModel carSelectViewModel;
+    private RecyclerView gasEntryRecyclerView;
+    private GasEntryAdapter gasEntryAdapter;
     private GasEntryViewModel gasEntryViewModel;
+    private RecyclerView reminderRecyclerView;
+    private ReminderAdapter reminderAdapter;
+    private ReminderViewModel reminderViewModel;
 
     public DashboardFragment() {
         // Required empty public constructor
@@ -79,6 +85,7 @@ public class DashboardFragment extends Fragment {
         fabAddMain = requireActivity().findViewById(R.id.fabPlusIcon);
         fabAddGas = requireActivity().findViewById(R.id.fabAddGas);
         fabAddService = requireActivity().findViewById(R.id.fabAddService);
+        fabAddReminder = requireActivity().findViewById(R.id.fabAddReminder);
         fabAddMileage = requireActivity().findViewById(R.id.fabAddMileage);
 
         closeFabMenu();
@@ -97,6 +104,14 @@ public class DashboardFragment extends Fragment {
                 closeFabMenu();
                 NavHostFragment.findNavController(DashboardFragment.this)
                         .navigate(R.id.action_dashboardFragment_to_addServiceFragment);
+            }
+        });
+        fabAddReminder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                closeFabMenu();
+                NavHostFragment.findNavController(DashboardFragment.this)
+                        .navigate(R.id.action_dashboardFragment_to_addReminderFragment);
             }
         });
         fabAddMain.setOnClickListener(new View.OnClickListener() {
@@ -119,19 +134,22 @@ public class DashboardFragment extends Fragment {
         fabAddGas.show();
         fabAddService.show();
         fabAddMileage.show();
+        fabAddReminder.show();
         fabAddMain.show();
     }
 
     private void showFabMenu() {
         isFabOpen = true;
-        fabAddMileage.animate().translationY(-getResources().getDimension(R.dimen.standard_55));
-        fabAddService.animate().translationY(-getResources().getDimension(R.dimen.standard_105));
-        fabAddGas.animate().translationY(-getResources().getDimension(R.dimen.standard_155));
+        fabAddMileage.animate().translationY(-getResources().getDimension(R.dimen.pos_1));
+        fabAddReminder.animate().translationY(-getResources().getDimension(R.dimen.pos_2));
+        fabAddService.animate().translationY(-getResources().getDimension(R.dimen.pos_3));
+        fabAddGas.animate().translationY(-getResources().getDimension(R.dimen.pos_4));
     }
 
     private void closeFabMenu() {
         isFabOpen = false;
         fabAddMileage.animate().translationY(0);
+        fabAddReminder.animate().translationY(0);
         fabAddService.animate().translationY(0);
         fabAddGas.animate().translationY(0);
     }
@@ -151,7 +169,7 @@ public class DashboardFragment extends Fragment {
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
-        GasEntry selectedGasEntry = adapter.getSelectedGasEntry();
+        GasEntry selectedGasEntry = gasEntryAdapter.getSelectedGasEntry();
         switch (item.getItemId()) {
             case R.id.action_delete:
                 deleteSelectedGasEntry(selectedGasEntry);
@@ -166,7 +184,7 @@ public class DashboardFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        CarSelectViewModel carSelectViewModel = new ViewModelProvider(requireActivity()).get(CarSelectViewModel.class);
+        carSelectViewModel = new ViewModelProvider(requireActivity()).get(CarSelectViewModel.class);
         selectedVehicle = carSelectViewModel.getSelectedVehicleLiveData();
 
         selectedVehicle.observe(getViewLifecycleOwner(), vehicle -> {
@@ -190,22 +208,22 @@ public class DashboardFragment extends Fragment {
         });
 
         
-        recyclerView = view.findViewById(R.id.rvDashboard);
-        registerForContextMenu(recyclerView);
+        gasEntryRecyclerView = view.findViewById(R.id.rvDashboard);
+        registerForContextMenu(gasEntryRecyclerView);
 
         gasEntryViewModel = new ViewModelProvider(requireActivity()).get(GasEntryViewModel.class);
         int carId = carSelectViewModel.getSelectedVehicleId();
         gasEntryViewModel.getAllByCarId(carId).observe(getViewLifecycleOwner(), new Observer<List<GasEntry>>() {
             @Override
             public void onChanged(List<GasEntry> gasEntries) {
-                adapter = new GasEntryAdapter(gasEntries, new ContextProvider() {
+                gasEntryAdapter = new GasEntryAdapter(gasEntries, new ContextProvider() {
                     @Override
                     public Context getContext() {
                         return requireActivity();
                     }
                 });
-                recyclerView.setAdapter(adapter);
-                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                gasEntryRecyclerView.setAdapter(gasEntryAdapter);
+                gasEntryRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
             }
         });
         gasEntryViewModel.getLatestGasEntry(carId).observe(getViewLifecycleOwner(), new Observer<GasEntry>() {
@@ -220,8 +238,24 @@ public class DashboardFragment extends Fragment {
             }
         });
 
-        progressBar = view.findViewById(R.id.dashboardProgressBar);
-        progressBar.setMax(1f);
-        progressBar.setProgress(.75f);
+        reminderRecyclerView = view.findViewById(R.id.rvDashboardReminders);
+        reminderViewModel = ViewModelProviders.of(requireActivity()).get(ReminderViewModel.class);
+        reminderViewModel.getAllByCarId(carId).observe(getViewLifecycleOwner(), new Observer<List<Reminder>>() {
+            @Override
+            public void onChanged(List<Reminder> reminders) {
+                reminderAdapter = new ReminderAdapter(new ContextProvider() {
+                    @Override
+                    public Context getContext() {
+                        return requireActivity();
+                    }
+                }, reminders, carSelectViewModel);
+                reminderRecyclerView.setAdapter(reminderAdapter);
+                reminderRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            }
+        });
+
+//        progressBar = view.findViewById(R.id.dashboardProgressBar);
+//        progressBar.setMax(1f);
+//        progressBar.setProgress(.75f);
     }
 }

@@ -1,0 +1,259 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ui.AddGasFragment"
+    style="@style/style_background">
+
+    <LinearLayout
+        android:id="@+id/addGasLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:divider="@android:drawable/divider_horizontal_textfield"
+        android:orientation="vertical"
+        android:showDividers="middle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/style_add_gas_constraint">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/centerGuideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".5" />
+
+            <EditText
+                android:id="@+id/addReminderForText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:hint="for:"
+                android:inputType="textCapWords"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/style_add_gas_constraint">
+
+            <TextView
+                android:id="@+id/mileageEveryText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:text="Every"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@+id/addReminderMileageEditText"
+                app:layout_constraintStart_toStartOf="@+id/centerGuideline3" />
+
+            <EditText
+                android:id="@+id/addReminderMileageEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginBottom="4dp"
+                android:ems="10"
+                android:inputType="number"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/addReminderMiLabel"
+                app:layout_constraintStart_toStartOf="@+id/centerGuideline3" />
+
+            <TextView
+                android:id="@+id/addReminderMiLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginBottom="8dp"
+                android:text="mi"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/centerGuideline3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".5" />
+
+            <TextView
+                android:id="@+id/addReminderRadioDateLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:text="By Date:"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/centerGuideline3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/addReminderDateEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
+                android:ems="10"
+                android:inputType="number"
+                app:layout_constraintEnd_toStartOf="@+id/addReminderDaysLabel"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/addReminderRadioGroup" />
+
+            <RadioGroup
+                android:id="@+id/addReminderRadioGroup"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                app:layout_constraintEnd_toStartOf="@+id/centerGuideline3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/addReminderRadioDateLabel">
+
+                <RadioButton
+                    android:id="@+id/addReminderMonthlyRadio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Monthly" />
+
+                <RadioButton
+                    android:id="@+id/addReminderYearlyRadio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Yearly" />
+
+                <RadioButton
+                    android:id="@+id/addReminderCustomDateRadio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Every" />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/addReminderByMileageText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:text="By Mileage:"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/centerGuideline3"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/addReminderDaysLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:text="days"
+                app:layout_constraintBottom_toBottomOf="@+id/addReminderDateEditText"
+                app:layout_constraintEnd_toStartOf="@+id/centerGuideline3" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            style="@style/style_add_gas_constraint"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/centerGuideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".5" />
+
+            <TextView
+                android:id="@+id/addReminderLastServiceLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Last Service:"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/addReminderDateText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="24dp"
+                android:hint="N/A"
+                android:inputType="none"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/addReminderCalendarButton"
+                app:layout_constraintStart_toStartOf="@+id/centerGuideline"
+                app:layout_constraintTop_toBottomOf="@+id/addReminderLastServiceLabel" />
+
+            <ImageButton
+                android:id="@+id/addReminderCalendarButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/outline_edit_calendar_24"
+                app:layout_constraintBottom_toBottomOf="@+id/addReminderDateText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:tint="@color/yellow_500" />
+
+            <EditText
+                android:id="@+id/addReminderLastMileageText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:textSize="24sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/addReminderDateText"
+                app:layout_constraintEnd_toStartOf="@+id/addReminderLastMilesLabel"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/addReminderLastMilesLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="4dp"
+                android:text="mi"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/addReminderLastMileageText"
+                app:layout_constraintEnd_toStartOf="@+id/centerGuideline" />
+
+            <TextView
+                android:id="@+id/addReminderOrText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="or"
+                app:layout_constraintEnd_toStartOf="@+id/centerGuideline"
+                app:layout_constraintStart_toStartOf="@+id/centerGuideline"
+                app:layout_constraintTop_toBottomOf="@+id/addReminderLastServiceLabel" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/addReminderSaveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addGasLinearLayout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

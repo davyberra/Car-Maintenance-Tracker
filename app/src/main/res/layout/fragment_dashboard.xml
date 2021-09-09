@@ -101,22 +101,14 @@
             android:text="Reminders"
             android:textSize="24sp" />
 
-        <com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar
-            android:id="@+id/dashboardProgressBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:rcBackgroundColor="@color/brand_light_gray"
-            app:rcBackgroundPadding="2dp"
-            app:rcIconBackgroundColor="@color/brand_teal_800"
-            app:rcIconPadding="5dp"
-            app:rcIconSize="24dp"
-            app:rcIconSrc="@drawable/outline_build_24"
-            app:rcProgressColor="@color/brand_teal_800"
-            app:rcRadius="5dp" />
-
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvDashboardReminders"
             android:layout_width="match_parent"
-            android:layout_height="200dp" />
+            android:layout_height="200dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginRight="4dp" />
 
         <TextView
             android:id="@+id/dashboardRecentFillupsLabel"

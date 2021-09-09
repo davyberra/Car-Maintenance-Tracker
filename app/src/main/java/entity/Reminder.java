@@ -21,23 +21,19 @@ public class Reminder {
     public String name;
 
     @ColumnInfo
-    public String lastMileage;
+    public int lastMileage;
 
     @ColumnInfo
     public String lastDate;
 
     @ColumnInfo
-    public int interval;
+    public long interval;
 
     @ColumnInfo
     public String intervalType;
 
-    public Reminder(int carId, String name, String lastMileage, String lastDate, int interval, String intervalType) {
+    public Reminder(int carId, String name) {
         this.carId = carId;
         this.name = name;
-        this.lastMileage = lastMileage;
-        this.lastDate = lastDate;
-        this.interval = interval;
-        this.intervalType = intervalType;
     }
 }

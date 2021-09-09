@@ -41,6 +41,15 @@
         app:srcCompat="@drawable/outline_build_24" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAddReminder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:contentDescription="@string/fab_add_service_desc"
+        app:srcCompat="@drawable/outline_schedule_24" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAddMileage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -12,8 +12,9 @@
     <dimen name="nav_header_vertical_spacing">8dp</dimen>
     <dimen name="nav_header_height">176dp</dimen>
     <!-- Fab menu dimens -->
-    <dimen name="standard_55">65dp</dimen>
-    <dimen name="standard_105">130dp</dimen>
-    <dimen name="standard_155">195dp</dimen>
+    <dimen name="pos_1">65dp</dimen>
+    <dimen name="pos_2">130dp</dimen>
+    <dimen name="pos_3">195dp</dimen>
+    <dimen name="pos_4">260dp</dimen>
 
 </resources>

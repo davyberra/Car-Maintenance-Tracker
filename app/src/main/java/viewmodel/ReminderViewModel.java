@@ -64,4 +64,13 @@ public class ReminderViewModel extends AndroidViewModel {
             }
         });
     }
+
+    public void insertReminder(Reminder reminder) {
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                db.reminderDao().insertReminder(reminder);
+            }
+        });
+    }
 }

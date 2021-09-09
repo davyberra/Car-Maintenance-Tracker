@@ -122,10 +122,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FloatingActionButton fabAddMain = findViewById(R.id.fabPlusIcon);
         FloatingActionButton fabAddGas = findViewById(R.id.fabAddGas);
         FloatingActionButton fabAddService = findViewById(R.id.fabAddService);
+        FloatingActionButton fabAddReminder = findViewById(R.id.fabAddReminder);
         FloatingActionButton fabAddMileage = findViewById(R.id.fabAddMileage);
         fabAddMain.hide();
         fabAddGas.hide();
         fabAddService.hide();
+        fabAddReminder.hide();
         fabAddMileage.hide();
     }
 }

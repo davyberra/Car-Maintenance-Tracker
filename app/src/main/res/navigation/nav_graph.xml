@@ -16,10 +16,13 @@
         <action
             android:id="@+id/action_dashboardFragment_to_addServiceFragment"
             app:destination="@id/addServiceFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_addReminderFragment"
+            app:destination="@id/addReminderFragment" />
     </fragment>
     <fragment
         android:id="@+id/add_Vehicle_Fragment"
-        android:name="ui.Add_Vehicle_Fragment"
+        android:name="ui.AddVehicleFragment"
         android:label="Add_Vehicle_Fragment"
         tools:layout="@layout/fragment_add_vehicle"
         app:startDestination="@id/action_add_Vehicle_Fragment_to_carSelectFragment">
@@ -90,5 +93,13 @@
             app:destination="@id/servicesOverviewFragment"
             app:popUpTo="@id/servicesOverviewFragment"
             app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/addReminderFragment"
+        android:name="ui.AddReminderFragment"
+        android:label="AddReminderFragment" >
+        <action
+            android:id="@+id/action_addReminderFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment" />
     </fragment>
 </navigation>

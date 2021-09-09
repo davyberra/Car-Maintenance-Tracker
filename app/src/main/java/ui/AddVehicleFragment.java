@@ -3,14 +3,10 @@ package ui;
 
 import android.content.Context;
 import android.content.ContextWrapper;
-import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,7 +16,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultCallback;
@@ -34,19 +29,17 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.carmaintenancetracker.R;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
 import entity.Vehicle;
 import viewmodel.CarSelectViewModel;
 
-public class Add_Vehicle_Fragment extends Fragment {
+public class AddVehicleFragment extends Fragment {
 
-    private static final String TAG = Add_Vehicle_Fragment.class.getSimpleName();
+    private static final String TAG = AddVehicleFragment.class.getSimpleName();
     private String pageTitle = "Add Vehicle";
     private Button saveButton;
     private Button cancelButton;
@@ -57,7 +50,7 @@ public class Add_Vehicle_Fragment extends Fragment {
     private ImageView addVehicleImageView;
 
     private CarSelectViewModel viewModel;
-    private Add_Vehicle_Fragment context;
+    private AddVehicleFragment context;
 
     private ActivityResultLauncher<String> getContent = registerForActivityResult(
             new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
@@ -70,7 +63,7 @@ public class Add_Vehicle_Fragment extends Fragment {
                 }
             });
 
-    public Add_Vehicle_Fragment() {
+    public AddVehicleFragment() {
         super(R.layout.fragment_add_vehicle);
     }
 
@@ -148,14 +141,14 @@ public class Add_Vehicle_Fragment extends Fragment {
                 viewModel = ViewModelProviders.of(context).get(CarSelectViewModel.class);
                 viewModel.insertVehicle(vehicle);
 
-                NavHostFragment.findNavController(Add_Vehicle_Fragment.this)
+                NavHostFragment.findNavController(AddVehicleFragment.this)
                         .navigate(R.id.action_global_carSelectFragment);
             }
         });
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavHostFragment.findNavController(Add_Vehicle_Fragment.this)
+                NavHostFragment.findNavController(AddVehicleFragment.this)
                         .navigate(R.id.action_add_Vehicle_Fragment_to_carSelectFragment);
             }
         });

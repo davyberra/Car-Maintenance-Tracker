@@ -27,6 +27,7 @@ public class ReminderViewModel extends AndroidViewModel {
     private SharedPreferences.Editor editor;
     private String KEY_SELECTED_REMINDER = "key_selected_service_entry";
     private Executor executor = Executors.newSingleThreadExecutor();
+    private Reminder selectedReminder;
 
     public ReminderViewModel(@NonNull Application application) {
         super(application);
@@ -43,11 +44,16 @@ public class ReminderViewModel extends AndroidViewModel {
     }
 
     public void setSelectedReminder(Reminder reminder) {
+        selectedReminder = reminder;
         editor.putInt(KEY_SELECTED_REMINDER, reminder.reminderId);
         editor.commit();
     }
 
-    public LiveData<Reminder> getSelectedReminder() {
+    public Reminder getSelectedReminder() {
+        return selectedReminder;
+    }
+
+    public LiveData<Reminder> getSelectedReminderLiveData() {
         int id = getSelectedReminderId();
         return db.reminderDao().getReminderById(id);
     }

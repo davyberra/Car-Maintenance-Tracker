@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
@@ -18,15 +21,18 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import dialog.CompleteReminderDialogFragment;
 import entity.Reminder;
 import entity.Vehicle;
 import viewmodel.CarSelectViewModel;
+import viewmodel.ReminderViewModel;
 
 public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHolder> {
-    private final ContextProvider contextProvider;
+    private final ReminderContextProvider contextProvider;
     private final List<Reminder> reminders;
     private final CarSelectViewModel carSelectViewModel;
     private static final String TAG = ReminderAdapter.class.getSimpleName();
+    private ReminderViewModel reminderViewModel;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView reminderName;
@@ -42,7 +48,7 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
         }
     }
 
-    public ReminderAdapter(ContextProvider contextProvider, List<Reminder> reminders, CarSelectViewModel carSelectViewModel) {
+    public ReminderAdapter(ReminderContextProvider contextProvider, List<Reminder> reminders, CarSelectViewModel carSelectViewModel) {
         this.contextProvider = contextProvider;
         this.reminders = reminders;
         this.carSelectViewModel = carSelectViewModel;
@@ -61,6 +67,8 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Reminder reminder = reminders.get(position);
+        reminderViewModel = ViewModelProviders.of(contextProvider.getFragment().requireActivity())
+                .get(ReminderViewModel.class);
         holder.reminderName.setText(reminder.name);
         holder.progressBar.setMax(1);
 
@@ -91,7 +99,14 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
             }
         }
 
-
+        holder.progressBar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reminderViewModel.setSelectedReminder(reminder);
+                CompleteReminderDialogFragment dialogFragment = new CompleteReminderDialogFragment();
+                dialogFragment.show(contextProvider.getFragment().getParentFragmentManager(), "completeReminderDialogFragment");
+            }
+        });
 
     }
 

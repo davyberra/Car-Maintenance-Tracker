@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -35,6 +36,7 @@ import java.util.List;
 import adapter.ContextProvider;
 import adapter.GasEntryAdapter;
 import adapter.ReminderAdapter;
+import adapter.ReminderContextProvider;
 import dialog.AddMileageDialogFragment;
 import entity.GasEntry;
 import entity.Reminder;
@@ -46,7 +48,6 @@ import viewmodel.ReminderViewModel;
 public class DashboardFragment extends Fragment {
     private static final String TAG = DashboardFragment.class.getSimpleName();
     private String pageTitle = "Dashboard";
-    private TextView dashboardText;
     private LiveData<Vehicle> selectedVehicle;
 
     private FloatingActionButton fabAddMain;
@@ -233,7 +234,9 @@ public class DashboardFragment extends Fragment {
                     TextView lastFillUpDate = view.findViewById(R.id.dashboardLastFillUpContent);
                     TextView mileage = view.findViewById(R.id.dashboardMileageText);
                     lastFillUpDate.setText(String.valueOf(gasEntry.date));
-                    mileage.setText(String.valueOf(gasEntry.totalMileage));
+                    if (carSelectViewModel.getSelectedVehicle() != null && gasEntry.totalMileage > carSelectViewModel.getSelectedVehicle().mileage) {
+                        mileage.setText(String.valueOf(gasEntry.totalMileage));
+                    }
                 }
             }
         });
@@ -243,10 +246,10 @@ public class DashboardFragment extends Fragment {
         reminderViewModel.getAllByCarId(carId).observe(getViewLifecycleOwner(), new Observer<List<Reminder>>() {
             @Override
             public void onChanged(List<Reminder> reminders) {
-                reminderAdapter = new ReminderAdapter(new ContextProvider() {
+                reminderAdapter = new ReminderAdapter(new ReminderContextProvider() {
                     @Override
-                    public Context getContext() {
-                        return requireActivity();
+                    public Fragment getFragment() {
+                        return DashboardFragment.this;
                     }
                 }, reminders, carSelectViewModel);
                 reminderRecyclerView.setAdapter(reminderAdapter);

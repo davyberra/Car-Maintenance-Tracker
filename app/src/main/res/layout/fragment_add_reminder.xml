@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
-                android:hint="for:"
+                android:hint="for"
                 android:inputType="textCapWords"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -63,10 +63,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
-                android:layout_marginBottom="4dp"
                 android:ems="10"
                 android:inputType="number"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBaseline_toBaselineOf="@+id/addReminderDateEditText"
                 app:layout_constraintEnd_toStartOf="@+id/addReminderMiLabel"
                 app:layout_constraintStart_toStartOf="@+id/centerGuideline3" />
 
@@ -198,8 +197,10 @@
                 android:inputType="none"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/addReminderCalendarButton"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/centerGuideline"
-                app:layout_constraintTop_toBottomOf="@+id/addReminderLastServiceLabel" />
+                app:layout_constraintTop_toBottomOf="@+id/addReminderLastServiceLabel"
+                app:layout_constraintVertical_bias="0.25" />
 
             <ImageButton
                 android:id="@+id/addReminderCalendarButton"
@@ -214,11 +215,13 @@
                 android:id="@+id/addReminderLastMileageText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:inputType="number"
                 android:textSize="24sp"
-                app:layout_constraintBaseline_toBaselineOf="@+id/addReminderDateText"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/addReminderLastMilesLabel"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/addReminderLastServiceLabel" />
 
             <TextView
                 android:id="@+id/addReminderLastMilesLabel"

@@ -102,24 +102,15 @@ public class CarSelectAdapter extends RecyclerView.Adapter<CarSelectAdapter.View
         textView.setText(text);
 
 
-        executor.execute(new Runnable() {
-            @Override
-            public void run() {
-                if (vehicle.imagePath != null) {
-                    ContextWrapper contextWrapper = new ContextWrapper(contextProvider.getContext());
-                    File directory = contextWrapper.getDir("vehicleImageDir", Context.MODE_PRIVATE);
-                    File file = new File(directory, vehicle.imagePath);
-                    Log.d("path", file.toString());
-                    ((MainActivity) contextProvider.getContext()).runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            holder.carImageView.setImageDrawable(Drawable.createFromPath(file.toString()));
-                            holder.carImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                        }
-                    });
-                }
-            }
-        });
+
+        if (vehicle.imagePath != null) {
+            ContextWrapper contextWrapper = new ContextWrapper(contextProvider.getContext());
+            File directory = contextWrapper.getDir("vehicleImageDir", Context.MODE_PRIVATE);
+            File file = new File(directory, vehicle.imagePath);
+            Log.d("path", file.toString());
+            holder.carImageView.setImageDrawable(Drawable.createFromPath(file.toString()));
+            holder.carImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        }
 
 
         viewModel = new ViewModelProvider((ViewModelStoreOwner) contextProvider.getContext()).get(CarSelectViewModel.class);

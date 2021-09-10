@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_dashboardFragment_to_addReminderFragment"
             app:destination="@id/addReminderFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_editReminderFragment"
+            app:destination="@id/editReminderFragment" />
     </fragment>
     <fragment
         android:id="@+id/add_Vehicle_Fragment"
@@ -100,6 +103,14 @@
         android:label="AddReminderFragment" >
         <action
             android:id="@+id/action_addReminderFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editReminderFragment"
+        android:name="ui.EditReminderFragment"
+        android:label="EditReminderFragment" >
+        <action
+            android:id="@+id/action_editReminderFragment_to_dashboardFragment"
             app:destination="@id/dashboardFragment" />
     </fragment>
 </navigation>

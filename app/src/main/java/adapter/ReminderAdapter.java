@@ -20,6 +20,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import dialog.CompleteReminderDialogFragment;
 import entity.Reminder;
@@ -33,8 +35,9 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
     private final CarSelectViewModel carSelectViewModel;
     private static final String TAG = ReminderAdapter.class.getSimpleName();
     private ReminderViewModel reminderViewModel;
+    private int currentPos;
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener{
         public TextView reminderName;
         public RoundCornerProgressBar progressBar;
         public TextView reminderNextService;
@@ -45,7 +48,22 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
             reminderName = itemView.findViewById(R.id.reminderRvName);
             progressBar = itemView.findViewById(R.id.reminderRvProgressBar);
             reminderNextService = itemView.findViewById(R.id.reminderRvNextService);
+
+            itemView.setOnLongClickListener(this);
         }
+
+        @Override
+        public boolean onLongClick(View v) {
+            currentPos = getAdapterPosition();
+            return false;
+        }
+    }
+
+    public Reminder getSelectedReminder() {
+        if (currentPos >= 0 && reminders != null && currentPos < reminders.size()) {
+            return reminders.get(currentPos);
+        }
+        return  null;
     }
 
     public ReminderAdapter(ReminderContextProvider contextProvider, List<Reminder> reminders, CarSelectViewModel carSelectViewModel) {
@@ -76,7 +94,7 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
         if (reminder.intervalType.equals("mileage")) {
             float progress = vehicle.mileage - reminder.lastMileage;
             holder.progressBar.setProgress(progress / reminder.interval);
-            holder.reminderNextService.setText("Next Service: " + String.valueOf(reminder.lastMileage + reminder.interval) + "mi");
+            holder.reminderNextService.setText("Next Service: " + String.valueOf(reminder.lastMileage + reminder.interval) + " mi");
         } else if (reminder.intervalType.equals("date")) {
             long curDate = System.currentTimeMillis();
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -108,6 +126,13 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
             }
         });
 
+        holder.progressBar.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                currentPos = holder.getAdapterPosition();
+                return false;
+            }
+        });
     }
 
     @Override

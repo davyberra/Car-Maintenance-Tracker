@@ -31,6 +31,12 @@
         <item>Battery/Alternator</item>
         <item>Other</item>
     </string-array>
+    <string-array name="services_overview_date_range_array">
+        <item>Past Year</item>
+        <item>7 Days</item>
+        <item>30 Days</item>
+        <item>All Time</item>
+    </string-array>
     <string-array name="reminder_interval_type_array">
         <item>Date</item>
         <item>Mileage</item>

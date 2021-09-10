@@ -8,7 +8,7 @@
     style="@style/style_background">
 
     <LinearLayout
-        android:id="@+id/addGasLinearLayout"
+        android:id="@+id/editReminderLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -29,7 +29,7 @@
                 app:layout_constraintGuide_percent=".5" />
 
             <EditText
-                android:id="@+id/addReminderForText"
+                android:id="@+id/editReminderForText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -47,30 +47,30 @@
         <androidx.constraintlayout.widget.ConstraintLayout style="@style/style_add_gas_constraint">
 
             <TextView
-                android:id="@+id/mileageEveryText"
+                android:id="@+id/editMileageEveryText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:text="Every"
                 android:textSize="18sp"
-                app:layout_constraintBottom_toTopOf="@+id/addReminderMileageEditText"
+                app:layout_constraintBottom_toTopOf="@+id/editReminderMileageEditText"
                 app:layout_constraintStart_toStartOf="@+id/centerGuideline3" />
 
             <EditText
-                android:id="@+id/addReminderMileageEditText"
+                android:id="@+id/editReminderMileageEditText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:ems="10"
                 android:inputType="number"
-                app:layout_constraintBaseline_toBaselineOf="@+id/addReminderDateEditText"
-                app:layout_constraintEnd_toStartOf="@+id/addReminderMiLabel"
+                app:layout_constraintBaseline_toBaselineOf="@+id/editReminderDateEditText"
+                app:layout_constraintEnd_toStartOf="@+id/editReminderMiLabel"
                 app:layout_constraintStart_toStartOf="@+id/centerGuideline3" />
 
             <TextView
-                android:id="@+id/addReminderMiLabel"
+                android:id="@+id/editReminderMiLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="4dp"
@@ -88,7 +88,7 @@
                 app:layout_constraintGuide_percent=".5" />
 
             <TextView
-                android:id="@+id/addReminderRadioDateLabel"
+                android:id="@+id/editReminderRadioDateLabel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -100,41 +100,41 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/addReminderDateEditText"
+                android:id="@+id/editReminderDateEditText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginLeft="24dp"
                 android:ems="10"
                 android:inputType="number"
-                app:layout_constraintEnd_toStartOf="@+id/addReminderDaysLabel"
+                app:layout_constraintEnd_toStartOf="@+id/editReminderDaysLabel"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/addReminderRadioGroup" />
+                app:layout_constraintTop_toBottomOf="@+id/editReminderRadioGroup" />
 
             <RadioGroup
-                android:id="@+id/addReminderRadioGroup"
+                android:id="@+id/editReminderRadioGroup"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 app:layout_constraintEnd_toStartOf="@+id/centerGuideline3"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/addReminderRadioDateLabel">
+                app:layout_constraintTop_toBottomOf="@+id/editReminderRadioDateLabel">
 
                 <RadioButton
-                    android:id="@+id/addReminderMonthlyRadio"
+                    android:id="@+id/editReminderMonthlyRadio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Monthly" />
 
                 <RadioButton
-                    android:id="@+id/addReminderYearlyRadio"
+                    android:id="@+id/editReminderYearlyRadio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Yearly" />
 
                 <RadioButton
-                    android:id="@+id/addReminderCustomDateRadio"
+                    android:id="@+id/editReminderCustomDateRadio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Every" />
@@ -142,7 +142,7 @@
             </RadioGroup>
 
             <TextView
-                android:id="@+id/addReminderByMileageText"
+                android:id="@+id/editReminderByMileageText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -154,12 +154,12 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/addReminderDaysLabel"
+                android:id="@+id/editReminderDaysLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
                 android:text="days"
-                app:layout_constraintBottom_toBottomOf="@+id/addReminderDateEditText"
+                app:layout_constraintBottom_toBottomOf="@+id/editReminderDateEditText"
                 app:layout_constraintEnd_toStartOf="@+id/centerGuideline3" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -177,7 +177,7 @@
                 app:layout_constraintGuide_percent=".5" />
 
             <TextView
-                android:id="@+id/addReminderLastServiceLabel"
+                android:id="@+id/editReminderLastServiceLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Last Service:"
@@ -187,31 +187,31 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/addReminderDateText"
+                android:id="@+id/editReminderDateText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:hint="N/A"
                 android:inputType="none"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/addReminderCalendarButton"
+                app:layout_constraintEnd_toStartOf="@+id/editReminderCalendarButton"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/addReminderLastServiceLabel"
+                app:layout_constraintTop_toBottomOf="@+id/editReminderLastServiceLabel"
                 app:layout_constraintVertical_bias="0.25" />
 
             <ImageButton
-                android:id="@+id/addReminderCalendarButton"
+                android:id="@+id/editReminderCalendarButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
                 android:src="@drawable/outline_edit_calendar_24"
-                app:layout_constraintBottom_toBottomOf="@+id/addReminderDateText"
+                app:layout_constraintBottom_toBottomOf="@+id/editReminderDateText"
                 app:layout_constraintEnd_toStartOf="@+id/centerGuideline"
                 app:tint="@color/yellow_500" />
 
             <EditText
-                android:id="@+id/addReminderLastMileageText"
+                android:id="@+id/editReminderLastMileageText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -220,12 +220,13 @@
                 android:inputType="number"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/addReminderLastMilesLabel"
+                app:layout_constraintEnd_toStartOf="@+id/editReminderLastMilesLabel"
                 app:layout_constraintStart_toStartOf="@+id/centerGuideline"
-                app:layout_constraintTop_toBottomOf="@+id/addReminderLastServiceLabel" />
+                app:layout_constraintTop_toBottomOf="@+id/editReminderLastServiceLabel"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
-                android:id="@+id/addReminderLastMilesLabel"
+                android:id="@+id/editReminderLastMilesLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="4dp"
@@ -233,31 +234,31 @@
                 android:layout_marginBottom="4dp"
                 android:text="mi"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/addReminderLastMileageText"
+                app:layout_constraintBottom_toBottomOf="@+id/editReminderLastMileageText"
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <TextView
-                android:id="@+id/addReminderOrText"
+                android:id="@+id/editReminderOrText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="or"
                 app:layout_constraintEnd_toStartOf="@+id/centerGuideline"
                 app:layout_constraintStart_toStartOf="@+id/centerGuideline"
-                app:layout_constraintTop_toBottomOf="@+id/addReminderLastServiceLabel" />
+                app:layout_constraintTop_toBottomOf="@+id/editReminderLastServiceLabel" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 
     <Button
-        android:id="@+id/addReminderSaveButton"
+        android:id="@+id/editReminderSaveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addGasLinearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/editReminderLinearLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

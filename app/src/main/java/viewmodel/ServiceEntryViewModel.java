@@ -10,6 +10,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -22,6 +23,7 @@ public class ServiceEntryViewModel extends AndroidViewModel {
     private ServiceEntryDao serviceEntryDao;
     private Executor executor = Executors.newSingleThreadExecutor();
     private MutableLiveData<String> type;
+    private MutableLiveData<String> dateRange;
     private List<ServiceEntry> curServiceEntries;
     private List<ServiceEntry> filteredServiceEntries;
 
@@ -102,5 +104,12 @@ public class ServiceEntryViewModel extends AndroidViewModel {
             }
         });
 
+    }
+
+    public MutableLiveData<String> getDateRangeLiveData() {
+        if (dateRange == null) {
+            dateRange = new MutableLiveData<>();
+        }
+        return dateRange;
     }
 }

@@ -39,7 +39,6 @@ public class CarSelectAdapter extends RecyclerView.Adapter<CarSelectAdapter.View
     private List<Vehicle> vehicles;
     private CarSelectViewModel viewModel;
     private int currentPos;
-    private Executor executor = Executors.newSingleThreadExecutor();
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
         public CardView carCardView;

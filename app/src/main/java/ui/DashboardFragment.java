@@ -66,6 +66,7 @@ public class DashboardFragment extends Fragment {
     private RecyclerView reminderRecyclerView;
     private ReminderAdapter reminderAdapter;
     private ReminderViewModel reminderViewModel;
+    private String contextType;
 
     public DashboardFragment() {
         // Required empty public constructor
@@ -165,17 +166,43 @@ public class DashboardFragment extends Fragment {
     @Override
     public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, @Nullable ContextMenu.ContextMenuInfo menuInfo) {
         MenuInflater inflater = getActivity().getMenuInflater();
-        inflater.inflate(R.menu.menu_context_delete, menu);
+        if (v.getId() == R.id.rvDashboard) {
+            contextType = "gasEntry";
+            inflater.inflate(R.menu.menu_context_delete, menu);
+        } else if (v.getId() == R.id.rvDashboardReminders) {
+            contextType = "reminder";
+            inflater.inflate(R.menu.context_edit_delete, menu);
+        }
     }
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
-        GasEntry selectedGasEntry = gasEntryAdapter.getSelectedGasEntry();
-        switch (item.getItemId()) {
-            case R.id.action_delete:
-                deleteSelectedGasEntry(selectedGasEntry);
+        if (contextType.equals("gasEntry")) {
+            GasEntry selectedGasEntry = gasEntryAdapter.getSelectedGasEntry();
+            switch (item.getItemId()) {
+                case R.id.action_delete:
+                    deleteSelectedGasEntry(selectedGasEntry);
+            }
+        } else if (contextType.equals("reminder")) {
+            Reminder selectedReminder = reminderAdapter.getSelectedReminder();
+            switch (item.getItemId()) {
+                case R.id.action_edit:
+                    editSelectedReminder(selectedReminder);
+                case R.id.action_delete:
+                    deleteSelectedReminder(selectedReminder);
+            }
         }
         return super.onContextItemSelected(item);
+    }
+
+    private void deleteSelectedReminder(Reminder reminder) {
+        reminderViewModel.deleteReminder(reminder);
+    }
+
+    private void editSelectedReminder(Reminder reminder) {
+        reminderViewModel.setSelectedReminder(reminder);
+        NavHostFragment.findNavController(DashboardFragment.this)
+                .navigate(R.id.action_dashboardFragment_to_editReminderFragment);
     }
 
     private void deleteSelectedGasEntry(GasEntry selectedGasEntry) {
@@ -242,6 +269,8 @@ public class DashboardFragment extends Fragment {
         });
 
         reminderRecyclerView = view.findViewById(R.id.rvDashboardReminders);
+        registerForContextMenu(reminderRecyclerView);
+
         reminderViewModel = ViewModelProviders.of(requireActivity()).get(ReminderViewModel.class);
         reminderViewModel.getAllByCarId(carId).observe(getViewLifecycleOwner(), new Observer<List<Reminder>>() {
             @Override

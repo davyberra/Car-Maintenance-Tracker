@@ -31,7 +31,7 @@
         app:rcIconSrc="@drawable/outline_build_24"
         app:rcMax="150"
         app:rcProgress="90"
-        app:rcProgressColor="@color/yellow_300"
+        app:rcProgressColor="@color/yellow_500"
         app:rcRadius="5dp" />
 
     <TextView

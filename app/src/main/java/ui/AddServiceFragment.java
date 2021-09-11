@@ -28,6 +28,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.carmaintenancetracker.R;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -43,6 +44,7 @@ public class AddServiceFragment extends Fragment {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private String KEY_SELECTED_VEHICLE = "key_selected_vehicle";
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 
     private Spinner categorySpinner;
     private EditText serviceText;
@@ -131,13 +133,18 @@ public class AddServiceFragment extends Fragment {
                     return;
                 }
                 int vehicleId = sharedPreferences.getInt(KEY_SELECTED_VEHICLE, 0);
-                SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
-                Date date = new Date(System.currentTimeMillis());
+                Date date = null;
+                try {
+                    date = sdf.parse(dateText.getText().toString());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                long dateMillis = date.getTime();
                 ServiceEntry serviceEntry = new ServiceEntry(
                         vehicleId,
                         categorySpinner.getSelectedItem().toString(),
                         serviceText.getText().toString(),
-                        dateText.getText().toString(),
+                        dateMillis,
                         Double.parseDouble(costText.getText().toString()),
                         locationText.getText().toString()
                 );

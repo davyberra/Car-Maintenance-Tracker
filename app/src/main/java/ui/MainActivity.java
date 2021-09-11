@@ -82,7 +82,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // as you specify a parent activity in AndroidManifest.xml.
 
         switch (item.getItemId()) {
-            case R.id.action_settings:
+            case R.id.action_about:
+                navController.navigate(R.id.action_global_aboutFragment);
                 return true;
 
             default:
@@ -107,6 +108,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             case R.id.nav_drawer_services_overview:
                 navController.navigate(R.id.action_global_servicesOverviewFragment);
+                break;
+
+            case R.id.nav_drawer_about:
+                navController.navigate(R.id.action_global_aboutFragment);
                 break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);

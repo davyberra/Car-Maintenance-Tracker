@@ -18,7 +18,7 @@ public class GasEntry {
     public int carId;
 
     @ColumnInfo
-    public String date;
+    public long date;
 
     @ColumnInfo
     public double gallons;
@@ -32,7 +32,7 @@ public class GasEntry {
     @ColumnInfo
     public int totalMileage;
 
-    public GasEntry(String date, int carId, double gallons, double totalPrice, double pricePerGallon, int totalMileage) {
+    public GasEntry(long date, int carId, double gallons, double totalPrice, double pricePerGallon, int totalMileage) {
         this.date = date;
         this.carId = carId;
         this.gallons = gallons;

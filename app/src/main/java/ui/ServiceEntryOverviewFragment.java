@@ -20,6 +20,9 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.carmaintenancetracker.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import entity.ServiceEntry;
 import viewmodel.ServiceEntryViewModel;
 
@@ -33,6 +36,7 @@ public class ServiceEntryOverviewFragment extends Fragment {
     private LiveData<ServiceEntry> serviceEntryLiveData;
     private ServiceEntryViewModel viewModel;
     private ServiceEntry selectedServiceEntry;
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 
 
     public ServiceEntryOverviewFragment() {
@@ -91,8 +95,11 @@ public class ServiceEntryOverviewFragment extends Fragment {
         serviceEntryLiveData.observe(getViewLifecycleOwner(), new Observer<ServiceEntry>() {
             @Override
             public void onChanged(ServiceEntry serviceEntry) {
+                Date date = new Date(serviceEntry.date);
+                String dateString = sdf.format(date);
+
                 selectedServiceEntry = serviceEntry;
-                dateText.setText(serviceEntry.date);
+                dateText.setText(dateString);
                 categoryText.setText(serviceEntry.category);
                 serviceText.setText(serviceEntry.serviceDescription);
                 locationText.setText(serviceEntry.location);

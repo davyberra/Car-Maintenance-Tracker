@@ -19,6 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.carmaintenancetracker.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import entity.GasEntry;
@@ -29,6 +31,7 @@ public class GasEntryAdapter extends RecyclerView.Adapter<GasEntryAdapter.ViewHo
     private final List<GasEntry> gasEntries;
     private GasEntryViewModel viewModel;
     private int currentPos;
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
         public TextView gasEntryDateText;
@@ -77,7 +80,9 @@ public class GasEntryAdapter extends RecyclerView.Adapter<GasEntryAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         GasEntry gasEntry = gasEntries.get(position);
         TextView textViewDate = holder.gasEntryDateText;
-        textViewDate.setText(gasEntry.date);
+        Date date = new Date(gasEntry.date);
+        String textDate = sdf.format(date);
+        textViewDate.setText(textDate);
         TextView textViewCost = holder.gasEntryCostText;
         String totalPrice = String.format("%.2f", gasEntry.totalPrice);
         textViewCost.setText("$" + totalPrice);

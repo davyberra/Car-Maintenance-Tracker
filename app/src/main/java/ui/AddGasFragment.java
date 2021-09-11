@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.example.carmaintenancetracker.R;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -45,6 +46,7 @@ public class AddGasFragment extends Fragment {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private String KEY_SELECTED_VEHICLE = "key_selected_vehicle";
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 
     private String pageTitle = "Add Gas";
     private Button saveButton;
@@ -169,8 +171,15 @@ public class AddGasFragment extends Fragment {
     private void addGas() {
         gasEntryViewModel = ViewModelProviders.of(requireActivity()).get(GasEntryViewModel.class);
         int vehicleId = sharedPreferences.getInt(KEY_SELECTED_VEHICLE, 0);
+        Date date = null;
+        try {
+            date = sdf.parse(dateText.getText().toString());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        long dateMillis = date.getTime();
         GasEntry gasEntry = new GasEntry(
-                dateText.getText().toString(),
+                dateMillis,
                 vehicleId,
                 Double.parseDouble(gallonsText.getText().toString()),
                 Double.parseDouble(totalPriceText.getText().toString()),

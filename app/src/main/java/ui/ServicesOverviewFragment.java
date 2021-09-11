@@ -32,6 +32,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import adapter.ContextProvider;
@@ -52,6 +53,7 @@ public class ServicesOverviewFragment extends Fragment {
     private ServiceOverviewAdapter adapter;
     private double totalCost = 0;
     private TextView totalCostText;
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -217,13 +219,13 @@ public class ServicesOverviewFragment extends Fragment {
         }
 
         List<ServiceEntry> filteredByDate = new ArrayList<>();
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
         if ( dateRange == null || dateRange.equals("All Time")) {
             filteredByDate = serviceEntries;
         } else {
             for (ServiceEntry serviceEntry : serviceEntries) {
                 Calendar formattedDate = Calendar.getInstance();
-                formattedDate.setTime(sdf.parse(serviceEntry.date));
+                Date date = new Date(serviceEntry.date);
+                formattedDate.setTime(date);
                 if (formattedDate.after(rangeDate)) {
                     filteredByDate.add(serviceEntry);
                 }

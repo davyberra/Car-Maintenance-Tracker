@@ -19,5 +19,9 @@
             android:id="@+id/nav_drawer_services_overview"
             android:icon="@drawable/outline_build_24"
             android:title="@string/nav_drawer_services_overview" />
+        <item
+            android:id="@+id/nav_drawer_about"
+            android:icon="@drawable/outline_info_24"
+            android:title="@string/nav_drawer_about" />
     </group>
 </menu>

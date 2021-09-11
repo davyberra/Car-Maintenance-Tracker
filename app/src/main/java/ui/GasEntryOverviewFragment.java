@@ -23,6 +23,9 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.carmaintenancetracker.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import entity.GasEntry;
 import viewmodel.GasEntryViewModel;
 
@@ -30,6 +33,7 @@ public class GasEntryOverviewFragment extends Fragment {
     private static final String TAG = GasEntryOverviewFragment.class.getSimpleName();
     private String pageTitle = "Fill-Up Overview";
     private GasEntryViewModel viewModel;
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 
     private TextView gasEntryOverviewDateText;
     private TextView gasEntryOverviewMileageText;
@@ -97,8 +101,11 @@ public class GasEntryOverviewFragment extends Fragment {
             @Override
             public void onChanged(GasEntry gasEntry) {
                 if (gasEntry != null) {
+                    Date date = new Date(gasEntry.date);
+                    String dateString = sdf.format(date);
+
                     selectedGasEntry = gasEntry;
-                    gasEntryOverviewDateText.setText(gasEntry.date);
+                    gasEntryOverviewDateText.setText(dateString);
                     gasEntryOverviewMileageText.setText(String.valueOf(gasEntry.totalMileage));
                     gasEntryOverviewGallonsText.setText(String.format("%.2f", gasEntry.gallons));
                     gasEntryOverviewCostText.setText("$" + String.format("%.2f", gasEntry.totalPrice));

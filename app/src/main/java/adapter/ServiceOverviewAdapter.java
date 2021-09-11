@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.carmaintenancetracker.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import entity.ServiceEntry;
@@ -25,6 +27,7 @@ public class ServiceOverviewAdapter extends RecyclerView.Adapter<ServiceOverview
     private final List<ServiceEntry> serviceEntries;
     private ServiceEntryViewModel viewModel;
     private int currentPos;
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
         public TextView serviceRvNameText;
@@ -83,7 +86,9 @@ public class ServiceOverviewAdapter extends RecyclerView.Adapter<ServiceOverview
         TextView textViewCost = holder.serviceRvCostText;
         String cost = String.format("%.2f", serviceEntry.cost);
         textViewCost.setText("$" + cost);
-        holder.serviceRvDateText.setText(serviceEntry.date);
+        Date date = new Date(serviceEntry.date);
+        String dateString = sdf.format(date);
+        holder.serviceRvDateText.setText(dateString);
         holder.serviceRvCategoryText.setText(serviceEntry.category);
 
         viewModel = ViewModelProviders.of((FragmentActivity) contextProvider.getContext()).get(ServiceEntryViewModel.class);

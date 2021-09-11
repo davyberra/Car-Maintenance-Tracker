@@ -24,7 +24,7 @@ public class ServiceEntry {
     public String serviceDescription;
 
     @ColumnInfo
-    public String date;
+    public long date;
 
     @ColumnInfo
     public double cost;
@@ -32,7 +32,7 @@ public class ServiceEntry {
     @ColumnInfo
     public String location;
 
-    public ServiceEntry(int carId, String category, String serviceDescription, String date, double cost, String location) {
+    public ServiceEntry(int carId, String category, String serviceDescription, long date, double cost, String location) {
         this.carId = carId;
         this.category = category;
         this.serviceDescription = serviceDescription;

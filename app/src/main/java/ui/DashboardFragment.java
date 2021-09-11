@@ -31,6 +31,8 @@ import com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar;
 import com.example.carmaintenancetracker.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import adapter.ContextProvider;
@@ -49,6 +51,7 @@ public class DashboardFragment extends Fragment {
     private static final String TAG = DashboardFragment.class.getSimpleName();
     private String pageTitle = "Dashboard";
     private LiveData<Vehicle> selectedVehicle;
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 
     private FloatingActionButton fabAddMain;
     private FloatingActionButton fabAddGas;
@@ -263,7 +266,9 @@ public class DashboardFragment extends Fragment {
                 if (gasEntry != null) {
                     TextView lastFillUpDate = view.findViewById(R.id.dashboardLastFillUpContent);
                     TextView mileage = view.findViewById(R.id.dashboardMileageText);
-                    lastFillUpDate.setText(String.valueOf(gasEntry.date));
+                    Date date = new Date(gasEntry.date);
+                    String dateString = sdf.format(date);
+                    lastFillUpDate.setText(dateString);
                     if (carSelectViewModel.getSelectedVehicle() != null && gasEntry.totalMileage > carSelectViewModel.getSelectedVehicle().mileage) {
                         mileage.setText(String.valueOf(gasEntry.totalMileage));
                     }

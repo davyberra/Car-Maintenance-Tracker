@@ -14,7 +14,7 @@ import entity.Reminder;
 
 @Dao
 public interface ReminderDao {
-    @Query("SELECT * FROM reminder WHERE carId = (:id) ORDER BY lastDate")
+    @Query("SELECT * FROM reminder WHERE carId = (:id) ORDER BY reminderId")
     public LiveData<List<Reminder>> getAllByCarId(int id);
 
     @Query("SELECT * FROM reminder WHERE reminderId = (:id)")

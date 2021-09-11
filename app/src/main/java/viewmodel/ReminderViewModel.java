@@ -28,6 +28,7 @@ public class ReminderViewModel extends AndroidViewModel {
     private String KEY_SELECTED_REMINDER = "key_selected_service_entry";
     private Executor executor = Executors.newSingleThreadExecutor();
     private Reminder selectedReminder;
+    private Reminder selectedEditReminder;
 
     public ReminderViewModel(@NonNull Application application) {
         super(application);
@@ -51,6 +52,14 @@ public class ReminderViewModel extends AndroidViewModel {
 
     public Reminder getSelectedReminder() {
         return selectedReminder;
+    }
+
+    public Reminder getSelectedEditReminder() {
+        return selectedEditReminder;
+    }
+
+    public void setSelectedEditReminder(Reminder selectedEditReminder) {
+        this.selectedEditReminder = selectedEditReminder;
     }
 
     public LiveData<Reminder> getSelectedReminderLiveData() {

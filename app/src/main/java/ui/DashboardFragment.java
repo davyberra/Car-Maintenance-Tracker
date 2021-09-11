@@ -182,14 +182,17 @@ public class DashboardFragment extends Fragment {
             switch (item.getItemId()) {
                 case R.id.action_delete:
                     deleteSelectedGasEntry(selectedGasEntry);
+                    break;
             }
         } else if (contextType.equals("reminder")) {
             Reminder selectedReminder = reminderAdapter.getSelectedReminder();
             switch (item.getItemId()) {
                 case R.id.action_edit:
                     editSelectedReminder(selectedReminder);
+                    break;
                 case R.id.action_delete:
                     deleteSelectedReminder(selectedReminder);
+                    break;
             }
         }
         return super.onContextItemSelected(item);
@@ -200,7 +203,7 @@ public class DashboardFragment extends Fragment {
     }
 
     private void editSelectedReminder(Reminder reminder) {
-        reminderViewModel.setSelectedReminder(reminder);
+        reminderViewModel.setSelectedEditReminder(reminder);
         NavHostFragment.findNavController(DashboardFragment.this)
                 .navigate(R.id.action_dashboardFragment_to_editReminderFragment);
     }

@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navView = findViewById(R.id.nav_view);
         drawerLayout = findViewById(R.id.drawerLayout);
         appBarConfiguration =
-                new AppBarConfiguration.Builder(R.id.dashboardFragment, R.id.carSelectFragment)
+                new AppBarConfiguration.Builder(R.id.dashboardFragment, R.id.carSelectFragment, R.id.servicesOverviewFragment)
                         .setOpenableLayout(drawerLayout)
                         .build();
         NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration);

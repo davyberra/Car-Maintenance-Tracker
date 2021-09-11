@@ -90,7 +90,7 @@ public class EditReminderFragment extends Fragment {
         reminderViewModel = ViewModelProviders.of(requireActivity()).get(ReminderViewModel.class);
         carSelectViewModel = ViewModelProviders.of(requireActivity()).get(CarSelectViewModel.class);
 
-        originalReminder = reminderViewModel.getSelectedReminder();
+        originalReminder = reminderViewModel.getSelectedEditReminder();
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
                 R.array.reminder_interval_type_array, android.R.layout.simple_spinner_item);
